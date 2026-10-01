@@ -30,8 +30,8 @@ for (const p of paginas) {
 await writeFile(path.join(dist, '404.html'), pagina({
   cfg, L, atual: '', caminho: '/404', titulo: 'Página não encontrada | Harmonização Humana',
   descricao: 'Esta página não existe.', jsonld: { '@context': 'https://schema.org', '@type': 'WebPage', name: 'Página não encontrada' },
-  conteudo: `<section class="secao"><div class="secao__dentro secao__texto">
-    <h1 class="titulo">Esta página não existe.</h1>
+  conteudo: `<section class="bloco"><div class="dentro estreito">
+    <h1 class="grande">Esta página não existe.</h1>
     <p>Talvez o endereço tenha mudado. <a href="/">Voltar para o início</a>.</p>
   </div></section>`,
 }).replace('<head>', '<head>\n<meta name="robots" content="noindex">'));

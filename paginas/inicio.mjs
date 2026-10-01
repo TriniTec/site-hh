@@ -1,221 +1,215 @@
-// Página Início. Textos: documento 02, Parte 4 (v1.10).
-// Ordem: reconhecer (1, 2), desarmar (3), entender (4, 5, 6), confiar (7, 8, 9), agir (10, 11).
-import { esc, botaoConversar, jsonldBase, breadcrumb } from '../scripts/partes.mjs';
+// Página Início · versão Solar.
+// Do documento 02 fica a frase do Hero e a ordem de fundo (reconhecer, desarmar, entender, confiar, agir).
+// O resto foi reescrito mais curto e mais visual, sem promessa de resultado.
+import { esc, botaoConversar, jsonldBase, breadcrumb, sol } from '../scripts/partes.mjs';
 
-const playIcone = `<span class="depo__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>`;
+const play = `<span class="depo__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>`;
 
 function depoimento(d) {
-  const pendente = !d.trecho || (d.prova === 'video' ? !d.videoId : !d.imagem);
-  const trecho = d.trecho || '[Trecho do depoimento: a preencher em data/depoimentos.json]';
-  let prova;
-  if (d.prova === 'video') {
-    prova = d.videoId
-      ? `<button class="depo__prova" type="button" data-video="${esc(d.videoId)}" aria-label="Assistir ao depoimento de ${esc(d.nome)}" data-umami-event="depoimento-play">${d.imagem ? `<img src="${esc(d.imagem)}" alt="" loading="lazy" width="640" height="360">` : ''}${playIcone}</button>`
-      : `<div class="depo__prova">${playIcone}</div>`;
-  } else {
-    prova = d.imagem
-      ? `<a class="depo__prova depo__prova--print" href="${esc(d.imagem)}" target="_blank" rel="noopener" aria-label="Ampliar o print da conversa com ${esc(d.nome)}"><img src="${esc(d.imagem)}" alt="${esc(d.alt || 'Print da conversa com ' + d.nome)}" loading="lazy"></a>`
-      : `<div class="depo__prova depo__prova--print" style="min-height:160px">Print do WhatsApp</div>`;
-  }
+  const prova = d.prova === 'video'
+    ? `<button class="depo__prova" type="button" data-video="${esc(d.videoId)}" aria-label="Assistir ao depoimento de ${esc(d.nome)}" data-umami-event="depoimento-play">${d.imagem ? `<img src="${esc(d.imagem)}" alt="" loading="lazy">` : ''}${play}</button>`
+    : `<a class="depo__prova depo__prova--print" href="${esc(d.imagem)}" target="_blank" rel="noopener" aria-label="Ampliar o print da conversa com ${esc(d.nome)}"><img src="${esc(d.imagem)}" alt="${esc(d.alt || 'Print da conversa com ' + d.nome)}" loading="lazy"></a>`;
   const transcricao = d.transcricao
-    ? `<details><summary>Ler a transcrição</summary><div class="depo__transcricao">${d.transcricao.split(/\n\s*\n/).map((p) => `<p>${esc(p)}</p>`).join('')}</div></details>`
-    : '';
-  return `<figure class="cartao depo${pendente ? ' pendente' : ''}">
-          <blockquote><p class="depo__trecho">${esc(trecho)}</p></blockquote>
-          <figcaption class="depo__nome">${esc(d.nome)}</figcaption>
-          ${prova}
-          ${transcricao}
-        </figure>`;
+    ? `<details><summary>Ler a transcrição</summary>${d.transcricao.split(/\n\s*\n/).map((p) => `<p>${esc(p)}</p>`).join('')}</details>` : '';
+  return `<figure class="depo surge"><blockquote>${esc(d.trecho)}</blockquote><figcaption>${esc(d.nome)}</figcaption>${prova}${transcricao}</figure>`;
 }
 
-function cardLive(l, guias) {
+function cardLive(l, guias, i) {
   const guia = guias[l.videoId];
-  return `<article class="cartao live">
-          <img class="live__mini" src="${esc(l.miniatura)}" alt="" loading="lazy" width="320" height="180">
+  return `<article class="live surge" style="--atraso:${i * 0.1}s">
+          <img src="${esc(l.miniatura)}" alt="" loading="lazy" width="320" height="180">
           <div class="live__corpo">
-            <h3 class="live__titulo"><a href="https://www.youtube.com/watch?v=${esc(l.videoId)}" target="_blank" rel="noopener">${esc(l.titulo)}</a></h3>
-            <p class="live__data">${esc(l.dataExtenso)}</p>
-            ${guia ? `<a class="live__guia" href="${esc(guia)}" target="_blank" rel="noopener">Ver o guia da live</a>` : ''}
+            <h3><a href="https://www.youtube.com/watch?v=${esc(l.videoId)}" target="_blank" rel="noopener">${esc(l.titulo)}</a></h3>
+            <p>${esc(l.dataExtenso)}</p>
+            ${guia ? `<a class="guia" href="${esc(guia)}" target="_blank" rel="noopener">Ver o guia da live</a>` : ''}
           </div>
         </article>`;
 }
 
 export default function inicio({ cfg, L, depoimentos, lives, guias }) {
   const base = jsonldBase(cfg);
-  const videos = depoimentos
-    .filter((d) => d.prova === 'video' && d.videoId)
-    .map((d) => ({
-      '@type': 'VideoObject',
-      name: `Depoimento de ${d.nome}`,
-      description: d.trecho,
-      thumbnailUrl: cfg.dominio + d.imagem,
-      embedUrl: `https://www.youtube-nocookie.com/embed/${d.videoId}`,
-      contentUrl: `https://www.youtube.com/watch?v=${d.videoId}`,
-      ...(d.uploadDate ? { uploadDate: d.uploadDate } : {}),
-      ...(d.transcricao ? { transcript: d.transcricao } : {}),
-    }));
+  const prontos = depoimentos.filter((d) => d.trecho && (d.prova === 'video' ? d.videoId : d.imagem));
+  const videos = prontos.filter((d) => d.prova === 'video').map((d) => ({
+    '@type': 'VideoObject', name: `Depoimento de ${d.nome}`, description: d.trecho,
+    thumbnailUrl: cfg.dominio + d.imagem, embedUrl: `https://www.youtube-nocookie.com/embed/${d.videoId}`,
+    contentUrl: `https://www.youtube.com/watch?v=${d.videoId}`,
+    ...(d.uploadDate ? { uploadDate: d.uploadDate } : {}), ...(d.transcricao ? { transcript: d.transcricao } : {}),
+  }));
+  const jsonld = { '@context': 'https://schema.org', '@graph': [base.website, base.servico, base.person, breadcrumb(cfg, [['Início', '/']]), ...videos] };
 
-  const jsonld = {
-    '@context': 'https://schema.org',
-    '@graph': [base.website, base.servico, base.person, breadcrumb(cfg, [['Início', '/']]), ...videos],
-  };
+  const palavras = ['Clareza', 'Movimento', 'Liberdade', 'Perceber', 'Transformar', 'Fluir'];
+  const faixa = [...palavras, ...palavras, ...palavras, ...palavras].map((p) => `<span>${p}</span>`).join('');
 
   const conteudo = `
-  <!-- 1 · Hero -->
-  <section class="secao abertura">
-    <div class="abertura__texto">
+  <section class="abertura">
+    <div class="dentro abertura__grade">
       <div>
-        <h1 class="hero-titulo">Você sabe que quer mudar. Mas sozinha ainda não conseguiu.</h1>
-        <p class="hero__sub">Uma experiência de leitura e transformação para revelar o que precisa ser visto e trabalhar o que precisa mudar.</p>
-        ${botaoConversar(L, { evento: 'quero-conversar-hero' })}
+        <p class="olho surge">Leitura e transformação</p>
+        <h1 class="surge" style="--atraso:.08s">Você sabe que quer <em>mudar.</em> Mas sozinha ainda não conseguiu.</h1>
+        <p class="lead surge" style="--atraso:.16s">Uma experiência de leitura e transformação para revelar o que precisa ser visto e trabalhar o que precisa mudar.</p>
+        <div class="acoes surge" style="--atraso:.24s">
+          ${botaoConversar(L, { evento: 'quero-conversar-hero' })}
+          <a class="seta" href="#como">Como funciona <span aria-hidden="true">→</span></a>
+        </div>
       </div>
-    </div>
-    <div class="abertura__foto">
-      <img src="/img/filipe-retrato-sorrindo-1200.webp"
-           srcset="/img/filipe-retrato-sorrindo-640.webp 640w, /img/filipe-retrato-sorrindo-1200.webp 1200w, /img/filipe-retrato-sorrindo-1600.webp 1600w"
-           sizes="100vw" width="1200" height="675" fetchpriority="high"
-           alt="Filipe Morgado sorrindo, de camiseta amarela, diante de uma parede clara iluminada pelo sol.">
+      <div class="retrato surge" style="--atraso:.1s">
+        <div class="retrato__halo"></div>
+        ${sol({ id: 'h' })}
+        <div class="retrato__foto">
+          <img src="/img/filipe-rosto-800.webp" srcset="/img/filipe-rosto-480.webp 480w, /img/filipe-rosto-800.webp 800w"
+               sizes="(min-width: 900px) 340px, 60vw" width="800" height="800" fetchpriority="high"
+               alt="Filipe Morgado sorrindo, de camiseta amarela, numa parede clara iluminada pelo sol.">
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- 2 · Para quem é -->
-  <section class="secao secao--areia" aria-labelledby="para-quem">
-    <div class="secao__dentro">
-      <h2 class="titulo" id="para-quem">Talvez isso faça sentido para você</h2>
-      <ul class="lista">
-        <li>Você sente que tem alguma coisa acontecendo, mas não consegue entender exatamente o quê.</li>
-        <li>Você percebe padrões que continuam se repetindo, mesmo tentando fazer diferente.</li>
-        <li>Você já tentou entender ou resolver isso por outros caminhos. Talvez até tenha entendido bastante coisa, e mesmo assim continua no mesmo lugar.</li>
-        <li>Você chegou naquele ponto de dizer: chega. Eu quero mudar.</li>
-        <li>Você busca uma luz, uma resposta para o que está vivendo agora.</li>
-        <li>Você não sabe nem qual seria a pergunta, mas sente que existe algo que precisa ser visto.</li>
+  <div class="faixa" aria-hidden="true"><div class="faixa__trilho">${faixa}</div></div>
+
+  <section class="bloco bloco--areia" aria-labelledby="espelho">
+    <div class="dentro">
+      <p class="olho surge">Talvez seja você</p>
+      <h2 class="grande surge" id="espelho">Alguma dessas frases<br>já passou pela sua cabeça?</h2>
+      <ul class="espelho">
+        <li class="surge">Tem alguma coisa acontecendo comigo. Só não sei o quê.</li>
+        <li class="surge" style="--atraso:.08s">O mesmo padrão volta. Mesmo quando eu tento fazer diferente.</li>
+        <li class="surge" style="--atraso:.16s">Já entendi tanta coisa. E continuo no mesmo lugar.</li>
+        <li class="surge">Chega. Eu quero mudar.</li>
+        <li class="surge" style="--atraso:.08s">Eu só queria uma luz. Uma resposta para o que estou vivendo.</li>
+        <li class="surge" style="--atraso:.16s">Eu nem sei qual seria a pergunta.</li>
       </ul>
+      <p class="espelho__fecho surge">Se uma delas é sua, a boa notícia vem a seguir.</p>
     </div>
   </section>
 
-  <!-- 3 · Você não precisa saber qual é a pergunta -->
-  <section class="secao" aria-labelledby="pergunta">
-    <div class="secao__dentro secao__texto">
-      <hr class="fio">
-      <h2 class="titulo" id="pergunta">Você não precisa saber qual é a pergunta.</h2>
-      <p>Você não precisa contar sua história, explicar o que está acontecendo ou chegar com uma questão definida.</p>
-      <p>A leitura começa sem informações prévias, e isso faz parte do método: sem uma história contada antes, o que aparece chega mais livre de interpretação. É o próprio processo que revela aquilo que precisa ser percebido, inclusive coisas que você ainda não conseguia enxergar por conta própria.</p>
-      <p class="fecho">A leitura conduz. Você só precisa estar presente.</p>
+  <section class="bloco declaracao" data-tema="indigo" aria-labelledby="pergunta">
+    <div class="declaracao__luz" aria-hidden="true">${sol({ id: 'd', raios: 48, onda: 1.2 })}</div>
+    <div class="dentro">
+      <h2 class="surge" id="pergunta">Você não precisa saber a <span class="ouro">pergunta.</span></h2>
+      <p class="lead surge">Nem contar sua história. A leitura começa sem nada prévio, e é o próprio processo que revela o que precisa ser visto. Inclusive o que você ainda não conseguia enxergar sozinha.</p>
+      <p class="assinatura surge">A leitura conduz. Você só precisa estar presente.</p>
     </div>
   </section>
 
-  <!-- 4 · O que acontece -->
-  <section class="secao" data-tema="indigo" aria-labelledby="acontece">
-    <div class="secao__dentro">
-      <h2 class="titulo" id="acontece">O que acontece em uma leitura</h2>
-      <ol class="etapas">
-        <li><div><h3 class="etapas__nome">Percepção</h3><p>O processo acessa o campo, e aquilo que precisa aparecer começa a se revelar. Podem surgir sensações, emoções, imagens, símbolos, palavras, padrões, memórias ou orientações.</p></div></li>
-        <li><div><h3 class="etapas__nome">Consciência</h3><p>O que apareceu é traduzido e compartilhado com você, de forma simples e compreensível.</p></div></li>
-        <li><div><h3 class="etapas__nome">Orientação</h3><p>A leitura aprofunda até o ponto relevante e traz direção sobre aquilo que se revelou.</p></div></li>
-        <li><div><h3 class="etapas__nome">Transformação</h3><p>Aquilo que precisa ser trabalhado é trabalhado energeticamente, ainda durante o processo.</p></div></li>
-      </ol>
-      <p class="forte">Não existe um roteiro fechado. Cada leitura encontra o próprio caminho.</p>
-    </div>
-  </section>
-
-  <!-- 5 · A leitura não termina quando algo é revelado -->
-  <section class="secao" aria-labelledby="nao-termina">
-    <div class="secao__dentro secao__texto">
-      <h2 class="titulo" id="nao-termina">A leitura não termina quando algo é revelado.</h2>
-      <p>Muitas vezes, entender não basta. O que prende costuma estar mais fundo do que a compreensão alcança.</p>
-      <p>Por isso aquilo que emerge é trabalhado energeticamente durante o próprio processo, buscando dissolver, transmutar, reorganizar e reprogramar o que precisa ser transformado. Para que você recupere a liberdade de escolher diferente.</p>
-      <p class="fecho">Não é uma leitura e depois um tratamento. A transformação acontece dentro da leitura.</p>
-    </div>
-  </section>
-
-  <!-- 6 · O que pode surgir -->
-  <section class="secao secao--areia" aria-labelledby="pode-surgir">
-    <div class="secao__dentro secao__texto">
-      <h2 class="titulo" id="pode-surgir">Uma experiência espiritual, sem exigir que você conheça o universo espiritual</h2>
-      <p>Durante o processo podem surgir diferentes formas de percepção e trabalho: aspectos intuitivos, energéticos e simbólicos, conteúdos relacionados aos Registros Akáshicos, orientações e outras informações relevantes para aquele momento.</p>
-      <p>Nada disso é escolhido antes, nem por você, nem por mim. Os recursos se combinam dentro da própria leitura, conforme o que o processo revela.</p>
-      <p class="fecho">Você não precisa conhecer nenhuma dessas práticas. Precisa apenas se abrir para a experiência.</p>
-    </div>
-  </section>
-
-  <!-- 7 · Uma experiência humana -->
-  <section class="secao" aria-labelledby="humana">
-    <div class="secao__dentro duas">
-      <div class="secao__texto">
-        <h2 class="titulo" id="humana">Uma experiência humana. Profunda.</h2>
-        <p>Você não precisa conhecer técnicas, dominar termos espirituais ou pertencer a nenhum grupo para viver uma leitura.</p>
-        <p>O que aparece na leitura é dito de forma simples, com calma, sem promessa e sem espetáculo.</p>
-        <p class="fecho">Sou Filipe Morgado. Eu me vejo como um Humano do Silêncio, aquele que restaura a Harmonia.</p>
-        <p style="margin-top:var(--espaco-4)"><a class="botao botao--contorno" href="/sobre">Conhecer minha história</a></p>
+  <section class="bloco" id="como" aria-labelledby="como-titulo">
+    <div class="dentro">
+      <p class="olho surge">Como acontece</p>
+      <h2 class="grande surge" id="como-titulo">Do que aparece<br>ao que se transforma.</h2>
+      <div class="caminho-caixa">
+        <span class="caminho__linha" aria-hidden="true"><i></i></span>
+        <ol class="caminho">
+          <li class="surge"><h3>Percepção</h3><p>O que precisa aparecer começa a se revelar: sensações, imagens, palavras, padrões, memórias.</p></li>
+          <li class="surge" style="--atraso:.1s"><h3>Consciência</h3><p>Eu traduzo o que aparece e compartilho com você, de forma simples.</p></li>
+          <li class="surge" style="--atraso:.2s"><h3>Orientação</h3><p>A leitura aprofunda até o ponto que importa e traz direção.</p></li>
+          <li class="surge" style="--atraso:.3s"><h3>Transformação</h3><p>O que precisa ser trabalhado é trabalhado ali mesmo, ainda durante a leitura.</p></li>
+        </ol>
       </div>
-      <div class="duas__foto duas__foto--vertical">
-        <img src="/img/filipe-sentado-sorrindo-640.webp"
-             srcset="/img/filipe-sentado-sorrindo-640.webp 640w, /img/filipe-sentado-sorrindo-1000.webp 1000w"
-             sizes="(min-width: 900px) 460px, 100vw" width="640" height="800" loading="lazy"
+      <p class="caminho__fecho surge">Não existe roteiro. Cada leitura encontra o próprio caminho.</p>
+    </div>
+  </section>
+
+  <section class="bloco bloco--areia" aria-labelledby="basta">
+    <div class="dentro par">
+      <h2 class="citacao surge" id="basta">Entender<br>não basta.</h2>
+      <div class="surge" style="--atraso:.1s">
+        <p class="lead">O que prende costuma estar mais fundo do que a compreensão alcança. Por isso, o que emerge na leitura é trabalhado energeticamente, buscando dissolver o que trava. Para você recuperar a liberdade de escolher diferente.</p>
+        <p class="forte" style="margin-top:28px">Não é uma leitura e depois um tratamento. A transformação acontece dentro da leitura.</p>
+        <p style="margin-top:28px">E você não precisa conhecer nada de espiritualidade para isso. Só se abrir para a experiência.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloco" aria-labelledby="filipe">
+    <div class="dentro par par--foto-esq">
+      <div class="surge">
+        <p class="olho">Quem conduz</p>
+        <h2 class="oi" id="filipe">Oi, eu sou o Filipe.</h2>
+        <p class="lead">Escuto antes de interferir. Percebo antes de interpretar. O que aparece na leitura eu digo de forma simples, com calma, sem promessa e sem espetáculo.</p>
+        <p style="margin:28px 0 36px">Me vejo como um Humano do Silêncio, aquele que restaura a Harmonia.</p>
+        <a class="seta" href="/sobre">Conhecer minha história <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="filipe__foto surge" style="--atraso:.1s">
+        <img src="/img/filipe-sentado-sorrindo-640.webp" srcset="/img/filipe-sentado-sorrindo-640.webp 640w, /img/filipe-sentado-sorrindo-1000.webp 1000w"
+             sizes="(min-width: 900px) 480px, 100vw" width="640" height="800" loading="lazy"
              alt="Filipe Morgado sentado, sorrindo, de camiseta amarela, numa sala clara com luz natural.">
+        <span class="filipe__selo"><img src="/img/hh-logo-96.webp" width="32" height="32" alt="">Filipe Morgado</span>
       </div>
     </div>
   </section>
 
-  <!-- 8 · Experiência ao vivo -->
-  <section class="secao secao--areia" aria-labelledby="ao-vivo">
-    <div class="secao__dentro">
-      <div class="secao__texto">
-        <h2 class="titulo" id="ao-vivo">Conheça a experiência ao vivo</h2>
-        <p>Às quintas-feiras, às 19h, realizo leituras ao vivo pelo YouTube.</p>
-        <p>São experiências mais curtas, abertas ao público, para que você possa conhecer o processo na prática, sem compromisso e sem precisar entender nada antes. Se estiver assistindo ao vivo e quiser receber uma leitura, é só escrever no chat.</p>
+  <section class="bloco ao-vivo" data-tema="indigo" aria-labelledby="vivo">
+    <div class="dentro">
+      <div class="par">
+        <div class="surge">
+          <p class="selo-vivo"><i></i>Ao vivo · quintas, 19h</p>
+          <h2 class="grande" id="vivo">Veja uma leitura <span class="ouro">acontecendo.</span></h2>
+        </div>
+        <div class="surge" style="--atraso:.1s">
+          <p class="lead">Toda quinta eu faço leituras abertas no YouTube. É de graça, sem compromisso e sem precisar entender nada antes. Quer receber uma? É só escrever no chat.</p>
+          <p style="margin-top:32px"><a class="botao botao--claro" href="${esc(lives.length ? L.playlist : cfg.youtube)}" target="_blank" rel="noopener">Assistir no YouTube</a></p>
+        </div>
       </div>
-      ${lives.length ? `<div class="grade-3">
-        ${lives.slice(0, 3).map((l) => cardLive(l, guias)).join('\n        ')}
-      </div>` : '<div style="height:var(--espaco-5)"></div>'}
-      <a class="botao botao--contorno" href="${esc(L.playlist)}" target="_blank" rel="noopener">Ver todas as leituras</a>
+      ${lives.length ? `<div class="lives">${lives.slice(0, 3).map((l, i) => cardLive(l, guias, i)).join('')}</div>` : ''}
     </div>
   </section>
 
-  <!-- 9 · Depoimentos -->
-  <section class="secao" aria-labelledby="depoimentos">
-    <div class="secao__dentro">
-      <h2 class="titulo" id="depoimentos">O que as pessoas dizem</h2>
-      <div class="grade-3">
-        ${depoimentos.map(depoimento).join('\n        ')}
+  ${prontos.length ? `<section class="bloco bloco--areia" aria-labelledby="dizem">
+    <div class="dentro">
+      <p class="olho surge">Quem já viveu</p>
+      <h2 class="grande surge" id="dizem">O que as pessoas dizem</h2>
+      <div class="depos">${prontos.map(depoimento).join('')}</div>
+    </div>
+  </section>` : ''}
+
+  <section class="bloco${prontos.length ? '' : ' bloco--areia'}" aria-labelledby="comecar-titulo">
+    <div class="dentro">
+      <p class="olho surge">Por onde começar</p>
+      <h2 class="grande surge" id="comecar-titulo">Uma leitura. Ou uma jornada.</h2>
+      <div class="formatos">
+        <article class="formato surge">
+          <p class="formato__tag">Cerca de 1 hora · por vídeo</p>
+          <h3>Sessão individual</h3>
+          <p>Para viver a experiência por inteiro, sem compromisso de continuidade. Você não precisa preparar nada.</p>
+          <p class="empurra"><a class="seta" href="/a-jornada#sessao">Como é <span aria-hidden="true">→</span></a></p>
+        </article>
+        <article class="formato formato--destaque surge" style="--atraso:.1s">
+          <span class="formato__recomendada">Recomendada</span>
+          <p class="formato__tag">10 semanas · 1 por semana</p>
+          <h3>A Jornada</h3>
+          <p>Para aprofundar. O trabalho se desenvolve no tempo, e diferentes camadas vão sendo acessadas e trabalhadas.</p>
+          <p class="empurra"><a class="seta" href="/a-jornada#jornada">Como é <span aria-hidden="true">→</span></a></p>
+        </article>
+        <article class="formato surge" style="--atraso:.2s">
+          <p class="formato__tag">Na dúvida</p>
+          <h3>Vamos conversar</h3>
+          <p>Me conta o que te trouxe até aqui, do seu jeito. A gente vê junto qual formato faz sentido para você agora.</p>
+          <p class="empurra">${botaoConversar(L, { evento: 'quero-conversar-formatos' })}</p>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- 10 · A Jornada -->
-  <section class="secao secao--areia" aria-labelledby="aprofundar">
-    <div class="secao__dentro secao__texto">
-      <h2 class="titulo" id="aprofundar">Quando você sente que é hora de aprofundar</h2>
-      <p>A leitura pode ser vivida como uma experiência pontual ou como uma jornada de transformação ao longo do tempo.</p>
-      <p style="margin-top:var(--espaco-4)"><a class="botao botao--contorno" href="/a-jornada">Conhecer a Jornada</a></p>
-    </div>
-  </section>
-
-  <!-- 11 · Chamada final -->
-  <section class="secao chamada" aria-labelledby="comecar">
-    <div class="chamada__foto">
-      <img src="/img/filipe-corpo-inteiro-640.webp"
-           srcset="/img/filipe-corpo-inteiro-640.webp 640w, /img/filipe-corpo-inteiro-1200.webp 1200w"
+  <section class="final" aria-labelledby="final">
+    <div class="final__foto">
+      <img src="/img/filipe-corpo-inteiro-640.webp" srcset="/img/filipe-corpo-inteiro-640.webp 640w, /img/filipe-corpo-inteiro-1200.webp 1200w"
            sizes="100vw" width="640" height="427" loading="lazy"
            alt="Filipe Morgado de pé, sorrindo, com as mãos nos bolsos, num ambiente claro e ensolarado.">
     </div>
-    <div class="chamada__texto">
-      <div>
-        <h2 class="titulo" id="comecar">Você não precisa saber por onde começar.</h2>
-        <p>Se você sente que chegou a hora de olhar mais profundamente para o que está acontecendo, podemos conversar.</p>
-        <p style="margin-top:var(--espaco-4)">${botaoConversar(L, { evento: 'quero-conversar-final' })}</p>
+    <div class="dentro final__texto">
+      <div class="surge">
+        <h2 id="final">Você não precisa saber por onde começar.</h2>
+        <p class="lead">Se sente que chegou a hora de olhar mais fundo para o que está acontecendo, podemos conversar.</p>
+        ${botaoConversar(L, { evento: 'quero-conversar-final' })}
       </div>
     </div>
   </section>`;
 
   return {
-    caminho: '/',
-    arquivo: 'index.html',
-    atual: 'inicio',
+    caminho: '/', arquivo: 'index.html', atual: 'inicio',
     titulo: 'Leitura energética e transformação | Harmonização Humana',
     descricao: 'Você sabe que quer mudar, mas sozinha ainda não conseguiu. Leitura energética e transformação, sem precisar contar sua história.',
     jsonld,
-    preload: ['<link rel="preload" as="image" href="/img/filipe-retrato-sorrindo-1200.webp" imagesrcset="/img/filipe-retrato-sorrindo-640.webp 640w, /img/filipe-retrato-sorrindo-1200.webp 1200w, /img/filipe-retrato-sorrindo-1600.webp 1600w" imagesizes="100vw" fetchpriority="high">'],
+    preload: ['<link rel="preload" as="image" href="/img/filipe-rosto-800.webp" imagesrcset="/img/filipe-rosto-480.webp 480w, /img/filipe-rosto-800.webp 800w" imagesizes="(min-width: 900px) 340px, 60vw" fetchpriority="high">'],
     conteudo,
   };
 }
