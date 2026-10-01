@@ -306,9 +306,10 @@ html[data-botao="h"] .botao--principal { font-size: 1.1875rem; min-height: 58px;
 .chamada__foto img { width: 100%; height: 100%; object-fit: cover; object-position: 72% 0%; }
 .chamada__texto { padding: var(--espaco-6) var(--espaco-3); }
 @media (min-width: 900px) {
-  .chamada { min-height: 560px; display: grid; }
+  /* O bloco segue o formato da foto (3:2), para ela aparecer sempre inteira, da cabeça aos pés */
+  .chamada { aspect-ratio: 3 / 2; display: grid; align-items: center; }
   .chamada__foto { position: absolute; inset: 0; }
-  .chamada__texto { position: relative; padding: var(--espaco-7) var(--espaco-5); max-width: calc(var(--largura-pagina) + 2 * var(--espaco-5)); margin: 0 auto; width: 100%; }
+  .chamada__texto { position: relative; z-index: 1; padding: var(--espaco-7) var(--espaco-5); max-width: calc(var(--largura-pagina) + 2 * var(--espaco-5)); margin: 0 auto; width: 100%; }
   .chamada__texto > div { max-width: 460px; }
 }
 @media (max-width: 899px) { .chamada__foto { aspect-ratio: 4 / 3; } }
