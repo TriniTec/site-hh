@@ -12,6 +12,10 @@ const dist = path.join(raiz, 'dist');
 const lerJson = async (p) => JSON.parse(await readFile(path.join(raiz, p), 'utf8'));
 
 const cfg = await lerJson('site.config.json');
+// No Netlify, URL é o endereço principal do site (hoje harmonizacaohumana.netlify.app; quando o domínio
+// for ligado, passa a ser ele sozinho). Assim a imagem de compartilhamento, o canonical e o sitemap
+// sempre apontam para um endereço que existe.
+if (process.env.URL) cfg.dominio = process.env.URL.replace(/\/$/, '');
 const depoimentos = await lerJson('data/depoimentos.json');
 const lives = await lerJson('data/lives.json');
 const guias = await lerJson('data/guias.json');
