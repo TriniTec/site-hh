@@ -5,13 +5,26 @@ import { esc, botaoConversar, jsonldBase, breadcrumb, sol } from '../scripts/par
 
 const play = `<span class="depo__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>`;
 
-function depoimento(d) {
-  const prova = d.prova === 'video'
-    ? `<button class="depo__prova" type="button" data-video="${esc(d.videoId)}" aria-label="Assistir ao depoimento de ${esc(d.nome)}" data-umami-event="depoimento-play">${d.imagem ? `<img src="${esc(d.imagem)}" alt="" loading="lazy">` : ''}${play}</button>`
-    : `<a class="depo__prova depo__prova--print" href="${esc(d.imagem)}" target="_blank" rel="noopener" aria-label="Ampliar o print da conversa com ${esc(d.nome)}"><img src="${esc(d.imagem)}" alt="${esc(d.alt || 'Print da conversa com ' + d.nome)}" loading="lazy"></a>`;
+function depoimento(d, i) {
+  // Enquanto o depoimento não está preenchido em data/depoimentos.json, o cartão mostra o lugar reservado
+  // (linhas suaves no lugar do texto). Nenhuma palavra é inventada.
+  const pronto = d.trecho && (d.prova === 'video' ? d.videoId : d.imagem);
+  const trecho = d.trecho
+    ? `<blockquote>${esc(d.trecho)}</blockquote>`
+    : `<div class="depo__reservado" aria-hidden="true"><i></i><i></i><i></i></div>`;
+  let prova;
+  if (d.prova === 'video') {
+    prova = d.videoId
+      ? `<button class="depo__prova" type="button" data-video="${esc(d.videoId)}" aria-label="Assistir ao depoimento de ${esc(d.nome)}" data-umami-event="depoimento-play">${d.imagem ? `<img src="${esc(d.imagem)}" alt="" loading="lazy">` : ''}${play}</button>`
+      : `<div class="depo__prova depo__prova--vazia">${play}<span>Depoimento em vídeo</span></div>`;
+  } else {
+    prova = d.imagem
+      ? `<a class="depo__prova depo__prova--print" href="${esc(d.imagem)}" target="_blank" rel="noopener" aria-label="Ampliar o print da conversa com ${esc(d.nome)}"><img src="${esc(d.imagem)}" alt="${esc(d.alt || 'Print da conversa com ' + d.nome)}" loading="lazy"></a>`
+      : `<div class="depo__prova depo__prova--vazia"><span>Print da conversa no WhatsApp</span></div>`;
+  }
   const transcricao = d.transcricao
     ? `<details><summary>Ler a transcrição</summary>${d.transcricao.split(/\n\s*\n/).map((p) => `<p>${esc(p)}</p>`).join('')}</details>` : '';
-  return `<figure class="depo surge"><blockquote>${esc(d.trecho)}</blockquote><figcaption>${esc(d.nome)}</figcaption>${prova}${transcricao}</figure>`;
+  return `<figure class="depo surge${pronto ? '' : ' depo--reservado'}" style="--atraso:${i * 0.1}s">${prova}${trecho}<figcaption>${esc(d.nome)}</figcaption>${transcricao}</figure>`;
 }
 
 function cardLive(l, guias, i) {
@@ -45,7 +58,7 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
     <div class="dentro abertura__grade">
       <div>
         <p class="olho surge">Leitura e transformação</p>
-        <h1 class="surge" style="--atraso:.08s">Você sabe que quer <em>mudar.</em> Mas sozinha ainda não conseguiu.</h1>
+        <h1 class="surge" style="--atraso:.08s">Você sabe que quer <em>mudar.</em><br>Mas sozinha ainda não conseguiu.</h1>
         <p class="lead surge" style="--atraso:.16s">Uma experiência de leitura e transformação para revelar o que precisa ser visto e trabalhar o que precisa mudar.</p>
         <div class="acoes surge" style="--atraso:.24s">
           ${botaoConversar(L, { evento: 'quero-conversar-hero' })}
@@ -114,12 +127,22 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
       <div class="surge" style="--atraso:.1s">
         <p class="lead">O que prende costuma estar mais fundo do que a compreensão alcança. Por isso, o que emerge na leitura é trabalhado energeticamente, buscando dissolver o que trava. Para você recuperar a liberdade de escolher diferente.</p>
         <p class="forte" style="margin-top:28px">Não é uma leitura e depois um tratamento. A transformação acontece dentro da leitura.</p>
-        <p style="margin-top:28px">E você não precisa conhecer nada de espiritualidade para isso. Só se abrir para a experiência.</p>
       </div>
     </div>
   </section>
 
-  <section class="bloco" aria-labelledby="filipe">
+  <section class="bloco surgir" aria-labelledby="surgir">
+    <div class="dentro">
+      <p class="olho surge">Uma experiência espiritual</p>
+      <h2 class="grande surge" id="surgir">Nada é escolhido antes.<br><span class="laranja">Nem por você, nem por mim.</span></h2>
+      <div class="par surgir__par">
+        <p class="lead surge">Durante a leitura podem surgir aspectos intuitivos, energéticos e simbólicos, conteúdos dos Registros Akáshicos, orientações. Não é um cardápio: os recursos se combinam dentro da própria leitura, conforme o que o processo revela.</p>
+        <p class="lead forte surge" style="--atraso:.1s">Você não precisa conhecer nenhuma dessas práticas. Nem pertencer a nenhum grupo. Só se abrir para a experiência.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloco bloco--areia" aria-labelledby="filipe">
     <div class="dentro par par--foto-esq">
       <div class="surge">
         <p class="olho">Quem conduz</p>
@@ -153,15 +176,20 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
     </div>
   </section>
 
-  ${prontos.length ? `<section class="bloco bloco--areia" aria-labelledby="dizem">
+  <section class="bloco" aria-labelledby="dizem">
     <div class="dentro">
-      <p class="olho surge">Quem já viveu</p>
-      <h2 class="grande surge" id="dizem">O que as pessoas dizem</h2>
-      <div class="depos">${prontos.map(depoimento).join('')}</div>
+      <div class="par" style="align-items:end">
+        <div>
+          <p class="olho surge">Quem já viveu</p>
+          <h2 class="grande surge" id="dizem">O que as pessoas dizem</h2>
+        </div>
+        <p class="lead surge" style="--atraso:.1s">O que mais aparece nas palavras de quem passou pela leitura não é espetáculo. É <span class="forte">clareza, precisão, acolhimento e direção.</span></p>
+      </div>
+      <div class="depos">${depoimentos.map(depoimento).join('')}</div>
     </div>
-  </section>` : ''}
+  </section>
 
-  <section class="bloco${prontos.length ? '' : ' bloco--areia'}" aria-labelledby="comecar-titulo">
+  <section class="bloco bloco--areia" aria-labelledby="comecar-titulo">
     <div class="dentro">
       <p class="olho surge">Por onde começar</p>
       <h2 class="grande surge" id="comecar-titulo">Uma leitura. Ou uma jornada.</h2>
