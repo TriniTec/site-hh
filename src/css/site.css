@@ -190,6 +190,23 @@ html[data-botao="h"] .botao--principal { font-size: 1.1875rem; min-height: 58px;
   .hero__foto { justify-self: end; width: 100%; }
 }
 
+/* Abertura da Home: a foto horizontal ocupa a largura; no computador o texto fica sobre a parede clara à esquerda */
+.abertura { padding: 0; }
+.abertura__texto { padding: var(--espaco-5) var(--espaco-3) var(--espaco-5); }
+.abertura__foto { aspect-ratio: 4 / 3; overflow: hidden; }
+.abertura__foto img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 30%; }
+@media (min-width: 900px) {
+  .abertura { position: relative; min-height: min(78vh, 720px); display: grid; align-items: center; }
+  .abertura__foto { position: absolute; inset: 0; aspect-ratio: auto; }
+  .abertura__foto img { object-position: 75% 25%; }
+  .abertura__texto { position: relative; z-index: 1; width: 100%; max-width: calc(var(--largura-pagina) + 2 * var(--espaco-5)); margin: 0 auto; padding: var(--espaco-7) var(--espaco-5); }
+  .abertura__texto > div { max-width: 540px; }
+}
+
+/* Foto vertical ao lado do texto (Sobre e bloco 7) */
+.duas__foto--vertical { aspect-ratio: 4 / 5; max-width: 460px; }
+@media (min-width: 900px) { .duas__foto--vertical { justify-self: end; width: 100%; } }
+
 /* ---------- Lista Para quem é ---------- */
 .lista { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--espaco-4); max-width: var(--largura-texto); }
 .lista li { display: grid; grid-template-columns: 12px 1fr; gap: var(--espaco-3); align-items: baseline; }

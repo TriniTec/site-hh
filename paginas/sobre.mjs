@@ -25,11 +25,11 @@ export default function sobre({ cfg, L }) {
           <p>Meu trabalho é ajudar a restaurar a harmonia quando algo deixou de fluir.</p>
         </div>
       </div>
-      <div class="duas__foto">
-        <img src="/img/filipe-retrato-sorrindo-640.webp"
-             srcset="/img/filipe-retrato-sorrindo-640.webp 640w, /img/filipe-retrato-sorrindo-1200.webp 1200w"
-             sizes="(min-width: 900px) 520px, 100vw" width="640" height="360" fetchpriority="high"
-             alt="Retrato de Filipe Morgado sorrindo, de camiseta amarela, diante de uma parede clara iluminada pelo sol.">
+      <div class="duas__foto duas__foto--vertical">
+        <img src="/img/filipe-sentado-sorrindo-640.webp"
+             srcset="/img/filipe-sentado-sorrindo-640.webp 640w, /img/filipe-sentado-sorrindo-1000.webp 1000w"
+             sizes="(min-width: 900px) 460px, 100vw" width="640" height="800" fetchpriority="high"
+             alt="Filipe Morgado sentado, sorrindo, de camiseta amarela, numa sala clara com luz natural.">
       </div>
     </div>
   </section>

@@ -62,20 +62,19 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
 
   const conteudo = `
   <!-- 1 · Hero -->
-  <section class="secao hero">
-    <div class="secao__dentro hero__grade">
+  <section class="secao abertura">
+    <div class="abertura__texto">
       <div>
         <h1 class="hero-titulo">Você sabe que quer mudar. Mas sozinha ainda não conseguiu.</h1>
         <p class="hero__sub">Uma experiência de leitura e transformação para revelar o que precisa ser visto e trabalhar o que precisa mudar.</p>
         ${botaoConversar(L, { evento: 'quero-conversar-hero' })}
       </div>
-      <div class="hero__foto">
-        <img src="/img/filipe-sentado-sorrindo-640.webp"
-             srcset="/img/filipe-sentado-sorrindo-640.webp 640w, /img/filipe-sentado-sorrindo-1000.webp 1000w"
-             sizes="(min-width: 900px) 480px, 100vw"
-             width="640" height="800" fetchpriority="high"
-             alt="Filipe Morgado sentado, sorrindo, de camiseta amarela, numa sala clara com luz natural.">
-      </div>
+    </div>
+    <div class="abertura__foto">
+      <img src="/img/filipe-retrato-sorrindo-1200.webp"
+           srcset="/img/filipe-retrato-sorrindo-640.webp 640w, /img/filipe-retrato-sorrindo-1200.webp 1200w, /img/filipe-retrato-sorrindo-1600.webp 1600w"
+           sizes="100vw" width="1200" height="675" fetchpriority="high"
+           alt="Filipe Morgado sorrindo, de camiseta amarela, diante de uma parede clara iluminada pelo sol.">
     </div>
   </section>
 
@@ -149,11 +148,11 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
         <p class="fecho">Sou Filipe Morgado. Eu me vejo como um Humano do Silêncio, aquele que restaura a Harmonia.</p>
         <p style="margin-top:var(--espaco-4)"><a class="botao botao--contorno" href="/sobre">Conhecer minha história</a></p>
       </div>
-      <div class="duas__foto">
-        <img src="/img/filipe-retrato-sorrindo-640.webp"
-             srcset="/img/filipe-retrato-sorrindo-640.webp 640w, /img/filipe-retrato-sorrindo-1200.webp 1200w"
-             sizes="(min-width: 900px) 520px, 100vw" width="640" height="360" loading="lazy"
-             alt="Retrato de Filipe Morgado sorrindo, de camiseta amarela, diante de uma parede clara iluminada pelo sol.">
+      <div class="duas__foto duas__foto--vertical">
+        <img src="/img/filipe-sentado-sorrindo-640.webp"
+             srcset="/img/filipe-sentado-sorrindo-640.webp 640w, /img/filipe-sentado-sorrindo-1000.webp 1000w"
+             sizes="(min-width: 900px) 460px, 100vw" width="640" height="800" loading="lazy"
+             alt="Filipe Morgado sentado, sorrindo, de camiseta amarela, numa sala clara com luz natural.">
       </div>
     </div>
   </section>
@@ -216,7 +215,7 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
     titulo: 'Leitura energética e transformação | Harmonização Humana',
     descricao: 'Você sabe que quer mudar, mas sozinha ainda não conseguiu. Leitura energética e transformação, sem precisar contar sua história.',
     jsonld,
-    preload: ['<link rel="preload" as="image" href="/img/filipe-sentado-sorrindo-640.webp" imagesrcset="/img/filipe-sentado-sorrindo-640.webp 640w, /img/filipe-sentado-sorrindo-1000.webp 1000w" imagesizes="(min-width: 900px) 480px, 100vw" fetchpriority="high">'],
+    preload: ['<link rel="preload" as="image" href="/img/filipe-retrato-sorrindo-1200.webp" imagesrcset="/img/filipe-retrato-sorrindo-640.webp 640w, /img/filipe-retrato-sorrindo-1200.webp 1200w, /img/filipe-retrato-sorrindo-1600.webp 1600w" imagesizes="100vw" fetchpriority="high">'],
     conteudo,
   };
 }
