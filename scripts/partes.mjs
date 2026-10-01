@@ -36,6 +36,7 @@ export function head({ cfg, titulo, descricao, caminho, jsonld, preload = [] }) 
 <meta name="description" content="${esc(descricao)}">
 <link rel="canonical" href="${url}">
 <meta name="theme-color" content="#082B61">
+<meta name="color-scheme" content="only light">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="${esc(cfg.nome)}">
@@ -88,7 +89,7 @@ export function topo({ L, atual }) {
 }
 
 export function rodape({ cfg, L }) {
-  return `<footer class="rodape" data-theme="dark">
+  return `<footer class="rodape" data-tema="indigo">
   <div class="rodape__dentro">
     <p class="rodape__nome">Harmonização Humana · Filipe Morgado</p>
     <ul class="rodape__links">

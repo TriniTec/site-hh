@@ -9,6 +9,7 @@
 
 /* ---------- Tokens ---------- */
 :root {
+  color-scheme: light; /* o site é sempre claro, também com o aparelho no modo noite */
   --indigo: #082B61;
   --ouro: #D6A332;
   --laranja: #E87716;
@@ -48,8 +49,9 @@
   --sombra-flutuante: 0 6px 20px rgba(8, 43, 97, 0.28);
 }
 
-/* Seções índigo (tema escuro do sistema) */
-[data-theme="dark"] {
+/* Seções índigo (tema "dark" do Design System). Marca própria (data-tema), para não
+   colidir com o data-theme que navegadores e molduras aplicam no modo noite. */
+[data-tema="indigo"] {
   --fundo: var(--indigo);
   --fundo-apoio: var(--indigo);
   --texto: var(--marfim);

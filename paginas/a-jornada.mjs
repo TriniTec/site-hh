@@ -70,7 +70,7 @@ export default function aJornada({ cfg, L }) {
     </div>
   </section>
 
-  <section class="secao" data-theme="dark" aria-labelledby="busca">
+  <section class="secao" data-tema="indigo" aria-labelledby="busca">
     <div class="secao__dentro secao__texto">
       <h2 class="titulo" id="busca">O que a jornada busca</h2>
       <p>Mais consciência sobre si. Clareza sobre padrões que vinham se repetindo. Novas perspectivas sobre situações da vida. Orientação. Movimento onde havia estagnação. E o trabalho energético voltado à transformação daquilo que se revela.</p>

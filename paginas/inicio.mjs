@@ -105,7 +105,7 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
   </section>
 
   <!-- 4 · O que acontece -->
-  <section class="secao" data-theme="dark" aria-labelledby="acontece">
+  <section class="secao" data-tema="indigo" aria-labelledby="acontece">
     <div class="secao__dentro">
       <h2 class="titulo" id="acontece">O que acontece em uma leitura</h2>
       <ol class="etapas">
