@@ -1,0 +1,32 @@
+name: Atualizar lives
+
+# Uma vez por dia, às 8h de Brasília (11h UTC): lê a playlist das lives e, só se entrou live nova,
+# atualiza data/lives.json e as miniaturas. O commit faz o Netlify publicar o site de novo.
+on:
+  schedule:
+    - cron: "7 11 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  lives:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/atualizar-lives.mjs
+      - name: Publicar se mudou
+        run: |
+          if [ -n "$(git status --porcelain data src/img/lives)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/lives.json src/img/lives
+            git commit -m "Lives: atualiza as três mais recentes"
+            git push
+          else
+            echo "Nada novo."
+          fi

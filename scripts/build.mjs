@@ -1,0 +1,89 @@
+// Monta o site em dist/. Sem dependências: node scripts/build.mjs
+import { readFile, writeFile, mkdir, cp, rm } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+import { pagina, links } from './partes.mjs';
+import inicio from '../paginas/inicio.mjs';
+import aJornada from '../paginas/a-jornada.mjs';
+import sobre from '../paginas/sobre.mjs';
+
+const raiz = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const dist = path.join(raiz, 'dist');
+const lerJson = async (p) => JSON.parse(await readFile(path.join(raiz, p), 'utf8'));
+
+const cfg = await lerJson('site.config.json');
+const depoimentos = await lerJson('data/depoimentos.json');
+const lives = await lerJson('data/lives.json');
+const guias = await lerJson('data/guias.json');
+const L = links(cfg);
+
+await rm(dist, { recursive: true, force: true });
+await mkdir(dist, { recursive: true });
+await cp(path.join(raiz, 'src'), dist, { recursive: true });
+
+const paginas = [inicio, aJornada, sobre].map((p) => p({ cfg, L, depoimentos, lives, guias }));
+for (const p of paginas) {
+  await writeFile(path.join(dist, p.arquivo), pagina({ cfg, L, ...p }));
+}
+
+// 404 simples, com o mesmo topo e rodapé
+await writeFile(path.join(dist, '404.html'), pagina({
+  cfg, L, atual: '', caminho: '/404', titulo: 'Página não encontrada | Harmonização Humana',
+  descricao: 'Esta página não existe.', jsonld: { '@context': 'https://schema.org', '@type': 'WebPage', name: 'Página não encontrada' },
+  conteudo: `<section class="secao"><div class="secao__dentro secao__texto">
+    <h1 class="titulo">Esta página não existe.</h1>
+    <p>Talvez o endereço tenha mudado. <a href="/">Voltar para o início</a>.</p>
+  </div></section>`,
+}).replace('<head>', '<head>\n<meta name="robots" content="noindex">'));
+
+const hoje = new Date().toISOString().slice(0, 10);
+await writeFile(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${paginas.map((p) => `  <url><loc>${cfg.dominio}${p.caminho}</loc><lastmod>${hoje}</lastmod></url>`).join('\n')}
+</urlset>
+`);
+
+// Todos os robôs liberados, inclusive os de IA (padrão da Trini, 25/09).
+await writeFile(path.join(dist, 'robots.txt'), `User-agent: *
+Allow: /
+
+Sitemap: ${cfg.dominio}/sitemap.xml
+`);
+
+await writeFile(path.join(dist, 'llms.txt'), `# Harmonização Humana
+
+> Uma experiência de leitura e transformação, conduzida por Filipe Morgado, para revelar o que precisa ser visto e trabalhar o que precisa mudar. Atendimento online, no Brasil. A leitura acontece sem informações prévias: a pessoa não precisa contar sua história nem chegar com uma pergunta.
+
+Este trabalho não substitui acompanhamento médico, psicológico ou psiquiátrico. Não são feitas promessas de cura ou garantia de resultados.
+
+## Páginas
+
+- [Início](${cfg.dominio}/): o que é a leitura, como acontece (percepção, consciência, orientação, transformação), leituras ao vivo e depoimentos.
+- [A Jornada](${cfg.dominio}/a-jornada): os três formatos (Mensagem em áudio, sessão individual por videochamada, Jornada de dez sessões) e como começar.
+- [Sobre](${cfg.dominio}/sobre): quem é Filipe Morgado.
+
+## Canais
+
+- [Leituras ao vivo no YouTube, às quintas, 19h](${cfg.youtube})
+- [Instagram](${cfg.instagram})
+- [Contato pelo WhatsApp](${L.whatsapp})
+`);
+
+await writeFile(path.join(dist, 'site.webmanifest'), JSON.stringify({
+  name: 'Harmonização Humana', short_name: 'Harmonização Humana', lang: 'pt-BR', start_url: '/',
+  display: 'browser', background_color: '#FFF7E7', theme_color: '#082B61',
+  icons: [{ src: '/icone-192.png', sizes: '192x192', type: 'image/png' }, { src: '/icone-512.png', sizes: '512x512', type: 'image/png' }],
+}, null, 2));
+
+// Avisos do que falta preencher
+const avisos = [];
+for (const d of depoimentos) {
+  if (!d.trecho) avisos.push(`Depoimento de ${d.nome}: falta o trecho (data/depoimentos.json)`);
+  if (d.prova === 'video' && !d.videoId) avisos.push(`Depoimento de ${d.nome}: falta o videoId e a imagem`);
+  if (d.prova === 'print' && !d.imagem) avisos.push(`Depoimento de ${d.nome}: falta o print`);
+}
+if (!lives.length) avisos.push('Lives: data/lives.json vazio (a tarefa diária no GitHub preenche)');
+if (!cfg.umamiWebsiteId) avisos.push('Umami: umamiWebsiteId vazio em site.config.json (estatística desligada)');
+
+console.log(`Site montado em dist/ (${paginas.length} páginas).`);
+if (avisos.length) console.log('Pendências:\n- ' + avisos.join('\n- '));
