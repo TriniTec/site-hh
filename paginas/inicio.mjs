@@ -146,7 +146,7 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
     <div class="dentro par par--foto-esq">
       <div class="surge">
         <p class="olho">Quem conduz</p>
-        <h2 class="oi" id="filipe">Oi, eu sou o Filipe.</h2>
+        <h2 class="oi" id="filipe">Oi, meu nome é Filipe.</h2>
         <p class="lead">Escuto antes de interferir. Percebo antes de interpretar. O que aparece na leitura eu digo de forma simples, com calma, sem promessa e sem espetáculo.</p>
         <p style="margin:28px 0 36px">Me vejo como um Humano do Silêncio, aquele que restaura a Harmonia.</p>
         <a class="seta" href="/sobre">Conhecer minha história <span aria-hidden="true">→</span></a>
@@ -164,12 +164,12 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
     <div class="dentro">
       <div class="par">
         <div class="surge">
-          <p class="selo-vivo"><i></i>Ao vivo · quintas, 19h</p>
+          <p class="selo-vivo"><i></i>Ao vivo no YouTube · quintas, 19h</p>
           <h2 class="grande" id="vivo">Veja uma leitura <span class="ouro">acontecendo.</span></h2>
         </div>
         <div class="surge" style="--atraso:.1s">
           <p class="lead">Toda quinta eu faço leituras abertas no YouTube. É de graça, sem compromisso e sem precisar entender nada antes. Quer receber uma? É só escrever no chat.</p>
-          <p style="margin-top:32px"><a class="botao botao--claro" href="${esc(lives.length ? L.playlist : cfg.youtube)}" target="_blank" rel="noopener">Assistir no YouTube</a></p>
+          <p style="margin-top:32px"><a class="botao botao--claro botao--yt" href="${esc(lives.length ? L.playlist : cfg.youtube)}" target="_blank" rel="noopener"><svg class="yt" viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" rx="5" fill="#FF0000"/><path d="M11.2 5.6v8.8l7.4-4.4z" fill="#fff"/></svg>Assistir no YouTube</a></p>
         </div>
       </div>
       ${lives.length ? `<div class="lives">${lives.slice(0, 3).map((l, i) => cardLive(l, guias, i)).join('')}</div>` : ''}

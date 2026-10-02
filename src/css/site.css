@@ -198,7 +198,7 @@ html[data-botao="e"] .botao--principal { text-shadow: none; }
 .filipe__foto img { width: 100%; height: 100%; object-fit: cover; }
 .filipe__selo { position: absolute; left: 20px; bottom: 20px; background: var(--marfim); border-radius: 999px; padding: 8px 18px 8px 8px; display: flex; align-items: center; gap: 10px; font-family: var(--t); font-weight: 700; font-size: .9375rem; box-shadow: var(--sombra); }
 .filipe__selo img { width: 32px; height: 32px; }
-.oi { font-size: clamp(2.25rem, 5vw, 3.75rem); line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 28px; }
+.oi { font-size: clamp(1.875rem, 3.4vw, 3rem); line-height: 1.05; white-space: nowrap; letter-spacing: -0.03em; margin-bottom: 28px; }
 
 /* Ao vivo */
 .ao-vivo { overflow: hidden; }
@@ -331,3 +331,6 @@ html[data-botao="e"] .botao--principal { text-shadow: none; }
 .depo__reservado i { display: block; height: 12px; border-radius: 6px; background: rgba(8, 43, 97, .09); }
 .depo__reservado i:nth-child(2) { width: 88%; }
 .depo__reservado i:nth-child(3) { width: 60%; }
+
+/* Botão do YouTube: ícone oficial (vermelho com o play branco) */
+.botao--yt .yt { width: 28px; height: 20px; flex: none; }
