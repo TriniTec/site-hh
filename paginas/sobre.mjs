@@ -1,6 +1,13 @@
 // Página Sobre · versão Solar. Sem currículo nem certificações: a trajetória é história, não credencial.
 import { botaoConversar, jsonldBase, breadcrumb, sol } from '../scripts/partes.mjs';
 
+// Ícones em traço, na cor do texto (o sistema não tem biblioteca de ícones: desenhados simples)
+const icone = {
+  camera: '<svg class="marco__icone" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 16h8l3-5h10l3 5h8v22H8z"/><circle cx="24" cy="26" r="7"/></svg>',
+  bussola: '<svg class="marco__icone" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16"/><path d="M30 18l-4 10-8 2 4-10z"/></svg>',
+  sol: '<svg class="marco__icone" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="7"/><path d="M24 7v6M24 35v6M7 24h6M35 24h6M12 12l4 4M32 32l4 4M36 12l-4 4M16 32l-4 4"/></svg>',
+};
+
 export default function sobre({ cfg, L }) {
   const base = jsonldBase(cfg);
   const person = { ...base.person, description: 'Um Humano do Silêncio, aquele que restaura a Harmonia.', worksFor: { '@id': `${cfg.dominio}/#servico` } };
@@ -18,7 +25,8 @@ export default function sobre({ cfg, L }) {
       <div>
         <p class="olho surge">Filipe Morgado</p>
         <h1 class="surge" style="--atraso:.08s">Um Humano do Silêncio, aquele que restaura a <span class="laranja">Harmonia.</span></h1>
-        <p class="lead surge" style="--atraso:.16s">Alguém que busca escutar antes de interferir, perceber antes de interpretar e compreender antes de agir. Meu trabalho é ajudar a restaurar a harmonia quando algo deixou de fluir.</p>
+        <p class="lead surge" style="--atraso:.16s">Alguém que busca escutar antes de interferir, perceber antes de interpretar e compreender antes de agir.</p>
+        <p class="sobre__trabalho surge" style="--atraso:.22s">Meu trabalho é ajudar a restaurar a harmonia quando algo deixou de fluir.</p>
       </div>
       <div class="filipe__foto surge" style="--atraso:.1s;justify-self:end;width:100%">
         <img src="/img/filipe-sentado-sorrindo-640.webp" srcset="/img/filipe-sentado-sorrindo-640.webp 640w, /img/filipe-sentado-sorrindo-1000.webp 1000w"
@@ -35,7 +43,14 @@ export default function sobre({ cfg, L }) {
       <ol class="trajeto surge" aria-label="Trajetória">
         ${trajeto.map((t, i) => `<li>${t}</li>${i < trajeto.length - 1 ? '<li class="passa" aria-hidden="true">→</li>' : ''}`).join('')}
       </ol>
-      <p class="lead surge" style="margin-top:48px;max-width:34em">A fotografia foi o que me fez olhar para mim mesmo e abriu o caminho. As viagens trouxeram outra forma de perceber. Por aí chegou a espiritualidade, e depois o trabalho terapêutico.</p>
+      <div class="marcos">
+        <article class="marco surge">${icone.camera}<h3>Fotografia</h3><p>Foi o que me fez olhar para mim mesmo e abriu o caminho.</p></article>
+        <article class="marco surge" style="--atraso:.1s">${icone.bussola}<h3>Viagens</h3><p>Os passeios e as viagens fotográficas trouxeram outra forma de perceber.</p></article>
+        <article class="marco surge" style="--atraso:.2s">${icone.sol}<h3>Espiritualidade</h3><p>Chegou por esse caminho. E depois dela, o trabalho terapêutico.</p></article>
+      </div>
+      <figure class="imagem-reservada surge" aria-hidden="true">
+        <span>Imagem a gerar · Filipe fotografando numa paisagem aberta, luz dourada</span>
+      </figure>
     </div>
   </section>
 
@@ -43,7 +58,7 @@ export default function sobre({ cfg, L }) {
     <div class="declaracao__luz" aria-hidden="true">${sol({ id: 'd', raios: 48, onda: 1.2 })}</div>
     <div class="dentro">
       <h2 class="surge" id="humanidade" style="max-width:18ch;font-size:clamp(2.25rem,5.4vw,4.25rem)">Razão e intuição. Tecnologia e espiritualidade. <span class="ouro">A mesma Humanidade.</span></h2>
-      <p class="lead surge">Talvez por isso eu não me encaixe perfeitamente na bolha espiritual. E talvez seja exatamente isso que permite que este trabalho aconteça de forma simples, humana e sem espetáculo.</p>
+      <p class="lead surge">Talvez por isso eu não me encaixe perfeitamente na bolha espiritual, nem em nenhuma outra. E talvez seja exatamente isso que permite que este trabalho aconteça de forma simples, humana e sem espetáculo.</p>
     </div>
   </section>
 

@@ -37,6 +37,17 @@
       passos.forEach(function (li, i) { li.classList.toggle('aceso', p >= (i / passos.length) + 0.02 || reduz); });
     }
   }
+  // O botão fixo sai de cena quando o rodapé ou a chamada final estão à vista
+  var finais = document.querySelectorAll('.final, .rodape');
+  if (fixo && 'IntersectionObserver' in window) {
+    var vistos = new Set();
+    var obsFim = new IntersectionObserver(function (itens) {
+      itens.forEach(function (i) { if (i.isIntersecting) vistos.add(i.target); else vistos.delete(i.target); });
+      fixo.classList.toggle('escondido', vistos.size > 0);
+    }, { threshold: 0.15 });
+    finais.forEach(function (el) { obsFim.observe(el); });
+  }
+
   var pedido = false;
   window.addEventListener('scroll', function () {
     if (!pedido) { pedido = true; requestAnimationFrame(function () { pedido = false; aoRolar(); }); }
@@ -52,7 +63,7 @@
       iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
       iframe.allowFullscreen = true;
       var caixa = document.createElement('div');
-      caixa.className = 'depo__prova';
+      caixa.className = botao.className;
       caixa.appendChild(iframe);
       botao.replaceWith(caixa);
     });

@@ -6,8 +6,7 @@ import { esc, botaoConversar, jsonldBase, breadcrumb, sol } from '../scripts/par
 const play = `<span class="depo__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>`;
 
 function depoimento(d, i) {
-  // Enquanto o depoimento não está preenchido em data/depoimentos.json, o cartão mostra o lugar reservado
-  // (linhas suaves no lugar do texto). Nenhuma palavra é inventada.
+  // Palavras das próprias pessoas, sem reescrever. O trecho em destaque sai da transcrição (data/depoimentos.json).
   const pronto = d.trecho && (d.prova === 'video' ? d.videoId : d.imagem);
   const trecho = d.trecho
     ? `<blockquote>${esc(d.trecho)}</blockquote>`
@@ -15,15 +14,16 @@ function depoimento(d, i) {
   let prova;
   if (d.prova === 'video') {
     prova = d.videoId
-      ? `<button class="depo__prova" type="button" data-video="${esc(d.videoId)}" aria-label="Assistir ao depoimento de ${esc(d.nome)}" data-umami-event="depoimento-play">${d.imagem ? `<img src="${esc(d.imagem)}" alt="" loading="lazy">` : ''}${play}</button>`
+      ? `<button class="depo__prova depo__prova--short" type="button" data-video="${esc(d.videoId)}" aria-label="Assistir ao depoimento de ${esc(d.nome)}" data-umami-event="depoimento-play">${d.imagem ? `<img src="${esc(d.imagem)}" alt="" loading="lazy">` : ''}${play}<span class="depo__selo">Depoimento em vídeo</span></button>`
       : `<div class="depo__prova depo__prova--vazia">${play}<span>Depoimento em vídeo</span></div>`;
   } else {
     prova = d.imagem
-      ? `<a class="depo__prova depo__prova--print" href="${esc(d.imagem)}" target="_blank" rel="noopener" aria-label="Ampliar o print da conversa com ${esc(d.nome)}"><img src="${esc(d.imagem)}" alt="${esc(d.alt || 'Print da conversa com ' + d.nome)}" loading="lazy"></a>`
+      ? `<a class="depo__prova depo__prova--print" href="${esc(d.imagem)}" target="_blank" rel="noopener" aria-label="Ampliar o print da mensagem de ${esc(d.nome)}"><img src="${esc(d.miniatura || d.imagem)}" alt="${esc(d.alt || 'Print da mensagem de ' + d.nome)}" loading="lazy" width="640" height="650"><span class="depo__selo">Toque para ampliar</span></a>`
       : `<div class="depo__prova depo__prova--vazia"><span>Print da conversa no WhatsApp</span></div>`;
   }
+  const rotulo = d.prova === 'video' ? 'Ler a transcrição' : 'Ler a mensagem inteira';
   const transcricao = d.transcricao
-    ? `<details><summary>Ler a transcrição</summary>${d.transcricao.split(/\n\s*\n/).map((p) => `<p>${esc(p)}</p>`).join('')}</details>` : '';
+    ? `<details><summary>${rotulo}</summary>${d.transcricao.split(/\n\s*\n/).map((p) => `<p>${esc(p)}</p>`).join('')}</details>` : '';
   return `<figure class="depo surge${pronto ? '' : ' depo--reservado'}" style="--atraso:${i * 0.1}s">${prova}${trecho}<figcaption>${esc(d.nome)}</figcaption>${transcricao}</figure>`;
 }
 
@@ -44,7 +44,7 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
   const prontos = depoimentos.filter((d) => d.trecho && (d.prova === 'video' ? d.videoId : d.imagem));
   const videos = prontos.filter((d) => d.prova === 'video').map((d) => ({
     '@type': 'VideoObject', name: `Depoimento de ${d.nome}`, description: d.trecho,
-    thumbnailUrl: cfg.dominio + d.imagem, embedUrl: `https://www.youtube-nocookie.com/embed/${d.videoId}`,
+    ...(d.imagem ? { thumbnailUrl: cfg.dominio + d.imagem } : {}), embedUrl: `https://www.youtube-nocookie.com/embed/${d.videoId}`,
     contentUrl: `https://www.youtube.com/watch?v=${d.videoId}`,
     ...(d.uploadDate ? { uploadDate: d.uploadDate } : {}), ...(d.transcricao ? { transcript: d.transcricao } : {}),
   }));
@@ -91,7 +91,7 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
         <li class="surge" style="--atraso:.08s">Eu só queria uma luz. Uma resposta para o que estou vivendo.</li>
         <li class="surge" style="--atraso:.16s">Eu nem sei qual seria a pergunta.</li>
       </ul>
-      <p class="espelho__fecho surge">Se uma delas é sua, a boa notícia vem a seguir.</p>
+      <p class="espelho__fecho surge">Alguma delas é sua? A boa notícia vem a seguir.</p>
     </div>
   </section>
 
@@ -121,12 +121,20 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
     </div>
   </section>
 
-  <section class="bloco bloco--areia" aria-labelledby="basta">
-    <div class="dentro par">
-      <h2 class="citacao surge" id="basta">Entender<br>não basta.</h2>
-      <div class="surge" style="--atraso:.1s">
-        <p class="lead">O que prende costuma estar mais fundo do que a compreensão alcança. Por isso, o que emerge na leitura é trabalhado energeticamente, buscando dissolver o que trava. Para você recuperar a liberdade de escolher diferente.</p>
-        <p class="forte" style="margin-top:28px">Não é uma leitura e depois um tratamento. A transformação acontece dentro da leitura.</p>
+  <section class="bloco bloco--areia basta" aria-labelledby="basta">
+    <div class="dentro">
+      <div class="par basta__topo">
+        <h2 class="citacao surge" id="basta">Entender<br>não basta.</h2>
+        <p class="basta__frase surge" style="--atraso:.1s">O que prende costuma estar <strong>mais fundo</strong> do que a compreensão alcança.</p>
+      </div>
+      <ol class="basta__passos">
+        <li class="surge"><span>1</span><em><b>Ver</b> o que prende</em></li>
+        <li class="surge" style="--atraso:.1s"><span>2</span><em><b>Soltar</b> o que trava</em></li>
+        <li class="surge" style="--atraso:.2s"><span>3</span><em><b>Escolher</b> diferente</em></li>
+      </ol>
+      <div class="par basta__fim">
+        <p class="lead surge">Por isso, o que emerge na leitura é trabalhado energeticamente, buscando dissolver, transmutar e reprogramar o que trava. Para você recuperar a <strong>liberdade de escolher diferente.</strong></p>
+        <p class="basta__selo surge" style="--atraso:.1s">Não é uma leitura e depois um tratamento. <span>A transformação acontece dentro da leitura.</span></p>
       </div>
     </div>
   </section>
@@ -148,7 +156,7 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
         <p class="olho">Quem conduz</p>
         <h2 class="oi" id="filipe">Oi, meu nome é Filipe.</h2>
         <p class="lead">Escuto antes de interferir. Percebo antes de interpretar. O que aparece na leitura eu digo de forma simples, com calma, sem promessa e sem espetáculo.</p>
-        <p style="margin:28px 0 36px">Me vejo como um Humano do Silêncio, aquele que restaura a Harmonia.</p>
+        <p class="filipe__marca">Sou um Humano do Silêncio, aquele que restaura a Harmonia.</p>
         <a class="seta" href="/sobre">Conhecer minha história <span aria-hidden="true">→</span></a>
       </div>
       <div class="filipe__foto surge" style="--atraso:.1s">
@@ -168,7 +176,7 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
           <h2 class="grande" id="vivo">Veja uma leitura <span class="ouro">acontecendo.</span></h2>
         </div>
         <div class="surge" style="--atraso:.1s">
-          <p class="lead">Toda quinta eu faço leituras abertas no YouTube. É de graça, sem compromisso e sem precisar entender nada antes. Quer receber uma? É só escrever no chat.</p>
+          <p class="lead">Toda quinta, às 19h, eu faço leituras ao vivo no YouTube. É aberto, de graça, sem compromisso e sem precisar entender nada antes. Quer receber uma? É só escrever no chat.</p>
           <p style="margin-top:32px"><a class="botao botao--claro botao--yt" href="${esc(lives.length ? L.playlist : cfg.youtube)}" target="_blank" rel="noopener"><svg class="yt" viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" rx="5" fill="#FF0000"/><path d="M11.2 5.6v8.8l7.4-4.4z" fill="#fff"/></svg>Assistir no YouTube</a></p>
         </div>
       </div>
@@ -197,20 +205,20 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
         <article class="formato surge">
           <p class="formato__tag">Cerca de 1 hora · por vídeo</p>
           <h3>Sessão individual</h3>
-          <p>Para viver a experiência por inteiro, sem compromisso de continuidade. Você não precisa preparar nada.</p>
+          <p>Para experimentar a leitura, ou para olhar algo mais pontual. Sem compromisso de continuidade e sem preparar nada.</p>
           <p class="empurra"><a class="seta" href="/a-jornada#sessao">Como é <span aria-hidden="true">→</span></a></p>
         </article>
         <article class="formato formato--destaque surge" style="--atraso:.1s">
           <span class="formato__recomendada">Recomendada</span>
           <p class="formato__tag">10 semanas · 1 por semana</p>
           <h3>A Jornada</h3>
-          <p>Para aprofundar. O trabalho se desenvolve no tempo, e diferentes camadas vão sendo acessadas e trabalhadas.</p>
+          <p>Para quem quer mudar de verdade. Dez semanas em que o trabalho vai fundo, camada por camada, buscando a transformação.</p>
           <p class="empurra"><a class="seta" href="/a-jornada#jornada">Como é <span aria-hidden="true">→</span></a></p>
         </article>
         <article class="formato surge" style="--atraso:.2s">
           <p class="formato__tag">Na dúvida</p>
           <h3>Vamos conversar</h3>
-          <p>Me conta o que te trouxe até aqui, do seu jeito. A gente vê junto qual formato faz sentido para você agora.</p>
+          <p>Você me conta, do seu jeito, o que trouxe você até aqui. E a gente vê junto qual formato faz sentido agora.</p>
           <p class="empurra">${botaoConversar(L, { evento: 'quero-conversar-formatos' })}</p>
         </article>
       </div>
@@ -226,7 +234,7 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
     <div class="dentro final__texto">
       <div class="surge">
         <h2 id="final">Você não precisa saber por onde começar.</h2>
-        <p class="lead">Se sente que chegou a hora de olhar mais fundo para o que está acontecendo, podemos conversar.</p>
+        <p class="lead">Sente que chegou a hora de olhar mais fundo para o que está acontecendo? Então vamos conversar.</p>
         ${botaoConversar(L, { evento: 'quero-conversar-final' })}
       </div>
     </div>

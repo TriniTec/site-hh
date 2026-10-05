@@ -9,10 +9,9 @@ Referências: documento 02 (briefing e textos, v1.10), documento 06 (identidade 
 
 | Quero mudar… | Arquivo |
 | --- | --- |
-| Número ou texto do WhatsApp (todos os botões, rodapé e Pedir uma Mensagem) | `site.config.json` → `whatsapp` |
+| Número ou textos do WhatsApp (geral, Mensagem, sessão, Jornada) | `site.config.json` → `whatsapp` |
 | Prazo da Mensagem | `site.config.json` → `mensagemPrazo` |
-| Cor do botão Quero conversar | `site.config.json` → `botaoPrincipal` (`cheio`, `e`, `f`, `g`, `h`, `i`, `a`) |
-| Estatística (Umami) | `site.config.json` → `umamiWebsiteId` |
+| Estatística (Umami, sem cookies) | `site.config.json` → `umamiWebsiteId` |
 | Depoimentos | `data/depoimentos.json` (imagens em `src/img/depoimentos/`) |
 | Link do guia de uma live | `data/guias.json` → `{ "ID_DO_VIDEO": "https://…" }` |
 | Textos das páginas | `paginas/inicio.mjs`, `paginas/a-jornada.mjs`, `paginas/sobre.mjs` |
@@ -20,12 +19,6 @@ Referências: documento 02 (briefing e textos, v1.10), documento 06 (identidade 
 
 As três últimas lives (`data/lives.json`) se atualizam sozinhas: o GitHub roda
 `scripts/atualizar-lives.mjs` todo dia às 8h e só publica quando entrou live nova.
-
-## Testar a cor do botão vendo a página inteira
-
-Acrescente `?botao=` ao endereço: `/?botao=e`, `/?botao=f`, `/?botao=i`… A escolha vale
-enquanto a aba estiver aberta, em todas as páginas. As opções são as do Design System
-(C índigo, E laranja com branco, F com sombra índigo, G com contorno, H maior, I fundo claro com borda laranja, A laranja com índigo).
 
 ## Rodar no computador
 
@@ -48,3 +41,19 @@ data/                   depoimentos, lives, guias
 src/                    fontes WOFF2, imagens, CSS, JS, favicons (copiados como estão)
 netlify.toml            build e cabeçalhos do Netlify
 ```
+
+## Depoimentos
+
+`data/depoimentos.json`: nome, trecho em destaque (palavras exatas da transcrição), vídeo (`videoId` do YouTube)
+ou print (`imagem`), e a transcrição completa. As miniaturas dos vídeos são baixadas do YouTube na hora de
+montar o site (no Netlify) e servidas pelo próprio site. O print vai como veio, sem edição.
+
+## Para fazer depois (TODO)
+
+- Modo noite desenhado (índigo como fundo, ouro como luz). Hoje o site é sempre claro, de propósito,
+  mesmo com o aparelho no modo escuro (`color-scheme: light`).
+- Ligar o domínio harmonizacaohumana.com.br e o redirecionamento do leituraenergetica.com.br.
+- Levar a versão Solar para o branch `main` e trocar o branch no Netlify (a tarefa das lives roda no `main`).
+- Conferir o endereço completo da playlist das lives (`playlistLives`).
+- Google Search Console e Bing Webmaster Tools, com o sitemap.
+- Imagens a gerar: ver `docs/imagens-a-gerar.md`.

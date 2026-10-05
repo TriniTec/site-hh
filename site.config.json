@@ -3,20 +3,17 @@
   "nome": "Harmonização Humana",
   "autor": "Filipe Morgado",
   "ano": 2026,
-
   "whatsapp": {
     "numero": "5511999915617",
     "textoGeral": "Oi Filipe, vim pelo site e queria saber mais sobre a Harmonização Humana",
-    "textoMensagem": "Oi Filipe, queria pedir uma Mensagem"
+    "textoMensagem": "Oi Filipe, queria pedir uma Mensagem",
+    "textoSessao": "Oi Filipe, vim pelo site e tenho interesse na sessão individual",
+    "textoJornada": "Oi Filipe, vim pelo site e tenho interesse na Jornada"
   },
-
   "youtube": "https://www.youtube.com/@FilipeMorgadoHH",
   "instagram": "https://www.instagram.com/filipemorgado.hh",
   "playlistLives": "PLQbbN3rDJtEM",
-
-  "botaoPrincipal": "f",
-
-  "umamiWebsiteId": "",
-
-  "mensagemPrazo": "Entrega em geral em um ou dois dias úteis."
+  "umamiWebsiteId": "471706c0-02ee-4b80-b339-d50430243247",
+  "mensagemPrazo": "Entrega em geral em um ou dois dias úteis.",
+  "playlistDepoimentos": "PLC8ZTQBtxNkk"
 }

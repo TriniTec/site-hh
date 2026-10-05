@@ -18,8 +18,8 @@ export default function aJornada({ cfg, L }) {
         <article class="formato surge" id="mensagem">
           <p class="formato__tag">Até 5 minutos · em áudio</p>
           <h2 style="font-size:2rem">Mensagem</h2>
+          <p class="formato__para">Para quando você busca uma luz, uma orientação, uma resposta.</p>
           <p>Você envia seu nome completo e sua data de nascimento. Eu devolvo, em áudio, o que aparecer para você naquele momento. Sem horário marcado.</p>
-          <p>Para quando você busca uma luz, uma orientação, uma resposta.</p>
           <p class="formato__prazo">${esc(cfg.mensagemPrazo)}</p>
           <p class="formato__nota">A Mensagem aponta. A sessão trabalha. São experiências e profundidades diferentes.</p>
           <p class="empurra">${botaoConversar(L, { texto: 'Pedir uma Mensagem', href: L.whatsappMensagem, evento: 'pedir-mensagem' })}</p>
@@ -27,35 +27,48 @@ export default function aJornada({ cfg, L }) {
         <article class="formato surge" id="sessao" style="--atraso:.1s">
           <p class="formato__tag">Cerca de 1 hora · videochamada</p>
           <h2 style="font-size:2rem">Sessão individual</h2>
-          <p>Nos primeiros minutos eu explico como vai ser. Depois a leitura flui: eu traduzo em voz alta o que aparece, e você recebe. Quando dá, abro espaço para uma pergunta.</p>
+          <p class="formato__para">Para experimentar, ou para olhar algo mais pontual.</p>
+          <p>Nos primeiros minutos eu explico como vai ser. Depois a leitura flui: eu traduzo em voz alta o que aparece, e você recebe. Quando possível, abro espaço para uma pergunta.</p>
           <p>Não precisa preparar nada nem chegar com um problema definido. Já no primeiro encontro pode começar a surgir clareza.</p>
-          <p class="empurra">${botaoConversar(L, { evento: 'quero-conversar-sessao' })}</p>
+          <p class="empurra">${botaoConversar(L, { href: L.whatsappSessao, evento: 'quero-conversar-sessao' })}</p>
         </article>
         <article class="formato formato--destaque surge" id="jornada" style="--atraso:.2s">
           <span class="formato__recomendada">Recomendada</span>
           <p class="formato__tag">10 sessões · 1 por semana</p>
           <h2 style="font-size:2rem">A Jornada</h2>
-          <p>A forma de aprofundar. O trabalho se desenvolve no tempo, e diferentes camadas vão sendo acessadas e trabalhadas, uma semana depois da outra.</p>
+          <p class="formato__para">Para quem quer mudar de verdade.</p>
+          <p>É o caminho da transformação mais profunda. Semana a semana, o processo acessa e trabalha camadas diferentes, buscando soltar o que prende e abrir espaço para uma nova forma de viver.</p>
+          <p><a class="seta seta--clara" href="#como-jornada">Como a Jornada se desenvolve <span aria-hidden="true">↓</span></a></p>
           <p class="formato__prazo">Os horários são limitados: cada jornada ocupa o mesmo horário durante dez semanas.</p>
-          <p class="empurra">${botaoConversar(L, { evento: 'quero-conversar-jornada' })}</p>
+          <p class="empurra">${botaoConversar(L, { href: L.whatsappJornada, evento: 'quero-conversar-jornada' })}</p>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="bloco" data-tema="indigo" aria-labelledby="tema">
+  <section class="bloco" data-tema="indigo" id="como-jornada" aria-labelledby="como-jornada-titulo">
     <div class="dentro">
-      <p class="olho surge">Como a jornada se desenvolve</p>
-      <h2 class="grande surge" id="tema">Você pode trazer um tema.<br><span class="ouro">Não precisa trazer uma história.</span></h2>
+      <p class="olho surge">A Jornada · 10 semanas</p>
+      <h2 class="grande surge" id="como-jornada-titulo">Como a Jornada <span class="ouro">se desenvolve.</span></h2>
       <div class="linha-tempo">
         <div class="etapa surge"><b>Sessões 1 a 4</b><h3>Começa aberta</h3><p>Sem tema. O próprio processo organiza o campo e revela o que precisa ser trabalhado.</p></div>
-        <div class="etapa surge" style="--atraso:.1s"><b>Sessões seguintes</b><h3>Você indica o território</h3><p>Se fizer sentido, traga um tema amplo: relacionamentos, trabalho, família, prosperidade, autoestima. Basta o território. O processo conduz o resto.</p></div>
+        <div class="etapa surge" style="--atraso:.1s"><b>Sessões 5 a 10</b><h3>Você indica o território</h3><p>Se fizer sentido, traga um tema amplo: relacionamentos, trabalho, família, prosperidade, autoestima. O processo conduz o resto.</p></div>
       </div>
-      <h3 class="surge" style="margin-top:72px;font-size:1.5rem">O que a jornada busca</h3>
-      <ul class="chips surge">
-        <li>Mais consciência sobre si</li><li>Clareza sobre padrões</li><li>Novas perspectivas</li><li>Orientação</li><li>Movimento onde havia estagnação</li>
-      </ul>
-      <p class="lead surge" style="margin-top:48px;max-width:30em">Não é criar uma nova versão de você. É trabalhar o que impede a sua própria vida de fluir com mais harmonia.</p>
+      <p class="jornada__regra surge">Na Jornada, você pode trazer um tema. <span class="ouro">Não precisa trazer uma história.</span></p>
+
+      <h3 class="surge" style="margin-top:88px;font-size:clamp(1.5rem,2.4vw,2rem)">O que a Jornada busca</h3>
+      <div class="busca surge">
+        <div>
+          <b>Ver</b>
+          <ul class="chips"><li>Mais consciência sobre si</li><li>Clareza sobre padrões que se repetem</li><li>Novas perspectivas</li><li>Orientação</li></ul>
+        </div>
+        <div>
+          <b>Transformar</b>
+          <ul class="chips chips--fortes"><li>Dissolver e reprogramar o que trava</li><li>Transformar o que se revela</li><li>Movimento onde havia estagnação</li><li>Liberdade para escolher diferente</li></ul>
+        </div>
+      </div>
+      <p class="lead surge" style="margin-top:56px;max-width:34em">A Jornada existe para a transformação acontecer. Soltar o que prende e abrir espaço para uma nova versão de você. Cada processo é único e o resultado não se promete, mas é exatamente isso que ela busca.</p>
+      <p style="margin-top:36px" class="surge">${botaoConversar(L, { texto: 'Quero fazer a Jornada', href: L.whatsappJornada, evento: 'quero-fazer-jornada' })}</p>
     </div>
   </section>
 

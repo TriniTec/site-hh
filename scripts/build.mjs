@@ -25,6 +25,26 @@ await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 await cp(path.join(raiz, 'src'), dist, { recursive: true });
 
+// Miniaturas dos depoimentos em vídeo: baixadas do YouTube na hora de montar o site e servidas
+// pelo próprio site (a página não fala com o YouTube antes do toque). Se a rede falhar, o cartão
+// mostra o fundo com o play, e o vídeo continua tocando.
+for (const d of depoimentos) {
+  if (d.prova !== 'video' || !d.videoId || d.imagem) continue;
+  const destino = path.join(dist, 'img/depoimentos', `${d.videoId}.jpg`);
+  for (const nome of ['oardefault.jpg', 'hq720.jpg', 'hqdefault.jpg']) {
+    try {
+      const r = await fetch(`https://i.ytimg.com/vi/${d.videoId}/${nome}`, { signal: AbortSignal.timeout(8000) });
+      if (!r.ok) continue;
+      await mkdir(path.dirname(destino), { recursive: true });
+      await writeFile(destino, Buffer.from(await r.arrayBuffer()));
+      d.imagem = `/img/depoimentos/${d.videoId}.jpg`;
+      d.imagemVertical = nome.startsWith('oar');
+      break;
+    } catch { /* sem rede: segue sem miniatura */ }
+  }
+  if (!d.imagem) console.log(`Aviso: miniatura do depoimento de ${d.nome} não baixada (sem acesso ao YouTube)`);
+}
+
 const paginas = [inicio, aJornada, sobre].map((p) => p({ cfg, L, depoimentos, lives, guias }));
 for (const p of paginas) {
   await writeFile(path.join(dist, p.arquivo), pagina({ cfg, L, ...p }));
