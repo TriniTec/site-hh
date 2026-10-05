@@ -6,6 +6,20 @@
   NODE_VERSION = "22"
 
 # Endereços limpos: /a-jornada e /sobre (o Netlify serve a-jornada.html nesses caminhos).
+# leituraenergetica.com.br redireciona (301) para o domínio principal, mantendo o caminho.
+# Funciona quando o domínio estiver adicionado no Netlify como alias do site.
+[[redirects]]
+  from = "https://leituraenergetica.com.br/*"
+  to = "https://harmonizacaohumana.com.br/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.leituraenergetica.com.br/*"
+  to = "https://harmonizacaohumana.com.br/:splat"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/index.html"
   to = "/"
