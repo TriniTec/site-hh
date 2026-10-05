@@ -44,7 +44,7 @@ export function head({ cfg, titulo, descricao, caminho, jsonld, preload = [] }) 
 <meta property="og:title" content="${esc(titulo)}">
 <meta property="og:description" content="${esc(descricao)}">
 <meta property="og:url" content="${url}">
-<meta property="og:image" content="${cfg.dominio}/img/compartilhamento.jpg">
+<meta property="og:image" content="${cfg.dominio}/img/compartilhamento.jpg?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Você sabe que quer mudar. Mas sozinha ainda não conseguiu. Harmonização Humana, com Filipe Morgado.">
@@ -60,6 +60,8 @@ ${preload.join('\n')}
 <link rel="stylesheet" href="/css/site.css">
 <script>
 document.documentElement.classList.add('js');
+/* Teste: ?letreiro=nao esconde a faixa de palavras; ?letreiro=sim volta. Vale até fechar a aba. */
+(function(){var q=new URLSearchParams(location.search).get('letreiro');try{if(q)sessionStorage.setItem('letreiro',q);q=sessionStorage.getItem('letreiro')}catch(e){}if(q==='nao')document.documentElement.classList.add('sem-letreiro')})();
 </script>
 ${umami}
 <script type="application/ld+json">${JSON.stringify(jsonld)}</script>

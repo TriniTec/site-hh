@@ -3,7 +3,11 @@
 Cada lugar reservado no site (moldura tracejada) tem aqui o prompt. Quando a imagem chegar, ela entra no
 lugar da moldura. Formato de entrega: o maior tamanho possível (de preferência 2560 px de largura ou mais).
 
-## 1. Sobre · "Um caminho que não escolheu lado" (abaixo dos três cartões)
+## 1. Sobre · "Um caminho que não escolheu lado" (abaixo dos três cartões) · TODO
+
+Situação: o Filipe prefere uma foto real dele nessas situações (fotos antigas, de viagens e fotografando).
+Fica para quando ele separar as fotos. Hoje a seção vai sem imagem. Se a opção for gerar, o prompt é este.
+Para recolocar o lugar reservado: `<figure class="imagem-reservada">` depois dos cartões, em `paginas/sobre.mjs`.
 
 Proporção 21:9, horizontal, larga.
 

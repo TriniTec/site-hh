@@ -54,6 +54,18 @@
   }, { passive: true });
   aoRolar();
 
+  // Print do depoimento: abre grande na própria página (sem nova aba). Fecha no X, no Esc ou tocando fora.
+  document.querySelectorAll('[data-ampliar]').forEach(function (gatilho) {
+    var dialogo = document.getElementById(gatilho.getAttribute('data-ampliar'));
+    if (!dialogo || typeof dialogo.showModal !== 'function') return;
+    gatilho.addEventListener('click', function (e) { e.preventDefault(); dialogo.showModal(); });
+  });
+  document.querySelectorAll('dialog.ampliado').forEach(function (dialogo) {
+    dialogo.addEventListener('click', function (e) {
+      if (e.target === dialogo || e.target.hasAttribute('data-fechar')) dialogo.close();
+    });
+  });
+
   // Depoimentos em vídeo: a imagem dá lugar ao player só depois do toque (youtube-nocookie.com).
   document.querySelectorAll('[data-video]').forEach(function (botao) {
     botao.addEventListener('click', function () {

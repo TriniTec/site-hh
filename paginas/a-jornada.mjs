@@ -27,7 +27,8 @@ export default function aJornada({ cfg, L }) {
         <article class="formato surge" id="sessao" style="--atraso:.1s">
           <p class="formato__tag">Cerca de 1 hora · videochamada</p>
           <h2 style="font-size:2rem">Sessão individual</h2>
-          <p class="formato__para">Para experimentar, ou para olhar algo mais pontual.</p>
+          <p class="formato__para">Uma leitura completa, para o seu momento.</p>
+          <p>Para olhar algo mais pontual, ou para sentir como o processo funciona antes de mergulhar na Jornada.</p>
           <p>Nos primeiros minutos eu explico como vai ser. Depois a leitura flui: eu traduzo em voz alta o que aparece, e você recebe. Quando possível, abro espaço para uma pergunta.</p>
           <p>Não precisa preparar nada nem chegar com um problema definido. Já no primeiro encontro pode começar a surgir clareza.</p>
           <p class="empurra">${botaoConversar(L, { href: L.whatsappSessao, evento: 'quero-conversar-sessao' })}</p>
@@ -36,8 +37,8 @@ export default function aJornada({ cfg, L }) {
           <span class="formato__recomendada">Recomendada</span>
           <p class="formato__tag">10 sessões · 1 por semana</p>
           <h2 style="font-size:2rem">A Jornada</h2>
-          <p class="formato__para">Para quem quer mudar de verdade.</p>
-          <p>É o caminho da transformação mais profunda. Semana a semana, o processo acessa e trabalha camadas diferentes, buscando soltar o que prende e abrir espaço para uma nova forma de viver.</p>
+          <p class="formato__para">Para quem quer mudar profundamente.</p>
+          <p>É o caminho para ir mais fundo. Semana a semana, o processo acessa e trabalha camadas diferentes, buscando soltar o que prende e abrir espaço para uma nova forma de viver.</p>
           <p><a class="seta seta--clara" href="#como-jornada">Como a Jornada se desenvolve <span aria-hidden="true">↓</span></a></p>
           <p class="formato__prazo">Os horários são limitados: cada jornada ocupa o mesmo horário durante dez semanas.</p>
           <p class="empurra">${botaoConversar(L, { href: L.whatsappJornada, evento: 'quero-conversar-jornada' })}</p>

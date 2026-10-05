@@ -31,7 +31,7 @@ await cp(path.join(raiz, 'src'), dist, { recursive: true });
 for (const d of depoimentos) {
   if (d.prova !== 'video' || !d.videoId || d.imagem) continue;
   const destino = path.join(dist, 'img/depoimentos', `${d.videoId}.jpg`);
-  for (const nome of ['oardefault.jpg', 'hq720.jpg', 'hqdefault.jpg']) {
+  for (const nome of ['oardefault.jpg', 'oar2.jpg', 'hq720.jpg', 'hqdefault.jpg']) {
     try {
       const r = await fetch(`https://i.ytimg.com/vi/${d.videoId}/${nome}`, { signal: AbortSignal.timeout(8000) });
       if (!r.ok) continue;

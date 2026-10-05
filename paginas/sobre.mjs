@@ -48,9 +48,6 @@ export default function sobre({ cfg, L }) {
         <article class="marco surge" style="--atraso:.1s">${icone.bussola}<h3>Viagens</h3><p>Os passeios e as viagens fotográficas trouxeram outra forma de perceber.</p></article>
         <article class="marco surge" style="--atraso:.2s">${icone.sol}<h3>Espiritualidade</h3><p>Chegou por esse caminho. E depois dela, o trabalho terapêutico.</p></article>
       </div>
-      <figure class="imagem-reservada surge" aria-hidden="true">
-        <span>Imagem a gerar · Filipe fotografando numa paisagem aberta, luz dourada</span>
-      </figure>
     </div>
   </section>
 

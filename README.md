@@ -56,4 +56,17 @@ montar o site (no Netlify) e servidas pelo próprio site. O print vai como veio,
 - Levar a versão Solar para o branch `main` e trocar o branch no Netlify (a tarefa das lives roda no `main`).
 - Conferir o endereço completo da playlist das lives (`playlistLives`).
 - Google Search Console e Bing Webmaster Tools, com o sitemap.
-- Imagens a gerar: ver `docs/imagens-a-gerar.md`.
+- Imagens: foto real para a trajetória no Sobre e foto de corpo inteiro em alta resolução (ver `docs/imagens-a-gerar.md`).
+- Versão de teste com mais respiro (sem a faixa de palavras), em branch separado.
+- PDF de apresentação com o texto longo do documento 02.
+- Atualizar o Design System com as escolhas finais do site.
+
+## Testes rápidos
+
+- `?letreiro=nao` esconde a faixa de palavras da Home (vale até fechar a aba); `?letreiro=sim` volta.
+
+## Imagem de compartilhamento
+
+Ativa: `src/img/compartilhamento.jpg` (versão Solar, retrato no sol). Alternativa guardada:
+`src/img/compartilhamento-foto.jpg` (foto à direita). Para trocar, copie a alternativa por cima da ativa
+e aumente o `?v=` do `og:image` em `scripts/partes.mjs` (o WhatsApp guarda a imagem antiga).

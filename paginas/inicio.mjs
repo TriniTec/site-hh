@@ -18,12 +18,22 @@ function depoimento(d, i) {
       : `<div class="depo__prova depo__prova--vazia">${play}<span>Depoimento em vídeo</span></div>`;
   } else {
     prova = d.imagem
-      ? `<a class="depo__prova depo__prova--print" href="${esc(d.imagem)}" target="_blank" rel="noopener" aria-label="Ampliar o print da mensagem de ${esc(d.nome)}"><img src="${esc(d.miniatura || d.imagem)}" alt="${esc(d.alt || 'Print da mensagem de ' + d.nome)}" loading="lazy" width="640" height="650"><span class="depo__selo">Toque para ampliar</span></a>`
+      ? `<a class="depo__prova depo__prova--print" href="${esc(d.imagem)}" data-ampliar="ampliado-${i}" aria-label="Ampliar o print da mensagem de ${esc(d.nome)}"><img src="${esc(d.miniatura || d.imagem)}" alt="${esc(d.alt || 'Print da mensagem de ' + d.nome)}" loading="lazy" width="640" height="650"><span class="depo__selo">Toque para ampliar</span></a>`
       : `<div class="depo__prova depo__prova--vazia"><span>Print da conversa no WhatsApp</span></div>`;
   }
-  const rotulo = d.prova === 'video' ? 'Ler a transcrição' : 'Ler a mensagem inteira';
-  const transcricao = d.transcricao
-    ? `<details><summary>${rotulo}</summary>${d.transcricao.split(/\n\s*\n/).map((p) => `<p>${esc(p)}</p>`).join('')}</details>` : '';
+  const paragrafos = (d.transcricao || '').split(/\n\s*\n/).map((p) => `<p>${esc(p)}</p>`).join('');
+  // Vídeo: transcrição abre no próprio cartão. Print: abre grande na página (diálogo), com a mensagem inteira ao lado.
+  const transcricao = !d.transcricao ? ''
+    : d.prova === 'video'
+      ? `<details><summary>Ler a transcrição</summary>${paragrafos}</details>`
+      : `<button class="depo__ler" type="button" data-ampliar="ampliado-${i}">Ler a mensagem inteira</button>
+         <dialog class="ampliado" id="ampliado-${i}" aria-label="Depoimento de ${esc(d.nome)}">
+           <div class="ampliado__caixa">
+             <button class="ampliado__fechar" type="button" data-fechar aria-label="Fechar">×</button>
+             <div class="ampliado__print"><img src="${esc(d.imagem)}" alt="${esc(d.alt || 'Print da mensagem de ' + d.nome)}" loading="lazy"></div>
+             <div class="ampliado__texto"><h2>${esc(d.nome)}</h2>${paragrafos}</div>
+           </div>
+         </dialog>`;
   return `<figure class="depo surge${pronto ? '' : ' depo--reservado'}" style="--atraso:${i * 0.1}s">${prova}${trecho}<figcaption>${esc(d.nome)}</figcaption>${transcricao}</figure>`;
 }
 
@@ -205,14 +215,14 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
         <article class="formato surge">
           <p class="formato__tag">Cerca de 1 hora · por vídeo</p>
           <h3>Sessão individual</h3>
-          <p>Para experimentar a leitura, ou para olhar algo mais pontual. Sem compromisso de continuidade e sem preparar nada.</p>
+          <p>Uma leitura completa, para o seu momento. Para olhar algo mais pontual ou sentir como o processo funciona. Sem preparar nada.</p>
           <p class="empurra"><a class="seta" href="/a-jornada#sessao">Como é <span aria-hidden="true">→</span></a></p>
         </article>
         <article class="formato formato--destaque surge" style="--atraso:.1s">
           <span class="formato__recomendada">Recomendada</span>
           <p class="formato__tag">10 semanas · 1 por semana</p>
           <h3>A Jornada</h3>
-          <p>Para quem quer mudar de verdade. Dez semanas em que o trabalho vai fundo, camada por camada, buscando a transformação.</p>
+          <p>Para quem quer mudar profundamente. Dez semanas em que o trabalho vai fundo, camada por camada, buscando a transformação.</p>
           <p class="empurra"><a class="seta" href="/a-jornada#jornada">Como é <span aria-hidden="true">→</span></a></p>
         </article>
         <article class="formato surge" style="--atraso:.2s">

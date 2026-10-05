@@ -45,7 +45,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 112px; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 80px; }
 body { margin: 0; font-family: var(--c); font-size: 1.125rem; line-height: 1.6; color: var(--texto); background: var(--marfim); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-underline-offset: 3px; }
@@ -314,7 +314,8 @@ h1, h2, h3 { font-family: var(--t); font-weight: 700; margin: 0; text-wrap: bala
 .entrada .lead { margin-top: 28px; max-width: 32em; }
 .entrada__sol { position: absolute; right: -220px; top: -240px; width: 600px; aspect-ratio: 1; opacity: .45; }
 @media (max-width: 899px) { .entrada__sol { right: -260px; top: -220px; } }
-.formato { scroll-margin-top: 120px; }
+.formato { scroll-margin-top: 36px; } /* 80px do topo + espaço para o selo Recomendada */
+@media (min-width: 900px) { .formato { scroll-margin-top: 56px; } }
 [data-tema="indigo"] .etapa { color: var(--indigo); }
 .etapa b { color: var(--laranja); }
 .formato__prazo { font-weight: 600; }
@@ -389,3 +390,20 @@ h1, h2, h3 { font-family: var(--t); font-weight: 700; margin: 0; text-wrap: bala
 /* Lugar reservado para imagem a gerar (o Filipe pede ao Aruan). Sai quando a imagem chegar. */
 .imagem-reservada { margin: 40px 0 0; aspect-ratio: 21 / 9; border-radius: var(--raio); border: 2px dashed rgba(8, 43, 97, .35); display: grid; place-items: center; text-align: center; padding: 24px; background: repeating-linear-gradient(135deg, rgba(255,247,231,.5) 0 12px, transparent 12px 24px); }
 .imagem-reservada span { font-family: var(--t); font-weight: 700; font-size: .9375rem; letter-spacing: .04em; color: var(--indigo); opacity: .75; max-width: 30ch; }
+
+/* Versão sem o letreiro de palavras: ?letreiro=nao (vale até fechar a aba) */
+html.sem-letreiro .faixa { display: none; }
+
+/* Print em tamanho grande, na própria página */
+.ampliado { border: 0; padding: 0; background: transparent; max-width: min(1080px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); width: 100%; overflow: visible; }
+.ampliado::backdrop { background: rgba(6, 31, 71, .78); backdrop-filter: blur(4px); }
+.ampliado__caixa { position: relative; background: var(--marfim); border-radius: var(--raio); box-shadow: 0 30px 80px -20px rgba(0,0,0,.5); display: grid; max-height: calc(100dvh - 32px); overflow: auto; }
+.ampliado__print { background: #F6EFE2; display: grid; place-items: center; padding: 16px; }
+.ampliado__print img { width: 100%; max-width: 560px; height: auto; border-radius: 12px; }
+.ampliado__texto { padding: 32px; }
+.ampliado__texto h2 { font-size: 1.5rem; margin-bottom: 16px; }
+.ampliado__texto p { font-size: 1.0625rem; line-height: 1.65; margin: 0 0 1em; }
+.ampliado__fechar { position: absolute; top: 12px; right: 12px; z-index: 2; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--indigo); color: var(--marfim); font-size: 1.5rem; line-height: 1; cursor: pointer; box-shadow: var(--sombra); }
+@media (min-width: 900px) { .ampliado__caixa { grid-template-columns: 1.1fr 1fr; overflow: hidden; } .ampliado__texto { overflow: auto; max-height: calc(100dvh - 32px); padding: 48px 40px; } }
+.depo__ler { align-self: flex-start; background: none; border: 0; padding: 0; cursor: pointer; font-family: var(--t); font-weight: 700; font-size: 1rem; color: var(--indigo); text-decoration: underline; text-underline-offset: 4px; }
+.depo__ler::before { content: "\2197"; display: inline-block; margin-right: 8px; text-decoration: none; }
