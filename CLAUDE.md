@@ -11,7 +11,9 @@ Regras de linguagem do Filipe que valem para todo texto do site:
 - O aviso de saúde no rodapé não sai.
 - Falando direto com a pessoa, preferir o feminino ("sozinha") sem deixar o texto todo no feminino; forma sem gênero quando funcionar tão bem.
 
-Versão em uso: branch `claude/site-solar` (publicada no Netlify em harmonizacaohumana.netlify.app).
+Publicação: o Netlify publica o branch `main` (harmonizacaohumana.netlify.app; depois, harmonizacaohumana.com.br).
+O trabalho é feito no `claude/site-solar` e levado ao `main` quando aprovado. A tarefa diária das lives faz
+commits no `main`: antes de levar trabalho novo, trazer o `main` para o branch de trabalho (merge).
 Imagens: quando uma parte pedir imagem nova, deixar o lugar reservado no site (`.imagem-reservada`) e
 escrever o prompt em `docs/imagens-a-gerar.md`; o Filipe pede ao Aruan.
 
