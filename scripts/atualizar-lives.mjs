@@ -58,9 +58,9 @@ async function pelaPagina() {
   return itens.filter((e) => e.publicado);
 }
 
+// Ordem: a da playlist (o Filipe a mantém com a live mais nova primeiro). A data que o YouTube informa
+// pode ser a de publicação do vídeo editado, e não a da live, então não serve para ordenar.
 const entradas = (await peloFeed()) ?? (await pelaPagina());
-// Ordena pela data de publicação, mais nova primeiro (não depende da ordem da playlist).
-entradas.sort((a, b) => new Date(b.publicado) - new Date(a.publicado));
 const novas = entradas.slice(0, 3).map((e) => ({
   videoId: e.videoId,
   titulo: e.titulo,
