@@ -60,8 +60,6 @@ ${preload.join('\n')}
 <link rel="stylesheet" href="/css/site.css">
 <script>
 document.documentElement.classList.add('js');
-/* Teste: ?letreiro=nao esconde a faixa de palavras; ?letreiro=sim volta. Vale até fechar a aba. */
-(function(){var q=new URLSearchParams(location.search).get('letreiro');try{if(q)sessionStorage.setItem('letreiro',q);q=sessionStorage.getItem('letreiro')}catch(e){}if(q==='nao')document.documentElement.classList.add('sem-letreiro')})();
 </script>
 ${umami}
 <script type="application/ld+json">${JSON.stringify(jsonld)}</script>

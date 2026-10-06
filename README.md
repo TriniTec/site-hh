@@ -45,8 +45,9 @@ netlify.toml            build e cabeçalhos do Netlify
 ## Depoimentos
 
 `data/depoimentos.json`: nome, trecho em destaque (palavras exatas da transcrição), vídeo (`videoId` do YouTube)
-ou print (`imagem`), e a transcrição completa. As miniaturas dos vídeos são baixadas do YouTube na hora de
-montar o site (no Netlify) e servidas pelo próprio site. O print vai como veio, sem edição.
+ou print (`imagem`), e a transcrição completa. Vídeo: a capa vai em `src/img/depoimentos/` (vertical, 480 e 720 px
+de largura) e entra em `imagem`/`miniatura`. Sem capa, o site baixa a do YouTube ao montar (pode vir um quadro do
+vídeo em vez da capa escolhida; por isso a capa própria é o caminho certo). O print vai como veio, sem edição.
 
 ## Para fazer depois (TODO)
 
@@ -57,13 +58,9 @@ montar o site (no Netlify) e servidas pelo próprio site. O print vai como veio,
 - Conferir o endereço completo da playlist das lives (`playlistLives`).
 - Google Search Console e Bing Webmaster Tools, com o sitemap.
 - Imagens: foto real para a trajetória no Sobre e foto de corpo inteiro em alta resolução (ver `docs/imagens-a-gerar.md`).
-- Versão de teste com mais respiro (sem a faixa de palavras), em branch separado.
+- Versão de teste com mais respiro, em branch separado (a faixa de palavras já saiu).
 - PDF de apresentação com o texto longo do documento 02.
 - Atualizar o Design System com as escolhas finais do site.
-
-## Testes rápidos
-
-- `?letreiro=nao` esconde a faixa de palavras da Home (vale até fechar a aba); `?letreiro=sim` volta.
 
 ## Imagem de compartilhamento
 

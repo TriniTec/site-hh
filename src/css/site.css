@@ -147,12 +147,6 @@ h1, h2, h3 { font-family: var(--t); font-weight: 700; margin: 0; text-wrap: bala
 /* No computador o sol cresce com a tela: a foto acompanha telas largas */
 @media (min-width: 900px) { .retrato { width: clamp(360px, 38vw, 780px); justify-self: start; margin: 0; } }
 
-/* Faixa de palavras */
-.faixa { background: var(--indigo); color: var(--brilho); overflow: hidden; padding: 22px 0; }
-.faixa__trilho { display: flex; width: max-content; animation: correr 50s linear infinite; }
-.faixa__trilho span { font-family: var(--t); font-weight: 700; font-size: clamp(1.25rem, 2.4vw, 1.75rem); letter-spacing: .02em; padding: 0 28px; white-space: nowrap; display: inline-flex; align-items: center; gap: 56px; }
-.faixa__trilho span::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--laranja); }
-@keyframes correr { to { transform: translateX(-50%); } }
 
 /* Espelho: frases de reconhecimento */
 .espelho { display: grid; gap: 16px; margin: 48px 0 0; padding: 0; }
@@ -391,8 +385,6 @@ h1, h2, h3 { font-family: var(--t); font-weight: 700; margin: 0; text-wrap: bala
 .imagem-reservada { margin: 40px 0 0; aspect-ratio: 21 / 9; border-radius: var(--raio); border: 2px dashed rgba(8, 43, 97, .35); display: grid; place-items: center; text-align: center; padding: 24px; background: repeating-linear-gradient(135deg, rgba(255,247,231,.5) 0 12px, transparent 12px 24px); }
 .imagem-reservada span { font-family: var(--t); font-weight: 700; font-size: .9375rem; letter-spacing: .04em; color: var(--indigo); opacity: .75; max-width: 30ch; }
 
-/* Versão sem o letreiro de palavras: ?letreiro=nao (vale até fechar a aba) */
-html.sem-letreiro .faixa { display: none; }
 
 /* Print em tamanho grande, na própria página */
 .ampliado { border: 0; padding: 0; background: transparent; max-width: min(1080px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); width: 100%; overflow: visible; }
@@ -407,3 +399,8 @@ html.sem-letreiro .faixa { display: none; }
 @media (min-width: 900px) { .ampliado__caixa { grid-template-columns: 1.1fr 1fr; overflow: hidden; } .ampliado__texto { overflow: auto; max-height: calc(100dvh - 32px); padding: 48px 40px; } }
 .depo__ler { align-self: flex-start; background: none; border: 0; padding: 0; cursor: pointer; font-family: var(--t); font-weight: 700; font-size: 1rem; color: var(--indigo); text-decoration: underline; text-underline-offset: 4px; }
 .depo__ler::before { content: "\2197"; display: inline-block; margin-right: 8px; text-decoration: none; }
+
+/* Capas verticais dos depoimentos em vídeo: aparecem inteiras; o play fica no canto, longe do rosto e do texto */
+.depo__prova--short { aspect-ratio: 9 / 16; }
+.depo__prova--short img { object-fit: cover; }
+.depo__prova--short .depo__play { top: 16px; right: 16px; width: 56px; height: 56px; }

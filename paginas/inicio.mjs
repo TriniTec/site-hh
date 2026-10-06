@@ -14,7 +14,7 @@ function depoimento(d, i) {
   let prova;
   if (d.prova === 'video') {
     prova = d.videoId
-      ? `<button class="depo__prova depo__prova--short" type="button" data-video="${esc(d.videoId)}" aria-label="Assistir ao depoimento de ${esc(d.nome)}" data-umami-event="depoimento-play">${d.imagem ? `<img src="${esc(d.imagem)}" alt="" loading="lazy">` : ''}${play}<span class="depo__selo">Depoimento em vídeo</span></button>`
+      ? `<button class="depo__prova depo__prova--short" type="button" data-video="${esc(d.videoId)}" aria-label="Assistir ao depoimento de ${esc(d.nome)}" data-umami-event="depoimento-play">${d.imagem ? `<img src="${esc(d.miniatura || d.imagem)}" ${d.miniatura ? `srcset="${esc(d.miniatura)} 480w, ${esc(d.imagem)} 720w" sizes="(min-width: 900px) 340px, 90vw"` : ''} alt="" loading="lazy" width="480" height="853">` : ''}${play}</button>`
       : `<div class="depo__prova depo__prova--vazia">${play}<span>Depoimento em vídeo</span></div>`;
   } else {
     prova = d.imagem
@@ -60,8 +60,6 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
   }));
   const jsonld = { '@context': 'https://schema.org', '@graph': [base.website, base.servico, base.person, breadcrumb(cfg, [['Início', '/']]), ...videos] };
 
-  const palavras = ['Clareza', 'Movimento', 'Liberdade', 'Perceber', 'Transformar', 'Fluir'];
-  const faixa = [...palavras, ...palavras, ...palavras, ...palavras].map((p) => `<span>${p}</span>`).join('');
 
   const conteudo = `
   <section class="abertura">
@@ -87,7 +85,6 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
     </div>
   </section>
 
-  <div class="faixa" aria-hidden="true"><div class="faixa__trilho">${faixa}</div></div>
 
   <section class="bloco bloco--areia" aria-labelledby="espelho">
     <div class="dentro">
