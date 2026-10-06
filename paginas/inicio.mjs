@@ -201,7 +201,8 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
           <p style="margin-top:32px"><a class="botao botao--claro botao--yt" href="${esc(lives.length ? L.playlist : cfg.youtube)}" target="_blank" rel="noopener"><svg class="yt" viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" rx="5" fill="#FF0000"/><path d="M11.2 5.6v8.8l7.4-4.4z" fill="#fff"/></svg>Assistir no YouTube</a></p>
         </div>
       </div>
-      ${lives.length ? `<div class="lives">${lives.slice(0, 3).map((l, i) => cardLive(l, guias, i)).join('')}</div>` : ''}
+      ${lives.length ? `<div class="lives__topo surge"><h3>Episódios recentes</h3><a class="seta seta--clara" href="${esc(L.playlist)}" target="_blank" rel="noopener">Ver todos no canal <span aria-hidden="true">→</span></a></div>
+      <div class="lives">${lives.slice(0, 3).map((l, i) => cardLive(l, guias, i)).join('')}</div>` : ''}
     </div>
   </section>
 

@@ -75,3 +75,4 @@ Etiquetas em todas as versões: "Recomendada" e "10 sessões · 1 por semana". F
 |---|---|---|---|---|
 | 1 | 01/10 | Não é criar uma nova versão de você. É trabalhar o que impede a sua própria vida de fluir com mais harmonia. | Primeira versão Solar (do documento 02, parte 5) | Claude (versão Solar) |
 | 2 | 05/10 manhã | A Jornada existe para a transformação acontecer. Soltar o que prende e abrir espaço para uma nova versão de você. Cada processo é único e o resultado não se promete, mas é exatamente isso que ela busca. | Reescrito: a Jornada busca, sim, uma nova versão de você | Filipe (J6); a redação foi Claude |
+| 3 | 06/10 | A Jornada existe para a transformação acontecer. Soltar o que prende e abrir espaço para uma nova versão de você. Cada processo é único e o resultado só se conhece percorrendo o caminho. | "o resultado não se promete, mas é exatamente isso que ela busca" → "o resultado só se conhece percorrendo o caminho" | Filipe |

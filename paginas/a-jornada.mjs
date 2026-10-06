@@ -68,7 +68,7 @@ export default function aJornada({ cfg, L }) {
           <ul class="chips chips--fortes"><li>Dissolver e reprogramar o que trava</li><li>Transformar o que se revela</li><li>Movimento onde havia estagnação</li><li>Liberdade para escolher diferente</li></ul>
         </div>
       </div>
-      <p class="lead surge" style="margin-top:56px;max-width:34em">A Jornada existe para a transformação acontecer. Soltar o que prende e abrir espaço para uma nova versão de você. Cada processo é único e o resultado não se promete, mas é exatamente isso que ela busca.</p>
+      <p class="lead surge" style="margin-top:56px;max-width:34em">A Jornada existe para a transformação acontecer. Soltar o que prende e abrir espaço para uma nova versão de você. Cada processo é único e o resultado só se conhece percorrendo o caminho.</p>
       <p style="margin-top:36px" class="surge">${botaoConversar(L, { texto: 'Quero fazer a Jornada', href: L.whatsappJornada, evento: 'quero-fazer-jornada' })}</p>
     </div>
   </section>

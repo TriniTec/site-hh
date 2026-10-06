@@ -116,6 +116,12 @@ h1, h2, h3 { font-family: var(--t); font-weight: 700; margin: 0; text-wrap: bala
   .topo__menu a { font-size: .9375rem; }
   .topo .botao { display: none; }
 }
+.topo__redes { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.topo__redes a { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; color: var(--indigo); transition: background .2s, color .2s; }
+.topo__redes a:hover { background: rgba(8, 43, 97, .08); color: var(--laranja); }
+.topo__redes .rede { width: 22px; height: 22px; }
+@media (max-width: 899px) { .topo__redes { gap: 0; margin-left: -4px; } .topo__redes a { width: 32px; height: 40px; } .topo__redes .rede { width: 20px; height: 20px; } }
+@media (max-width: 339px) { .topo__redes { display: none; } }
 @media (max-width: 360px) { .topo__marca img { width: 34px; height: 34px; } .topo__menu { gap: 14px; } }
 
 /* Sol: o símbolo da marca em movimento lento */
@@ -205,7 +211,10 @@ h1, h2, h3 { font-family: var(--t); font-weight: 700; margin: 0; text-wrap: bala
 @keyframes vivo { 0% { box-shadow: 0 0 0 0 rgba(232, 119, 22, .7); } 70% { box-shadow: 0 0 0 12px rgba(232, 119, 22, 0); } 100% { box-shadow: 0 0 0 0 rgba(232, 119, 22, 0); } }
 .ao-vivo .botao--claro { color: var(--marfim); }
 .ao-vivo .botao--claro:hover { background: var(--marfim); color: var(--indigo); }
-.lives { display: grid; gap: 20px; margin-top: clamp(72px, 9vw, 112px); }
+.lives__topo { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px 24px; margin-top: clamp(72px, 9vw, 112px); padding-top: 28px; border-top: 1px solid rgba(214, 163, 50, .35); }
+.lives__topo h3 { font-family: var(--t); font-size: .8125rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--brilho); margin: 0; }
+.lives__topo .seta { font-size: .9375rem; }
+.lives { display: grid; gap: 20px; margin-top: 28px; }
 @media (min-width: 768px) { .lives { grid-template-columns: repeat(3, 1fr); } }
 .live { position: relative; background: rgba(255, 247, 231, .06); border-radius: var(--raio); overflow: hidden; transition: transform .4s var(--mola), background .3s; }
 .live:hover { transform: translateY(-4px); background: rgba(255, 247, 231, .12); }
@@ -291,6 +300,15 @@ h1, h2, h3 { font-family: var(--t); font-weight: 700; margin: 0; text-wrap: bala
 .rodape__aviso p { margin: 0; }
 .rodape__assinatura { display: flex; align-items: center; gap: 10px; }
 .rodape__assinatura img { width: 24px; height: 24px; }
+.rodape__rede { display: flex; align-items: center; gap: 12px; padding: 4px 0; }
+.rodape__rede .rede { flex: none; width: 28px; height: 28px; color: var(--brilho); }
+.rodape__rede span { display: grid; line-height: 1.35; }
+.rodape__rede b { font-family: var(--t); font-size: 1rem; }
+.rodape__rede:hover b { text-decoration: underline; }
+.rodape a.rodape__rede:hover { text-decoration: none; }
+.acompanhe__redes .botao { max-width: 100%; white-space: normal; text-align: left; line-height: 1.3; padding-block: 10px; }
+.acompanhe__redes { list-style: none; margin: 36px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 16px; }
+.botao .rede { width: 22px; height: 22px; }
 
 /* Aparecer ao rolar (só com JS ativo) */
 .js .surge { opacity: 0; transform: translateY(28px); transition: opacity .9s var(--mola), transform .9s var(--mola); transition-delay: var(--atraso, 0s); }

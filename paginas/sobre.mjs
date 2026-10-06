@@ -1,5 +1,5 @@
 // Página Sobre · versão Solar. Sem currículo nem certificações: a trajetória é história, não credencial.
-import { botaoConversar, jsonldBase, breadcrumb, sol } from '../scripts/partes.mjs';
+import { esc, youtubeIcone, instagramIcone, botaoConversar, jsonldBase, breadcrumb, sol } from '../scripts/partes.mjs';
 
 // Ícones em traço, na cor do texto (o sistema não tem biblioteca de ícones: desenhados simples)
 const icone = {
@@ -66,6 +66,16 @@ export default function sobre({ cfg, L }) {
         <p class="lead">Cada pessoa apresenta um campo diferente, e o processo conduz aquilo que precisa ser visto e trabalhado. A ferramenta mais adequada surge dentro do processo, não antes dele.</p>
         <p style="margin-top:36px">${botaoConversar(L, { evento: 'quero-conversar-sobre' })}</p>
       </div>
+    </div>
+  </section>
+
+  <section class="bloco bloco--areia acompanhe" aria-labelledby="acompanhe">
+    <div class="dentro">
+      <h2 class="grande surge" id="acompanhe">Acompanhe o <span class="laranja">trabalho.</span></h2>
+      <ul class="acompanhe__redes surge">
+        <li><a class="botao botao--claro" href="${esc(L.youtube)}" target="_blank" rel="noopener" data-umami-event="youtube-sobre">${youtubeIcone}YouTube · ao vivo às quintas, 19h</a></li>
+        <li><a class="botao botao--claro" href="${esc(L.instagram)}" target="_blank" rel="noopener" data-umami-event="instagram-sobre">${instagramIcone}Instagram</a></li>
+      </ul>
     </div>
   </section>`;
 
