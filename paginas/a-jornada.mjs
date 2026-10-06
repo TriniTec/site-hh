@@ -27,7 +27,7 @@ export default function aJornada({ cfg, L }) {
         <article class="formato surge" id="sessao" style="--atraso:.1s">
           <p class="formato__tag">Cerca de 1 hora · videochamada</p>
           <h2 style="font-size:2rem">Sessão individual</h2>
-          <p class="formato__para">Uma leitura completa, para o seu momento.</p>
+          <p class="formato__para">Uma leitura completa para o seu momento.</p>
           <p>Nos primeiros minutos eu explico como vai ser. Depois a leitura flui: eu traduzo em voz alta o que aparece, e você recebe. Quando possível, abro espaço para uma pergunta.</p>
           <p>Não precisa preparar nada nem chegar com um problema definido. Já no primeiro encontro pode começar a surgir clareza.</p>
           <p class="empurra">${botaoConversar(L, { href: L.whatsappSessao, evento: 'quero-conversar-sessao' })}</p>

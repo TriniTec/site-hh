@@ -1,0 +1,41 @@
+name: Teste de velocidade
+
+# Roda o Lighthouse (o mesmo teste do PageSpeed do Google) no site no ar, no celular e no computador,
+# e salva o resultado em docs/velocidade.md. Só roda quando alguém pede (aba Actions → Run workflow).
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  velocidade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Lighthouse
+        run: |
+          mkdir -p /tmp/lh
+          for pagina in "" a-jornada sobre; do
+            nome=${pagina:-inicio}
+            for aparelho in celular computador; do
+              extra=""
+              [ "$aparelho" = computador ] && extra="--preset=desktop"
+              for vez in 1 2 3; do
+                npx -y lighthouse@12 "https://harmonizacaohumana.com.br/$pagina" $extra \
+                  --chrome-flags="--headless=new --no-sandbox" --output=json --quiet \
+                  --output-path="/tmp/lh/$nome-$aparelho-$vez.json" || true
+              done
+            done
+          done
+      - run: node scripts/velocidade.mjs /tmp/lh
+      - name: Publicar o relatório
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/velocidade.md
+          git commit -m "Velocidade: relatório do Lighthouse no site no ar" || exit 0
+          git pull --rebase && git push

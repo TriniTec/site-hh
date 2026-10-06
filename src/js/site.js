@@ -66,6 +66,13 @@
     });
   });
 
+  // Live agendada: "Ao vivo agora" durante a transmissão; depois dela a etiqueta sai.
+  document.querySelectorAll('[data-inicio]').forEach(function (etiqueta) {
+    var inicio = Date.parse(etiqueta.getAttribute('data-inicio')), agora = Date.now();
+    if (agora > inicio + 3 * 3600e3) etiqueta.remove();
+    else if (agora >= inicio - 10 * 60e3) etiqueta.querySelector('span').textContent = 'Ao vivo agora';
+  });
+
   // Depoimentos em vídeo: a imagem dá lugar ao player só depois do toque (youtube-nocookie.com).
   document.querySelectorAll('[data-video]').forEach(function (botao) {
     botao.addEventListener('click', function () {

@@ -67,12 +67,13 @@ async function dataDaLive(videoId) {
   for (let tentativa = 1; tentativa <= 3; tentativa++) {
     const r = await fetch(`https://www.youtube.com/watch?v=${videoId}&hl=pt-BR&bpctr=9999999999&has_verified=1`, { headers: cabecalhos });
     const p = await r.text();
-    const quando = p.match(/"liveBroadcastDetails":\{[^}]*?"startTimestamp":"([^"]+)"/)?.[1]
-      || p.match(/"scheduledStartTime":"(\d+)"/)?.[1]?.replace(/^\d+$/, (t) => new Date(t * 1000).toISOString())
+    const inicio = p.match(/"liveBroadcastDetails":\{[^}]*?"startTimestamp":"([^"]+)"/)?.[1]
+      || p.match(/"scheduledStartTime":"(\d+)"/)?.[1]?.replace(/^\d+$/, (t) => new Date(t * 1000).toISOString());
+    const quando = inicio
       || aoVivoEm(p)
       || p.match(/"(?:publishDate|uploadDate)":"([^"]+)"/)?.[1]
       || p.match(/itemprop="(?:startDate|datePublished|uploadDate)" content="([^"]+)"/)?.[1];
-    if (quando) return quando;
+    if (quando) return { quando, inicio };
     console.log(`Sem data na página de ${videoId} (tentativa ${tentativa}, resposta ${r.status}, ${p.length} caracteres, título: ${p.match(/<title>([^<]*)/)?.[1] ?? '?'}).`);
     for (const chave of ['startTimestamp', 'publishDate', 'uploadDate', 'dateText']) {
       const i = p.indexOf(chave);
@@ -89,7 +90,7 @@ const atuais = JSON.parse(await readFile(arqLives, 'utf8'));
 const entradas = (await peloFeed()) ?? (await pelaPagina());
 const novas = [];
 for (const e of entradas.slice(0, 3)) {
-  const quando = await dataDaLive(e.videoId);
+  const { quando, inicio } = (await dataDaLive(e.videoId)) ?? {};
   const antes = atuais.find((l) => l.videoId === e.videoId);
   // Se o YouTube não entregar a data agora, fica a que já estava no site; live nova sem data é erro
   if (!quando && !antes) throw new Error(`Não encontrei a data da live ${e.videoId}`);
@@ -99,6 +100,9 @@ for (const e of entradas.slice(0, 3)) {
     data: quando ? diaSP(quando) : antes.data,
     dataExtenso: quando ? extenso(quando) : antes.dataExtenso,
     miniatura: `/img/lives/${e.videoId}.jpg`,
+    // Horário exato da transmissão: o site mostra a etiqueta "Ao vivo…" enquanto ela não aconteceu
+    ...(inicio && new Date(inicio) > new Date() ? { inicio: new Date(inicio).toISOString() } : {}),
+    ...(!quando && antes.inicio ? { inicio: antes.inicio } : {}),
   });
 }
 console.log(`Encontradas ${entradas.length} lives; as três mais novas:\n` + novas.map((l) => `- ${l.dataExtenso}: ${l.titulo}`).join('\n'));

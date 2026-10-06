@@ -38,9 +38,22 @@ function depoimento(d, i) {
   return `<figure class="depo surge${pronto ? '' : ' depo--reservado'}" style="--atraso:${i * 0.1}s">${prova}${trecho}<figcaption>${esc(d.nome)}</figcaption>${transcricao}</figure>`;
 }
 
+// Etiqueta da live que ainda vai acontecer ("Ao vivo na quinta, às 19h"). O site.js troca por
+// "Ao vivo agora" durante a transmissão e tira a etiqueta depois dela.
+function etiquetaLive(l) {
+  if (!l.inicio || new Date(l.inicio) < new Date()) return '';
+  const d = new Date(l.inicio);
+  const fuso = { timeZone: 'America/Sao_Paulo' };
+  const dia = d.toLocaleDateString('pt-BR', { ...fuso, weekday: 'long' }).replace('-feira', '');
+  const [h, m] = d.toLocaleTimeString('pt-BR', { ...fuso, hour: '2-digit', minute: '2-digit', hour12: false }).split(':');
+  const quando = `${/^(sábado|domingo)$/.test(dia) ? 'no' : 'na'} ${dia}, às ${Number(h)}h${m === '00' ? '' : m}`;
+  return `<p class="live__etiqueta" data-inicio="${esc(l.inicio)}"><i></i><span>Ao vivo ${quando}</span></p>`;
+}
+
 function cardLive(l, guias, i) {
   const guia = guias[l.videoId];
   return `<article class="live surge" style="--atraso:${i * 0.1}s">
+          ${etiquetaLive(l)}
           <img src="${esc(l.miniatura)}" alt="" loading="lazy" width="320" height="180">
           <div class="live__corpo">
             <h3><a href="https://www.youtube.com/watch?v=${esc(l.videoId)}" target="_blank" rel="noopener">${esc(l.titulo)}</a></h3>
