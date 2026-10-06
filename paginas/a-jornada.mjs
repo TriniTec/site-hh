@@ -79,6 +79,7 @@ export default function aJornada({ cfg, L }) {
       <div class="surge">
         <p class="lead">Você pode começar por uma Mensagem, por uma sessão, ou simplesmente conversando comigo sobre a jornada.</p>
         <p style="margin-top:32px">${botaoConversar(L, { evento: 'quero-conversar-duvida' })}</p>
+        ${cfg.apresentacaoPdf ? `<p style="margin-top:28px"><a class="seta" href="${esc(cfg.apresentacaoPdf)}" target="_blank" rel="noopener" data-umami-event="apresentacao-pdf">Ler a apresentação completa (PDF) <span aria-hidden="true">↓</span></a></p>` : ''}
       </div>
     </div>
   </section>`;

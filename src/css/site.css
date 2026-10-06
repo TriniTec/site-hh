@@ -301,7 +301,7 @@ h1, h2, h3 { font-family: var(--t); font-weight: 700; margin: 0; text-wrap: bala
 .rodape__assinatura { display: flex; align-items: center; gap: 10px; }
 .rodape__assinatura img { width: 24px; height: 24px; }
 .rodape__rede { display: flex; align-items: center; gap: 12px; padding: 4px 0; }
-.rodape__rede .rede { flex: none; width: 28px; height: 28px; color: var(--brilho); }
+.rodape__rede .rede, .rodape__rede .wa { flex: none; width: 28px; height: 28px; color: var(--brilho); }
 .rodape__rede span { display: grid; line-height: 1.35; }
 .rodape__rede b { font-family: var(--t); font-size: 1rem; }
 .rodape__rede:hover b { text-decoration: underline; }

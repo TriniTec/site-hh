@@ -118,7 +118,7 @@ export function rodape({ cfg, L }) {
       <div>
         <h2>Fale e acompanhe</h2>
         <ul>
-          <li><a href="${esc(L.whatsapp)}" target="_blank" rel="noopener" data-umami-event="whatsapp-rodape">WhatsApp</a></li>
+          <li><a class="rodape__rede" href="${esc(L.whatsapp)}" target="_blank" rel="noopener" data-umami-event="whatsapp-rodape">${whatsappIcone}<span><b>WhatsApp</b>Quero conversar</span></a></li>
           <li><a class="rodape__rede" href="${esc(cfg.youtube)}" target="_blank" rel="noopener" data-umami-event="youtube-rodape">${youtubeIcone}<span><b>${esc(arroba(cfg.youtube))}</b>YouTube · ao vivo às quintas, 19h</span></a></li>
           <li><a class="rodape__rede" href="${esc(cfg.instagram)}" target="_blank" rel="noopener" data-umami-event="instagram-rodape">${instagramIcone}<span><b>${esc(arroba(cfg.instagram))}</b>Instagram</span></a></li>
         </ul>

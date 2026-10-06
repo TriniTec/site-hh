@@ -11,6 +11,7 @@ Referências: documento 02 (briefing e textos, v1.10), documento 06 (identidade 
 | --- | --- |
 | Número ou textos do WhatsApp (geral, Mensagem, sessão, Jornada) | `site.config.json` → `whatsapp` |
 | Prazo da Mensagem | `site.config.json` → `mensagemPrazo` |
+| Link da apresentação em PDF (vazio = escondido) | `site.config.json` → `apresentacaoPdf` |
 | Estatística (Umami, sem cookies) | `site.config.json` → `umamiWebsiteId` |
 | Depoimentos | `data/depoimentos.json` (imagens em `src/img/depoimentos/`) |
 | Link do guia de uma live | sozinho: o link do PDF na descrição do vídeo (linha com "guia"). Para forçar: `data/guias.json` |
@@ -60,10 +61,11 @@ vídeo em vez da capa escolhida; por isso a capa própria é o caminho certo). O
 
 ## Apresentação em PDF
 
-`harmonizacaohumana.com.br/harmonizacao-humana-apresentacao.pdf` (arquivo `src/harmonizacao-humana-apresentacao.pdf`,
-sem link no site, para enviar). O texto vem do documento 02 com as regras de linguagem e os textos já revisados do
-site. Para refazer: `node scripts/apresentacao.mjs` gera `docs/apresentacao/apresentacao.html`; abra no Chrome,
+Em revisão pelo Filipe, ainda fora do ar. Arquivo atual: `docs/apresentacao/harmonizacao-humana-apresentacao.pdf`.
+Para refazer: `node scripts/apresentacao.mjs` gera `docs/apresentacao/apresentacao.html`; abra no Chrome,
 Imprimir → Salvar como PDF, A4, sem margens, com gráficos de fundo.
+Lugar reservado: página A Jornada, bloco "Ainda em dúvida?", embaixo do botão. Para publicar, copie o PDF para
+`src/` e preencha `apresentacaoPdf` em `site.config.json` (ex.: `/harmonizacao-humana-apresentacao.pdf`).
 
 ## Textos
 
