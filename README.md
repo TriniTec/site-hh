@@ -54,11 +54,9 @@ vídeo em vez da capa escolhida; por isso a capa própria é o caminho certo). O
 - Modo noite desenhado (índigo como fundo, ouro como luz). Hoje o site é sempre claro, de propósito,
   mesmo com o aparelho no modo escuro (`color-scheme: light`).
 - Ligar o domínio harmonizacaohumana.com.br e o redirecionamento do leituraenergetica.com.br.
-- Lives: confirmar que a tarefa diária encontra a playlist (o feed do YouTube dá 404 com estes IDs; o script lê a página da playlist).
 - Google Search Console e Bing Webmaster Tools, com o sitemap.
 - Imagens: foto real para a trajetória no Sobre e foto de corpo inteiro em alta resolução (ver `docs/imagens-a-gerar.md`).
 - Versão de teste com mais respiro, em branch separado (a faixa de palavras já saiu).
-- Atualizar o Design System com as escolhas finais do site.
 
 ## Apresentação em PDF
 
