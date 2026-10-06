@@ -76,3 +76,13 @@ Etiquetas em todas as versões: "Recomendada" e "10 sessões · 1 por semana". F
 | 1 | 01/10 | Não é criar uma nova versão de você. É trabalhar o que impede a sua própria vida de fluir com mais harmonia. | Primeira versão Solar (do documento 02, parte 5) | Claude (versão Solar) |
 | 2 | 05/10 manhã | A Jornada existe para a transformação acontecer. Soltar o que prende e abrir espaço para uma nova versão de você. Cada processo é único e o resultado não se promete, mas é exatamente isso que ela busca. | Reescrito: a Jornada busca, sim, uma nova versão de você | Filipe (J6); a redação foi Claude |
 | 3 | 06/10 | A Jornada existe para a transformação acontecer. Soltar o que prende e abrir espaço para uma nova versão de você. Cada processo é único e o resultado só se conhece percorrendo o caminho. | "o resultado não se promete, mas é exatamente isso que ela busca" → "o resultado só se conhece percorrendo o caminho" | Filipe |
+
+## Textos novos de 06/10 (versão 1, para revisão do Filipe)
+
+| Onde | Texto inteiro | Pedido por |
+|---|---|---|
+| Home · seção ao vivo, acima dos cartões | "Episódios recentes" · "Ver todos no canal →" | Filipe pediu uma divisória; o texto foi Claude |
+| Home · etiqueta da live agendada | "Ao vivo na quinta, às 19h" (durante a live: "Ao vivo agora") | Filipe aprovou a etiqueta; o texto foi Claude |
+| Sobre · bloco final | "Acompanhe o trabalho." · botões "YouTube · ao vivo às quintas, 19h" e "Instagram" | Filipe aprovou o bloco; o texto foi Claude |
+| Rodapé · Fale e acompanhe | "WhatsApp / Quero conversar" · "@FilipeMorgadoHH / YouTube · ao vivo às quintas, 19h" · "@filipemorgado.hh / Instagram" | Filipe aprovou os ícones; o texto foi Claude |
+| A Jornada · "Ainda em dúvida?" (escondido até o PDF ser aprovado) | "Ler a apresentação completa (PDF) ↓" | Claude, proposta |

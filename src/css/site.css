@@ -440,3 +440,9 @@ h1, h2, h3 { font-family: var(--t); font-weight: 700; margin: 0; text-wrap: bala
 .formatos { align-items: stretch; }
 .formato { height: 100%; }
 .depos { align-items: stretch; }
+
+/* Celulares estreitos (360px ou menos): o botão do cartão quebra a linha em vez de empurrar o cartão para fora da tela */
+.formatos > * { min-width: 0; }
+.formato .botao { max-width: 100%; white-space: normal; text-align: center; line-height: 1.2; padding-block: 12px; }
+@media (max-width: 400px) { .formato { padding: 36px 22px 30px; } .formato .botao { padding-inline: 20px; font-size: 1.0625rem; } }
+@media (max-width: 400px) { main .botao { max-width: 100%; white-space: normal; text-align: center; line-height: 1.2; padding-block: 12px; } }

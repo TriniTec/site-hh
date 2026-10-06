@@ -17,9 +17,9 @@ fica registrada em `docs/historico-de-textos.md` (data, onde, antes, depois, que
 - O aviso de saúde no rodapé não sai.
 - Falando direto com a pessoa, preferir o feminino ("sozinha") sem deixar o texto todo no feminino; forma sem gênero quando funcionar tão bem.
 
-Publicação: o Netlify publica o branch `main` (harmonizacaohumana.netlify.app; depois, harmonizacaohumana.com.br).
-O trabalho segue no `main`. Até fechar a primeira versão, o `claude/site-solar` é mantido igual (cada envio
-vai para os dois); depois de fechada, só o `main`.
+Publicação: o Netlify publica o branch `main` em harmonizacaohumana.com.br.
+A primeira versão fechou em 06/10/2026. Daqui em diante o trabalho vai só para o `main`
+(o `claude/site-solar` ficou parado como registro da versão 1).
 A tarefa diária das lives faz commits no `main`: antes de enviar, trazer o `main` (pull/merge).
 Imagens: quando uma parte pedir imagem nova, deixar o lugar reservado no site (`.imagem-reservada`) e
 escrever o prompt em `docs/imagens-a-gerar.md`; o Filipe pede ao Aruan.
