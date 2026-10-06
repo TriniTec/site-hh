@@ -17,9 +17,10 @@ const cabecalhos = { 'accept-language': 'pt-BR,pt;q=0.9', 'user-agent': 'Mozilla
 
 const desfazer = (s) => s.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
 const meses = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+// Datas no fuso de São Paulo (a live é às 19h de Brasília, que já é o dia seguinte em UTC)
+const diaSP = (iso) => new Date(iso).toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' });
 const extenso = (iso) => {
-  // Data no fuso de São Paulo (a live é às 19h de Brasília)
-  const [a, m, d] = new Date(iso).toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' }).split('-').map(Number);
+  const [a, m, d] = diaSP(iso).split('-').map(Number);
   return `${d} de ${meses[m - 1]} de ${a}`;
 };
 
@@ -31,8 +32,7 @@ async function peloFeed() {
   return [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].map(([, e]) => ({
     videoId: e.match(/<yt:videoId>([^<]+)/)?.[1],
     titulo: desfazer(e.match(/<title>([^<]*)/)?.[1] || ''),
-    publicado: e.match(/<published>([^<]+)/)?.[1],
-  })).filter((e) => e.videoId && e.publicado);
+  })).filter((e) => e.videoId);
 }
 
 async function pelaPagina() {
@@ -50,24 +50,34 @@ async function pelaPagina() {
     for (const k in o) andar(o[k]);
   })(JSON.parse(dados));
   if (!itens.length) throw new Error('A playlist está vazia ou não é pública.');
-  // A data de cada vídeo vem da própria página do vídeo
-  for (const it of itens.slice(0, 6)) {
-    const p = await (await fetch(`https://www.youtube.com/watch?v=${it.videoId}&hl=pt-BR`, { headers: cabecalhos })).text();
-    it.publicado = p.match(/"(?:publishDate|uploadDate)":"([^"]+)"/)?.[1] || p.match(/itemprop="datePublished" content="([^"]+)"/)?.[1];
-  }
-  return itens.filter((e) => e.publicado);
+  return itens;
+}
+
+// Data da live: o início da transmissão (ou o horário agendado, se ainda não aconteceu). A data de
+// publicação não serve: numa live agendada é o dia em que ela foi agendada, e numa live que já passou
+// pode cair no dia seguinte (quando o vídeo termina de processar).
+async function dataDaLive(videoId) {
+  const p = await (await fetch(`https://www.youtube.com/watch?v=${videoId}&hl=pt-BR`, { headers: cabecalhos })).text();
+  return p.match(/"liveBroadcastDetails":\{[^}]*?"startTimestamp":"([^"]+)"/)?.[1]
+    || p.match(/"scheduledStartTime":"(\d+)"/)?.[1]?.replace(/^\d+$/, (t) => new Date(t * 1000).toISOString())
+    || p.match(/"(?:publishDate|uploadDate)":"([^"]+)"/)?.[1];
 }
 
 // Ordem: a da playlist (o Filipe a mantém com a live mais nova primeiro). A data que o YouTube informa
 // pode ser a de publicação do vídeo editado, e não a da live, então não serve para ordenar.
 const entradas = (await peloFeed()) ?? (await pelaPagina());
-const novas = entradas.slice(0, 3).map((e) => ({
-  videoId: e.videoId,
-  titulo: e.titulo,
-  data: new Date(e.publicado).toISOString().slice(0, 10),
-  dataExtenso: extenso(e.publicado),
-  miniatura: `/img/lives/${e.videoId}.jpg`,
-}));
+const novas = [];
+for (const e of entradas.slice(0, 3)) {
+  const quando = await dataDaLive(e.videoId);
+  if (!quando) throw new Error(`Não encontrei a data da live ${e.videoId}`);
+  novas.push({
+    videoId: e.videoId,
+    titulo: e.titulo,
+    data: diaSP(quando),
+    dataExtenso: extenso(quando),
+    miniatura: `/img/lives/${e.videoId}.jpg`,
+  });
+}
 console.log(`Encontradas ${entradas.length} lives; as três mais novas:\n` + novas.map((l) => `- ${l.dataExtenso}: ${l.titulo}`).join('\n'));
 
 const atuais = JSON.parse(await readFile(arqLives, 'utf8'));

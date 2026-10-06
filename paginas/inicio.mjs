@@ -213,7 +213,7 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
         <article class="formato surge">
           <p class="formato__tag">Cerca de 1 hora · por vídeo</p>
           <h3>Sessão individual</h3>
-          <p>Uma leitura completa, para o seu momento. Você não precisa preparar nada.</p>
+          <p>Uma leitura completa para o seu momento. Você não precisa preparar nada nem contar sua história.</p>
           <p class="empurra"><a class="seta" href="/a-jornada#sessao">Como é <span aria-hidden="true">→</span></a></p>
         </article>
         <article class="formato formato--destaque surge" style="--atraso:.1s">

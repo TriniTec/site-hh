@@ -50,6 +50,7 @@ export default function aJornada({ cfg, L }) {
     <div class="dentro">
       <p class="olho surge">A Jornada · 10 semanas</p>
       <h2 class="grande surge" id="como-jornada-titulo">Como a Jornada <span class="ouro">se desenvolve.</span></h2>
+      <p class="lead surge" style="margin-top:24px;max-width:34em">O trabalho se desenvolve ao longo do tempo: diferentes camadas são acessadas e trabalhadas, progressivamente.</p>
       <div class="linha-tempo">
         <div class="etapa surge"><b>Sessões 1 a 4</b><h3>Começa aberta</h3><p>Sem tema. O próprio processo organiza o campo e revela o que precisa ser trabalhado.</p></div>
         <div class="etapa surge" style="--atraso:.1s"><b>Sessões 5 a 10</b><h3>Você indica o território</h3><p>Se fizer sentido, traga um tema amplo: relacionamentos, trabalho, família, prosperidade, autoestima. O processo conduz o resto.</p></div>
