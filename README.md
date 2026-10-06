@@ -13,7 +13,7 @@ Referências: documento 02 (briefing e textos, v1.10), documento 06 (identidade 
 | Prazo da Mensagem | `site.config.json` → `mensagemPrazo` |
 | Estatística (Umami, sem cookies) | `site.config.json` → `umamiWebsiteId` |
 | Depoimentos | `data/depoimentos.json` (imagens em `src/img/depoimentos/`) |
-| Link do guia de uma live | `data/guias.json` → `{ "ID_DO_VIDEO": "https://…" }` |
+| Link do guia de uma live | sozinho: o link do PDF na descrição do vídeo (linha com "guia"). Para forçar: `data/guias.json` |
 | Textos das páginas | `paginas/inicio.mjs`, `paginas/a-jornada.mjs`, `paginas/sobre.mjs` |
 | Cores, tamanhos, espaços | `src/css/site.css` |
 
@@ -58,8 +58,14 @@ vídeo em vez da capa escolhida; por isso a capa própria é o caminho certo). O
 - Google Search Console e Bing Webmaster Tools, com o sitemap.
 - Imagens: foto real para a trajetória no Sobre e foto de corpo inteiro em alta resolução (ver `docs/imagens-a-gerar.md`).
 - Versão de teste com mais respiro, em branch separado (a faixa de palavras já saiu).
-- PDF de apresentação com o texto longo do documento 02.
 - Atualizar o Design System com as escolhas finais do site.
+
+## Apresentação em PDF
+
+`harmonizacaohumana.com.br/harmonizacao-humana-apresentacao.pdf` (arquivo `src/harmonizacao-humana-apresentacao.pdf`,
+sem link no site, para enviar). O texto vem do documento 02 com as regras de linguagem e os textos já revisados do
+site. Para refazer: `node scripts/apresentacao.mjs` gera `docs/apresentacao/apresentacao.html`; abra no Chrome,
+Imprimir → Salvar como PDF, A4, sem margens, com gráficos de fundo.
 
 ## Textos
 
