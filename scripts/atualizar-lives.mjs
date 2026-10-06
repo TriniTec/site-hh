@@ -91,7 +91,12 @@ async function dataDaLive(videoId) {
       || aoVivoEm(p)
       || p.match(/"(?:publishDate|uploadDate)":"([^"]+)"/)?.[1]
       || p.match(/itemprop="(?:startDate|datePublished|uploadDate)" content="([^"]+)"/)?.[1];
-    if (quando) return { quando, inicio, guia: guiaNaDescricao(p) };
+    const guia = guiaNaDescricao(p);
+    if (!guia) {
+      const desc = p.match(/"shortDescription":"((?:[^"\\]|\\.)*)"/)?.[1] ?? '';
+      console.log(`Sem guia em ${videoId}. Descrição com ${desc.length} caracteres; links: ${(desc.match(/https?:[^\s"\\]+/g) || []).join(' ') || 'nenhum'}; menciona guia: ${/guia/i.test(desc)}`);
+    }
+    if (quando) return { quando, inicio, guia };
     console.log(`Sem data na página de ${videoId} (tentativa ${tentativa}, resposta ${r.status}, ${p.length} caracteres, título: ${p.match(/<title>([^<]*)/)?.[1] ?? '?'}).`);
     for (const chave of ['startTimestamp', 'publishDate', 'uploadDate', 'dateText']) {
       const i = p.indexOf(chave);
