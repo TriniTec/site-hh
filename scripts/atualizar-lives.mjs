@@ -63,6 +63,24 @@ function aoVivoEm(p) {
   return mes ? `${m[3]}-${String(mes).padStart(2, '0')}-${m[1].padStart(2, '0')}T12:00:00-03:00` : null;
 }
 
+// Link do guia em PDF: o pós-live coloca na descrição do vídeo. Vale o link na linha que fala do guia
+// (ou na seguinte); sem isso, o primeiro link do Google Drive. Sem link, o cartão fica sem o botão.
+function guiaNaDescricao(p) {
+  const bruto = p.match(/"shortDescription":"((?:[^"\\]|\\.)*)"/)?.[1];
+  if (!bruto) return null;
+  let texto;
+  try { texto = JSON.parse(`"${bruto}"`); } catch { return null; }
+  const linhas = texto.split('\n');
+  const url = (l) => l?.match(/https?:\/\/\S+/)?.[0];
+  for (let i = 0; i < linhas.length; i++) {
+    if (/guia/i.test(linhas[i])) {
+      const achado = url(linhas[i]) || url(linhas[i + 1]);
+      if (achado) return achado;
+    }
+  }
+  return texto.match(/https?:\/\/(?:drive|docs)\.google\.com\/\S+/)?.[0] ?? null;
+}
+
 async function dataDaLive(videoId) {
   for (let tentativa = 1; tentativa <= 3; tentativa++) {
     const r = await fetch(`https://www.youtube.com/watch?v=${videoId}&hl=pt-BR&bpctr=9999999999&has_verified=1`, { headers: cabecalhos });
@@ -73,7 +91,7 @@ async function dataDaLive(videoId) {
       || aoVivoEm(p)
       || p.match(/"(?:publishDate|uploadDate)":"([^"]+)"/)?.[1]
       || p.match(/itemprop="(?:startDate|datePublished|uploadDate)" content="([^"]+)"/)?.[1];
-    if (quando) return { quando, inicio };
+    if (quando) return { quando, inicio, guia: guiaNaDescricao(p) };
     console.log(`Sem data na página de ${videoId} (tentativa ${tentativa}, resposta ${r.status}, ${p.length} caracteres, título: ${p.match(/<title>([^<]*)/)?.[1] ?? '?'}).`);
     for (const chave of ['startTimestamp', 'publishDate', 'uploadDate', 'dateText']) {
       const i = p.indexOf(chave);
@@ -90,7 +108,7 @@ const atuais = JSON.parse(await readFile(arqLives, 'utf8'));
 const entradas = (await peloFeed()) ?? (await pelaPagina());
 const novas = [];
 for (const e of entradas.slice(0, 3)) {
-  const { quando, inicio } = (await dataDaLive(e.videoId)) ?? {};
+  const { quando, inicio, guia } = (await dataDaLive(e.videoId)) ?? {};
   const antes = atuais.find((l) => l.videoId === e.videoId);
   // Se o YouTube não entregar a data agora, fica a que já estava no site; live nova sem data é erro
   if (!quando && !antes) throw new Error(`Não encontrei a data da live ${e.videoId}`);
@@ -103,9 +121,10 @@ for (const e of entradas.slice(0, 3)) {
     // Horário exato da transmissão: o site mostra a etiqueta "Ao vivo…" enquanto ela não aconteceu
     ...(inicio && new Date(inicio) > new Date() ? { inicio: new Date(inicio).toISOString() } : {}),
     ...(!quando && antes.inicio ? { inicio: antes.inicio } : {}),
+    ...(guia ? { guia } : !quando && antes?.guia ? { guia: antes.guia } : {}),
   });
 }
-console.log(`Encontradas ${entradas.length} lives; as três mais novas:\n` + novas.map((l) => `- ${l.dataExtenso}: ${l.titulo}`).join('\n'));
+console.log(`Encontradas ${entradas.length} lives; as três mais novas:\n` + novas.map((l) => `- ${l.dataExtenso}: ${l.titulo}${l.guia ? `\n  guia: ${l.guia}` : ''}`).join('\n'));
 
 if (JSON.stringify(atuais) === JSON.stringify(novas)) {
   console.log('Nenhuma live nova.');

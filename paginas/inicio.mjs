@@ -51,7 +51,7 @@ function etiquetaLive(l) {
 }
 
 function cardLive(l, guias, i) {
-  const guia = guias[l.videoId];
+  const guia = l.guia || guias[l.videoId];
   return `<article class="live surge" style="--atraso:${i * 0.1}s">
           ${etiquetaLive(l)}
           <img src="${esc(l.miniatura)}" alt="" loading="lazy" width="320" height="180">
