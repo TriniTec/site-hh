@@ -3,7 +3,8 @@
 // O resto foi reescrito mais curto e mais visual, sem promessa de resultado.
 import { esc, botaoConversar, jsonldBase, breadcrumb, sol } from '../scripts/partes.mjs';
 
-const play = `<span class="depo__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>`;
+// Play no estilo do YouTube: a pessoa reconhece na hora que é um vídeo.
+const play = `<span class="depo__play" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M66.5 7.7c-.8-2.9-3-5.2-5.9-6C55.3.3 34 .3 34 .3s-21.3 0-26.6 1.4c-2.9.8-5.1 3.1-5.9 6C.1 13 .1 24 .1 24s0 11 1.4 16.3c.8 2.9 3 5.1 5.9 5.9C12.7 47.7 34 47.7 34 47.7s21.3 0 26.6-1.5c2.9-.8 5.1-3 5.9-5.9C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg></span>`;
 
 function depoimento(d, i) {
   // Palavras das próprias pessoas, sem reescrever. O trecho em destaque sai da transcrição (data/depoimentos.json).
@@ -212,7 +213,7 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
         <article class="formato surge">
           <p class="formato__tag">Cerca de 1 hora · por vídeo</p>
           <h3>Sessão individual</h3>
-          <p>Uma leitura completa, para o seu momento. Para olhar algo mais pontual ou sentir como o processo funciona. Sem preparar nada.</p>
+          <p>Uma leitura completa, para o seu momento. Você não precisa preparar nada.</p>
           <p class="empurra"><a class="seta" href="/a-jornada#sessao">Como é <span aria-hidden="true">→</span></a></p>
         </article>
         <article class="formato formato--destaque surge" style="--atraso:.1s">
@@ -225,7 +226,7 @@ export default function inicio({ cfg, L, depoimentos, lives, guias }) {
         <article class="formato surge" style="--atraso:.2s">
           <p class="formato__tag">Na dúvida</p>
           <h3>Vamos conversar</h3>
-          <p>Você me conta, do seu jeito, o que trouxe você até aqui. E a gente vê junto qual formato faz sentido agora.</p>
+          <p>Você me conta, do seu jeito, o que trouxe você até aqui. Vemos junto qual formato faz sentido para você agora.</p>
           <p class="empurra">${botaoConversar(L, { evento: 'quero-conversar-formatos' })}</p>
         </article>
       </div>

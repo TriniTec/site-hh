@@ -54,13 +54,16 @@ vídeo em vez da capa escolhida; por isso a capa própria é o caminho certo). O
 - Modo noite desenhado (índigo como fundo, ouro como luz). Hoje o site é sempre claro, de propósito,
   mesmo com o aparelho no modo escuro (`color-scheme: light`).
 - Ligar o domínio harmonizacaohumana.com.br e o redirecionamento do leituraenergetica.com.br.
-- Levar a versão Solar para o branch `main` e trocar o branch no Netlify (a tarefa das lives roda no `main`).
-- Conferir o endereço completo da playlist das lives (`playlistLives`).
+- Lives: confirmar que a tarefa diária encontra a playlist (o feed do YouTube dá 404 com estes IDs; o script lê a página da playlist).
 - Google Search Console e Bing Webmaster Tools, com o sitemap.
 - Imagens: foto real para a trajetória no Sobre e foto de corpo inteiro em alta resolução (ver `docs/imagens-a-gerar.md`).
 - Versão de teste com mais respiro, em branch separado (a faixa de palavras já saiu).
 - PDF de apresentação com o texto longo do documento 02.
 - Atualizar o Design System com as escolhas finais do site.
+
+## Textos
+
+Texto revisado pelo Filipe só muda com aprovação dele. Histórico: `docs/historico-de-textos.md`.
 
 ## Imagem de compartilhamento
 
