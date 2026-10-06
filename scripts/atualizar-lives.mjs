@@ -88,6 +88,16 @@ function guiaNaDescricao(p) {
   return texto.match(/https?:\/\/(?:drive|docs)\.google\.com\/\S+/)?.[0] ?? null;
 }
 
+// O YouTube encurta links longos no texto da descrição ("https://drive.google.com/file/d/1pwrZ...").
+// O endereço inteiro está no próprio link (youtube.com/redirect?...&q=ENDEREÇO): pega o que começa igual.
+function linkCompleto(p, curto) {
+  if (!curto || !/(\.\.\.|…)$/.test(curto)) return curto;
+  const inicio = curto.replace(/(\.\.\.|…)$/, '');
+  const alvos = [...p.matchAll(/[?&\\u0026]q=(https?%3A[^&"\\]+)/g)].map((m) => { try { return decodeURIComponent(m[1]); } catch { return ''; } });
+  const diretos = [...p.matchAll(/"url":"(https?:\/\/(?:drive|docs)\.google\.com\/[^"]+)"/g)].map((m) => m[1].replace(/\\u0026/g, '&'));
+  return [...alvos, ...diretos].find((u) => u.startsWith(inicio)) ?? null;
+}
+
 async function dataDaLive(videoId) {
   for (let tentativa = 1; tentativa <= 3; tentativa++) {
     const r = await fetch(`https://www.youtube.com/watch?v=${videoId}&hl=pt-BR&bpctr=9999999999&has_verified=1`, { headers: cabecalhos });
@@ -98,7 +108,7 @@ async function dataDaLive(videoId) {
       || aoVivoEm(p)
       || p.match(/"(?:publishDate|uploadDate)":"([^"]+)"/)?.[1]
       || p.match(/itemprop="(?:startDate|datePublished|uploadDate)" content="([^"]+)"/)?.[1];
-    const guia = guiaNaDescricao(p);
+    const guia = linkCompleto(p, guiaNaDescricao(p));
     if (!guia) {
       const desc = descricao(p);
       console.log(`Sem guia em ${videoId}. Descrição com ${desc.length} caracteres; links: ${(desc.match(/https?:\S+/g) || []).join(' ') || 'nenhum'}; menciona guia: ${/guia/i.test(desc)}`);
