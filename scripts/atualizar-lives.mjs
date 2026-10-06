@@ -66,6 +66,10 @@ async function dataDaLive(videoId) {
       || p.match(/itemprop="(?:startDate|datePublished|uploadDate)" content="([^"]+)"/)?.[1];
     if (quando) return quando;
     console.log(`Sem data na página de ${videoId} (tentativa ${tentativa}, resposta ${r.status}, ${p.length} caracteres, título: ${p.match(/<title>([^<]*)/)?.[1] ?? '?'}).`);
+    for (const chave of ['startTimestamp', 'publishDate', 'uploadDate', 'dateText']) {
+      const i = p.indexOf(chave);
+      if (i >= 0) console.log(`  ${chave}: ${p.slice(Math.max(0, i - 40), i + 120).replace(/\s+/g, ' ')}`);
+    }
     await new Promise((ok) => setTimeout(ok, 3000));
   }
   return null;
