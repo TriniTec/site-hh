@@ -65,11 +65,18 @@ function aoVivoEm(p) {
 
 // Link do guia em PDF: o pós-live coloca na descrição do vídeo. Vale o link na linha que fala do guia
 // (ou na seguinte); sem isso, o primeiro link do Google Drive. Sem link, o cartão fica sem o botão.
+function descricao(p) {
+  const textos = [
+    p.match(/"shortDescription":"((?:[^"\\]|\\.)*)"/)?.[1],
+    p.match(/"attributedDescription":\{"content":"((?:[^"\\]|\\.)*)"/)?.[1],
+    p.match(/"attributedDescriptionBodyText":\{"content":"((?:[^"\\]|\\.)*)"/)?.[1],
+  ].filter(Boolean).map((b) => { try { return JSON.parse(`"${b}"`); } catch { return ''; } });
+  return textos.sort((a, b) => b.length - a.length)[0] ?? '';
+}
+
 function guiaNaDescricao(p) {
-  const bruto = p.match(/"shortDescription":"((?:[^"\\]|\\.)*)"/)?.[1];
-  if (!bruto) return null;
-  let texto;
-  try { texto = JSON.parse(`"${bruto}"`); } catch { return null; }
+  const texto = descricao(p);
+  if (!texto) return null;
   const linhas = texto.split('\n');
   const url = (l) => l?.match(/https?:\/\/\S+/)?.[0];
   for (let i = 0; i < linhas.length; i++) {
@@ -93,8 +100,9 @@ async function dataDaLive(videoId) {
       || p.match(/itemprop="(?:startDate|datePublished|uploadDate)" content="([^"]+)"/)?.[1];
     const guia = guiaNaDescricao(p);
     if (!guia) {
-      const desc = p.match(/"shortDescription":"((?:[^"\\]|\\.)*)"/)?.[1] ?? '';
-      console.log(`Sem guia em ${videoId}. Descrição com ${desc.length} caracteres; links: ${(desc.match(/https?:[^\s"\\]+/g) || []).join(' ') || 'nenhum'}; menciona guia: ${/guia/i.test(desc)}`);
+      const desc = descricao(p);
+      console.log(`Sem guia em ${videoId}. Descrição com ${desc.length} caracteres; links: ${(desc.match(/https?:\S+/g) || []).join(' ') || 'nenhum'}; menciona guia: ${/guia/i.test(desc)}`);
+      if (!desc) for (const chave of ['Description', 'description"']) { const i = p.indexOf(chave); if (i >= 0) console.log(`  ${chave}: ${p.slice(Math.max(0, i - 60), i + 160).replace(/\s+/g, ' ')}`); }
     }
     if (quando) return { quando, inicio, guia };
     console.log(`Sem data na página de ${videoId} (tentativa ${tentativa}, resposta ${r.status}, ${p.length} caracteres, título: ${p.match(/<title>([^<]*)/)?.[1] ?? '?'}).`);
