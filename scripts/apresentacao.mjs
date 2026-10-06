@@ -39,14 +39,15 @@ h3 { font-size: 15pt; margin: 0 0 3mm; }
 .rodape-pag { margin-top: auto; display: flex; justify-content: space-between; font-size: 8pt; opacity: .7; padding-top: 6mm; }
 /* capa */
 .capa { padding: 0; }
-.capa__foto { position: absolute; right: 0; bottom: 0; width: 92mm; height: 175mm; object-fit: cover; object-position: 88% 25%; border-top-left-radius: 60mm; }
+.capa__foto { position: absolute; left: 0; bottom: 0; width: 210mm; height: 118.1mm; object-fit: cover; }
+.capa__fade { position: absolute; left: 0; right: 0; bottom: 88mm; height: 32mm; background: linear-gradient(var(--indigo), rgba(8, 43, 97, 0)); z-index: 0; }
 .capa__texto { position: relative; padding: 24mm 22mm; z-index: 1; }
-.capa__marca { display: flex; align-items: center; gap: 4mm; font-family: "DM Sans"; font-weight: 700; font-size: 13pt; margin-bottom: 30mm; }
+.capa__marca { display: flex; align-items: center; gap: 4mm; font-family: "DM Sans"; font-weight: 700; font-size: 13pt; margin-bottom: 22mm; }
 .capa__marca img { width: 14mm; height: 14mm; }
-.capa h1 { font-size: 38pt; max-width: 8.6em; margin-bottom: 8mm; }
-.capa .lead { max-width: 17em; font-size: 13pt; }
-.capa__sol { position: absolute; width: 190mm; height: 190mm; right: -48mm; bottom: 25mm; opacity: .4; }
-.capa__assinatura { position: absolute; left: 22mm; bottom: 22mm; z-index: 1; font-family: "DM Sans"; font-weight: 700; font-size: 11pt; }
+.capa h1 { font-size: 40pt; max-width: 10em; margin-bottom: 7mm; }
+.capa .lead { max-width: 24em; font-size: 13pt; }
+.capa__sol { position: absolute; width: 170mm; height: 170mm; right: -70mm; top: -60mm; opacity: .45; }
+.capa__assinatura { margin-top: 9mm; font-family: "DM Sans"; font-weight: 700; font-size: 11pt; }
 .capa__assinatura span { display: block; font-family: Manrope; font-weight: 400; font-size: 9.5pt; opacity: .8; }
 /* listas */
 .espelho { list-style: none; padding: 0; margin: 0; display: grid; gap: 3mm; }
@@ -74,10 +75,20 @@ h3 { font-size: 15pt; margin: 0 0 3mm; }
 .linha b { font-family: "DM Sans"; color: var(--brilho); font-size: 9pt; letter-spacing: .12em; text-transform: uppercase; }
 .chips { list-style: none; padding: 0; margin: 3mm 0 0; display: flex; flex-wrap: wrap; gap: 2.5mm; }
 .chips li { border: 1px solid rgba(255, 247, 231, .4); border-radius: 99px; padding: 1.8mm 4mm; font-size: 9.5pt; }
-.depos { display: grid; gap: 5mm; }
-.depo { background: #fff; border-radius: 6mm; padding: 6mm 7mm; }
-.depo blockquote { margin: 0 0 3mm; font-family: "DM Sans"; font-weight: 500; font-size: 13pt; line-height: 1.4; }
-.depo cite { font-style: normal; font-weight: 600; color: var(--laranja); }
+.depos { display: grid; gap: 6mm; }
+.depo { margin: 0; background: #fff; border-radius: 6mm; padding: 5mm; display: grid; gap: 6mm; }
+.depo--video { grid-template-columns: 40mm 1fr; align-items: start; }
+.depo--print { grid-template-columns: 74mm 1fr; align-items: start; }
+.depo__capa { position: relative; display: block; border-radius: 4mm; overflow: hidden; }
+.depo__capa img { width: 100%; display: block; aspect-ratio: 9 / 16; object-fit: cover; }
+.depo__play { position: absolute; left: 50%; top: 50%; width: 15mm; height: 10.6mm; transform: translate(-50%, -50%); }
+.depo__play svg { width: 100%; height: 100%; display: block; }
+.depo__print { width: 100%; border-radius: 3mm; display: block; }
+.depo cite { font-style: normal; font-family: "DM Sans"; font-weight: 700; font-size: 13pt; color: var(--laranja); display: block; margin-bottom: 2mm; }
+.depo__texto p { font-size: 9.4pt; line-height: 1.45; margin-bottom: 4pt; }
+.depo__link { display: inline-block; margin-top: 2mm; font-family: "DM Sans"; font-weight: 700; font-size: 10pt; color: var(--indigo); text-decoration: none; border-bottom: 2px solid var(--laranja); padding-bottom: 1mm; }
+.depo__fonte { font-size: 8.5pt; opacity: .7; margin-top: 3mm; }
+.vivo { margin-top: 10mm; }
 .retrato { position: absolute; right: 22mm; top: 20mm; width: 46mm; height: 46mm; border-radius: 50%; object-fit: cover; }
 .contato { display: grid; gap: 4mm; margin-top: 6mm; }
 .contato a { display: flex; align-items: center; gap: 4mm; color: inherit; text-decoration: none; background: rgba(255, 247, 231, .08); border-radius: 5mm; padding: 4.5mm 6mm; font-family: "DM Sans"; font-weight: 700; font-size: 12.5pt; }
@@ -89,13 +100,14 @@ h3 { font-size: 15pt; margin: 0 0 3mm; }
 const capa = `
 <section class="pagina capa indigo">
   <div class="capa__sol">${sol({ id: 'c', raios: 40, onda: 1.6 })}</div>
-  <img class="capa__foto" src="${src('img/filipe-retrato-sorrindo-1200.webp')}" alt="">
+  <img class="capa__foto" src="${src('img/filipe-retrato-sorrindo-1600.webp')}" alt="">
+  <div class="capa__fade"></div>
   <div class="capa__texto">
     <p class="capa__marca"><img src="${src('img/hh-logo-192.webp')}" alt="">Harmonização Humana</p>
     <h1>Você sabe que quer mudar. <span class="ouro">Mas sozinha ainda não conseguiu.</span></h1>
     <p class="lead">Uma experiência de leitura e transformação para revelar o que precisa ser visto e trabalhar o que precisa mudar.</p>
+    <p class="capa__assinatura">Filipe Morgado<span>harmonizacaohumana.com.br</span></p>
   </div>
-  <p class="capa__assinatura">Filipe Morgado<span>harmonizacaohumana.com.br</span></p>
 </section>`;
 
 const rodapePag = (n) => `<div class="rodape-pag"><span>Harmonização Humana · Filipe Morgado</span><span>${n}</span></div>`;
@@ -217,19 +229,40 @@ const p7 = `
     ${rodapePag(7)}
 </section>`;
 
+const yt = (d) => `https://youtube.com/shorts/${d.videoId}`;
+const paragrafos = (t) => t.split(/\n\n+/).map((x) => `<p>${esc(x).replace(/\n/g, '<br>')}</p>`).join('');
+const depoVideo = (d) => `
+  <figure class="depo depo--video">
+    <a class="depo__capa" href="${yt(d)}"><img src="${src(d.imagem.replace(/^\//, ''))}" alt=""><span class="depo__play"><svg viewBox="0 0 68 48"><path d="M66.5 7.7a8.6 8.6 0 0 0-6-6C55.2.2 34 .2 34 .2s-21.2 0-26.5 1.4a8.6 8.6 0 0 0-6 6C.1 13.1.1 24 .1 24s0 10.9 1.4 16.3a8.6 8.6 0 0 0 6 6C12.8 47.8 34 47.8 34 47.8s21.2 0 26.5-1.4a8.6 8.6 0 0 0 6-6C67.9 34.9 67.9 24 67.9 24s0-10.9-1.4-16.3z" fill="#FF0000"/><path d="M45 24 27 14v20z" fill="#fff"/></svg></span></a>
+    <div>
+      <cite>${esc(d.nome)}</cite>
+      <div class="depo__texto">${paragrafos(d.transcricao)}</div>
+      <a class="depo__link" href="${yt(d)}">Assistir ao depoimento no YouTube →</a>
+    </div>
+  </figure>`;
+
+const geruza = depoimentos.find((d) => d.prova === 'print');
 const p8 = `
 <section class="pagina areia">
   <p class="olho">Depoimentos</p>
   <h2>O que as pessoas <span class="laranja">dizem.</span></h2>
-  <div class="depos">
-    ${depoimentos.map((d) => `<figure class="depo" style="margin:0"><blockquote>“${esc(d.trecho)}”</blockquote><cite>${esc(d.nome)}</cite></figure>`).join('')}
-  </div>
-  <div style="margin-top:12mm">
+  <div class="depos">${depoimentos.filter((d) => d.prova === 'video').map(depoVideo).join('')}</div>
+  ${rodapePag(8)}
+</section>`;
+
+const p8b = `
+<section class="pagina areia">
+  ${geruza ? `<figure class="depo depo--print">
+    <img class="depo__print" src="${src(geruza.imagem.replace(/^\//, ''))}" alt="">
+    <div><cite>${esc(geruza.nome)}</cite><div class="depo__texto">${paragrafos(geruza.transcricao.replace(/\n\nGeruza Cristina\s*$/, ''))}</div><p class="depo__fonte">Mensagem de WhatsApp, reproduzida sem edição.</p></div>
+  </figure>` : ''}
+  <div class="vivo">
     <p class="olho" style="margin-bottom:4mm">Ao vivo no YouTube · quintas, 19h</p>
     <h3 style="font-size:20pt">Veja uma leitura acontecendo.</h3>
     <p>Toda quinta, às 19h, eu faço leituras ao vivo no YouTube. É aberto, de graça, sem compromisso e sem precisar entender nada antes. Quer receber uma? É só escrever no chat.</p>
+    <a class="depo__link" href="${esc(L.playlist)}">Assistir às leituras ao vivo no YouTube →</a>
   </div>
-  ${rodapePag(8)}
+  ${rodapePag(9)}
 </section>`;
 
 const p9 = `
@@ -248,7 +281,7 @@ const p9 = `
 
 const html = `<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><title>Harmonização Humana · Apresentação</title><style>${css}</style></head>
-<body>${capa}${p2}${p3}${p4}${p5}${p6}${p7}${p8}${p9}</body></html>`;
+<body>${capa}${p2}${p3}${p4}${p5}${p6}${p7}${p8}${p8b}${p9}</body></html>`;
 
 await mkdir(path.join(raiz, 'docs/apresentacao'), { recursive: true });
 await writeFile(path.join(raiz, 'docs/apresentacao/apresentacao.html'), html);
