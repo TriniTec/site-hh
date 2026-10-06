@@ -56,12 +56,20 @@ async function pelaPagina() {
 // Data da live: o início da transmissão (ou o horário agendado, se ainda não aconteceu). A data de
 // publicação não serve: numa live agendada é o dia em que ela foi agendada, e numa live que já passou
 // pode cair no dia seguinte (quando o vídeo termina de processar).
+// Em live que já passou, a página traz o dia em texto: "Transmitido ao vivo em 1 de out. de 2026"
+function aoVivoEm(p) {
+  const m = p.match(/Transmitido ao vivo em (\d{1,2}) de ([a-zç]{3})\.? de (\d{4})/i);
+  const mes = m && meses.findIndex((n) => n.slice(0, 3) === m[2].toLowerCase()) + 1;
+  return mes ? `${m[3]}-${String(mes).padStart(2, '0')}-${m[1].padStart(2, '0')}T12:00:00-03:00` : null;
+}
+
 async function dataDaLive(videoId) {
   for (let tentativa = 1; tentativa <= 3; tentativa++) {
     const r = await fetch(`https://www.youtube.com/watch?v=${videoId}&hl=pt-BR&bpctr=9999999999&has_verified=1`, { headers: cabecalhos });
     const p = await r.text();
     const quando = p.match(/"liveBroadcastDetails":\{[^}]*?"startTimestamp":"([^"]+)"/)?.[1]
       || p.match(/"scheduledStartTime":"(\d+)"/)?.[1]?.replace(/^\d+$/, (t) => new Date(t * 1000).toISOString())
+      || aoVivoEm(p)
       || p.match(/"(?:publishDate|uploadDate)":"([^"]+)"/)?.[1]
       || p.match(/itemprop="(?:startDate|datePublished|uploadDate)" content="([^"]+)"/)?.[1];
     if (quando) return quando;
