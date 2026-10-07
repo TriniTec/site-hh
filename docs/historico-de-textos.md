@@ -86,3 +86,10 @@ Etiquetas em todas as versões: "Recomendada" e "10 sessões · 1 por semana". F
 | Sobre · bloco final | "Acompanhe o trabalho." · botões "YouTube · ao vivo às quintas, 19h" e "Instagram" | Filipe aprovou o bloco; o texto foi Claude |
 | Rodapé · Fale e acompanhe | "WhatsApp / Quero conversar" · "@FilipeMorgadoHH / YouTube · ao vivo às quintas, 19h" · "@filipemorgado.hh / Instagram" | Filipe aprovou os ícones; o texto foi Claude |
 | A Jornada · "Ainda em dúvida?" (escondido até o PDF ser aprovado) | "Ler a apresentação completa (PDF) ↓" | Claude, proposta |
+
+## Aviso legal (rodapé, llms.txt, Design System, PDF)
+
+| Versão | Data | Texto inteiro | O que mudou | Pedido por |
+|---|---|---|---|---|
+| 1 | 01/10 | Este trabalho não substitui acompanhamento médico, psicológico ou psiquiátrico, nem outros cuidados profissionais de saúde. Não são feitas promessas de cura ou garantia de resultados. | Texto do documento 02 (no llms.txt havia uma versão curta, sem "nem outros cuidados profissionais de saúde") | Documento 02 |
+| 2 | 07/10 | Este trabalho não substitui o acompanhamento de médicos, psicólogos, psiquiatras e de outros profissionais de saúde. Não são feitas promessas de cura ou garantia de resultados. | Primeira frase reescrita; a segunda não muda. O llms.txt passa a ter o aviso completo | Filipe |

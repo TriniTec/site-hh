@@ -78,7 +78,7 @@ await writeFile(path.join(dist, 'llms.txt'), `# Harmonização Humana
 
 > Uma experiência de leitura e transformação, conduzida por Filipe Morgado, para revelar o que precisa ser visto e trabalhar o que precisa mudar. Atendimento online, no Brasil. A leitura acontece sem informações prévias: a pessoa não precisa contar sua história nem chegar com uma pergunta.
 
-Este trabalho não substitui acompanhamento médico, psicológico ou psiquiátrico. Não são feitas promessas de cura ou garantia de resultados.
+Este trabalho não substitui o acompanhamento de médicos, psicólogos, psiquiatras e de outros profissionais de saúde. Não são feitas promessas de cura ou garantia de resultados.
 
 ## Páginas
 

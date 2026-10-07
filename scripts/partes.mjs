@@ -125,7 +125,7 @@ export function rodape({ cfg, L }) {
       </div>
     </div>
     <div class="rodape__aviso">
-      <p>Este trabalho não substitui acompanhamento médico, psicológico ou psiquiátrico, nem outros cuidados profissionais de saúde. Não são feitas promessas de cura ou garantia de resultados.</p>
+      <p>Este trabalho não substitui o acompanhamento de médicos, psicólogos, psiquiatras e de outros profissionais de saúde. Não são feitas promessas de cura ou garantia de resultados.</p>
       <p>Privacidade: este site não usa cookies e não identifica quem visita. As visitas são contadas de forma anônima. O contato acontece pelo WhatsApp, por sua iniciativa. Os vídeos só carregam do YouTube quando você toca neles.</p>
       <p class="rodape__assinatura">© ${cfg.ano} Filipe Morgado <img src="/img/terapeuta-consciencial-marfim.png" width="24" height="24" alt="Terapeuta consciencial"></p>
     </div>

@@ -276,7 +276,7 @@ const p9 = `
     <a href="${esc(L.youtube)}">${youtubeIcone}<div>YouTube<span>Ao vivo às quintas, 19h</span></div></a>
     <a href="${esc(L.instagram)}">${instagramIcone}<div>Instagram<span>@filipemorgado.hh</span></div></a>
   </div>
-  <p class="aviso">Este trabalho não substitui acompanhamento médico, psicológico ou psiquiátrico, nem outros cuidados profissionais de saúde. Não são feitas promessas de cura ou garantia de resultados.</p>
+  <p class="aviso">Este trabalho não substitui o acompanhamento de médicos, psicólogos, psiquiatras e de outros profissionais de saúde. Não são feitas promessas de cura ou garantia de resultados.</p>
 </section>`;
 
 const html = `<!doctype html>
