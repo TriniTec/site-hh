@@ -1,0 +1,35 @@
+name: Conferir texto no ar
+
+# Abre as páginas publicadas e conta quantas vezes um texto aparece (e se um texto antigo ainda aparece).
+# Aba Actions → Conferir texto no ar → Run workflow.
+on:
+  workflow_dispatch:
+    inputs:
+      deve_aparecer:
+        description: "Texto que deve aparecer uma vez em cada endereço"
+        required: true
+      nao_deve_aparecer:
+        description: "Texto que não deve aparecer mais"
+        required: false
+
+jobs:
+  conferir:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Conferir
+        env:
+          NOVO: ${{ inputs.deve_aparecer }}
+          ANTIGO: ${{ inputs.nao_deve_aparecer }}
+        run: |
+          base=https://harmonizacaohumana.com.br
+          falhou=0
+          for caminho in / /a-jornada /sobre /pagina-que-nao-existe /llms.txt; do
+            corpo=$(curl -sL -H 'Cache-Control: no-cache' "$base$caminho?conferir=$GITHUB_RUN_ID")
+            codigo=$(curl -sL -o /dev/null -w '%{http_code}' "$base$caminho")
+            novo=$(printf '%s' "$corpo" | grep -oF -- "$NOVO" | wc -l)
+            antigo=0
+            [ -n "$ANTIGO" ] && antigo=$(printf '%s' "$corpo" | grep -oF -- "$ANTIGO" | wc -l)
+            echo "$caminho (HTTP $codigo): texto novo $novo vez(es); texto antigo $antigo vez(es)"
+            if [ "$novo" != "1" ] || [ "$antigo" != "0" ]; then falhou=1; fi
+          done
+          exit $falhou
