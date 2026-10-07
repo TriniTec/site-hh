@@ -54,7 +54,6 @@ vídeo em vez da capa escolhida; por isso a capa própria é o caminho certo). O
 
 - Modo noite desenhado (índigo como fundo, ouro como luz). Hoje o site é sempre claro, de propósito,
   mesmo com o aparelho no modo escuro (`color-scheme: light`).
-- leituraenergetica.com.br no Registro.br (A em branco → 75.2.60.5; CNAME www → harmonizacaohumana.netlify.app) e "Verify DNS" no Netlify. O redirecionamento 301 já está no `netlify.toml`.
 - Google Search Console e Bing Webmaster Tools, com o sitemap.
 - Imagens: foto real para a trajetória no Sobre e foto de corpo inteiro em alta resolução (ver `docs/imagens-a-gerar.md`).
 - Versão de teste com mais respiro, em branch separado (a faixa de palavras já saiu).
