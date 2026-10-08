@@ -12,10 +12,36 @@
     "textoInstagram": "Oi Filipe, vim pelo Instagram e queria saber mais sobre a Harmonização Humana",
     "textoYoutube": "Oi Filipe, vim pelo YouTube e queria saber mais sobre a Harmonização Humana",
     "origens": {
-      "site": "textoGeral",
-      "instagram": "textoInstagram",
-      "youtube": "textoYoutube",
-      "mensagem": "textoMensagem"
+      "site": {
+        "texto": "textoGeral",
+        "onde": "Site: botões \"Quero conversar\" (topo, Home, Sobre, chamada final, botão fixo do celular, rodapé)",
+        "para": "Conversa geral, de quem conheceu pelo site"
+      },
+      "sessao": {
+        "texto": "textoSessao",
+        "onde": "Site: botão do cartão \"Sessão individual\" (página A Jornada)",
+        "para": "Interesse na sessão individual"
+      },
+      "jornada": {
+        "texto": "textoJornada",
+        "onde": "Site: botões do cartão \"A Jornada\" e \"Quero fazer a Jornada\" (página A Jornada)",
+        "para": "Interesse na Jornada de 10 semanas"
+      },
+      "mensagem": {
+        "texto": "textoMensagem",
+        "onde": "Site: botão \"Pedir uma Mensagem\" (página A Jornada). Também serve para divulgar a Mensagem fora do site",
+        "para": "Pedido da Mensagem em áudio"
+      },
+      "instagram": {
+        "texto": "textoInstagram",
+        "onde": "Instagram: link da bio (e onde mais o Instagram pedir link de WhatsApp)",
+        "para": "Conversa geral, de quem veio pelo Instagram"
+      },
+      "youtube": {
+        "texto": "textoYoutube",
+        "onde": "YouTube: reservado (descrição do canal ou dos vídeos, quando for usar)",
+        "para": "Conversa geral, de quem veio pelo YouTube"
+      }
     }
   },
   "youtube": "https://www.youtube.com/@FilipeMorgadoHH",

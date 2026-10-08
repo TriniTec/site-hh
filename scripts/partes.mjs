@@ -8,19 +8,22 @@ export const esc = (s = '') =>
 // Saem do mesmo site.config.json que os botões do site; o build grava isso para a função do Netlify.
 export function whatsappOrigens(cfg) {
   const destinos = {};
-  for (const [origem, chave] of Object.entries(cfg.whatsapp.origens || {})) {
-    destinos[origem] = `https://wa.me/${cfg.whatsapp.numero}?text=${encodeURIComponent(cfg.whatsapp[chave])}`;
+  for (const [origem, o] of Object.entries(cfg.whatsapp.origens || {})) {
+    destinos[origem] = `https://wa.me/${cfg.whatsapp.numero}?text=${encodeURIComponent(cfg.whatsapp[o.texto])}`;
   }
   return destinos;
 }
 
 export function links(cfg) {
-  const wa = (texto) => `https://wa.me/${cfg.whatsapp.numero}?text=${encodeURIComponent(texto)}`;
+  // Os botões do site também passam pelo subdomínio (whatsapp.harmonizacaohumana.com.br/<origem>): o número
+  // não aparece no site e todo acesso de WhatsApp segue o mesmo caminho. Sem subdomínio, link wa.me direto.
+  const direto = whatsappOrigens(cfg);
+  const wa = (origem) => (cfg.whatsappSubdominio ? `https://${cfg.whatsappSubdominio}/${origem}` : direto[origem]);
   return {
-    whatsapp: wa(cfg.whatsapp.textoGeral),
-    whatsappMensagem: wa(cfg.whatsapp.textoMensagem),
-    whatsappSessao: wa(cfg.whatsapp.textoSessao),
-    whatsappJornada: wa(cfg.whatsapp.textoJornada),
+    whatsapp: wa('site'),
+    whatsappMensagem: wa('mensagem'),
+    whatsappSessao: wa('sessao'),
+    whatsappJornada: wa('jornada'),
     playlist: `https://www.youtube.com/playlist?list=${cfg.playlistLives}`,
     youtube: cfg.youtube,
     instagram: cfg.instagram,

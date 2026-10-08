@@ -126,3 +126,19 @@ if (cfg.whatsappSubdominio) {
     `# Gerado por scripts/build.mjs. Raiz e caminhos desconhecidos do subdomínio do WhatsApp: mensagem geral.\n` +
     `https://${cfg.whatsappSubdominio}/* ${destinos.site || L.whatsapp} 302!\n`);
 }
+
+// Mapa dos links públicos de WhatsApp (docs/links-whatsapp.md), gerado do mesmo site.config.json:
+// o mapa nunca fica diferente do que está no ar.
+{
+  const linhas = Object.entries(cfg.whatsapp.origens || {}).map(([origem, o]) =>
+    `| https://${cfg.whatsappSubdominio}/${origem} | ${o.onde} | ${o.para} | ${cfg.whatsapp[o.texto]} |`);
+  await writeFile(path.join(raiz, 'docs/links-whatsapp.md'),
+    `# Links públicos de WhatsApp\n\n` +
+    `Gerado por scripts/build.mjs a partir de site.config.json. Não editar à mão: mude o arquivo de configuração.\n\n` +
+    `Regra: fora do site e no próprio site, use sempre estes endereços, nunca o link wa.me direto. Trocar o número em\n` +
+    `site.config.json atualiza todos de uma vez. Cada acesso é contado no Umami como evento "whatsapp-<origem>".\n\n` +
+    `| Link | Onde usar | Para que serve | Mensagem pronta que aparece no WhatsApp |\n|---|---|---|---|\n` +
+    linhas.join('\n') +
+    `\n\nO endereço sem nada depois (https://${cfg.whatsappSubdominio}) ou com um caminho que não está na tabela\n` +
+    `abre o WhatsApp com a mensagem do site ("${cfg.whatsapp.textoGeral}").\n`);
+}

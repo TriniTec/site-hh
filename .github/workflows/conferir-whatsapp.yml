@@ -22,7 +22,7 @@ jobs:
           computador='Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36'
           falhou=0
           # A raiz só redireciona no subdomínio; no domínio principal ela é o site.
-          for caminho in /site /instagram /youtube /mensagem /; do
+          for caminho in /site /sessao /jornada /mensagem /instagram /youtube /; do
             for nome in celular computador; do
               ua=${!nome}
               linha=$(curl -s -o /dev/null -A "$ua" -w '%{http_code} %{redirect_url}' "$BASE$caminho" || true)

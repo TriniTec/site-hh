@@ -6,6 +6,8 @@ import { destinos, umamiWebsiteId, subdominio } from './destinos.js';
 
 export default async (request, context) => {
   const url = new URL(request.url);
+  // Só no subdomínio do WhatsApp; no domínio principal estes caminhos seguem como qualquer outro.
+  if (subdominio && url.hostname !== subdominio) return context.next();
   const origem = url.pathname.replace(/^\/+|\/+$/g, '').toLowerCase();
   const destino = destinos[origem];
   if (!destino) return context.next();
@@ -34,4 +36,5 @@ export default async (request, context) => {
   return new Response(null, { status: 302, headers: { Location: destino, 'Cache-Control': 'no-store' } });
 };
 
-export const config = { path: ['/site', '/site/', '/instagram', '/instagram/', '/youtube', '/youtube/', '/mensagem', '/mensagem/'] };
+// Ao criar uma origem nova em site.config.json, acrescente o caminho aqui também.
+export const config = { path: ['/site', '/site/', '/sessao', '/sessao/', '/jornada', '/jornada/', '/mensagem', '/mensagem/', '/instagram', '/instagram/', '/youtube', '/youtube/'] };

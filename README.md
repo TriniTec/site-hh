@@ -10,7 +10,7 @@ Referências: documento 02 (briefing e textos, v1.10), documento 06 (identidade 
 | Quero mudar… | Arquivo |
 | --- | --- |
 | Número ou textos do WhatsApp (geral, Mensagem, sessão, Jornada, Instagram, YouTube) | `site.config.json` → `whatsapp` |
-| Links de WhatsApp para fora do site (`whatsapp.harmonizacaohumana.com.br/site`, `/instagram`, `/youtube`, `/mensagem`) | `site.config.json` → `whatsapp.origens` (origem → qual texto usar) |
+| Links de WhatsApp (`whatsapp.harmonizacaohumana.com.br/<origem>`) e onde usar cada um | `site.config.json` → `whatsapp.origens` (mapa em `docs/links-whatsapp.md`) |
 | Prazo da Mensagem | `site.config.json` → `mensagemPrazo` |
 | Link da apresentação em PDF (vazio = escondido) | `site.config.json` → `apresentacaoPdf` |
 | Estatística (Umami, sem cookies) | `site.config.json` → `umamiWebsiteId` |
@@ -24,13 +24,12 @@ As três últimas lives (`data/lives.json`) se atualizam sozinhas: o GitHub roda
 
 ## WhatsApp por origem
 
-Para usar fora do site (bio do Instagram, descrição do YouTube, cartão, assinatura): sempre
-`whatsapp.harmonizacaohumana.com.br/<origem>`, nunca o link wa.me direto. Cada endereço redireciona (302)
-para o WhatsApp com a mensagem daquela origem. Trocar o número em `site.config.json` atualiza todos os
-links já espalhados. A função fica em `netlify/edge-functions/whatsapp/` e conta cada acesso no Umami como
-evento `whatsapp-<origem>`, sem cookie. A raiz do subdomínio e caminhos desconhecidos vão para a mensagem
-geral. Nova origem: acrescente em `whatsapp.origens` (e o caminho em `config.path` da função).
-Para testar: GitHub → Actions → "Conferir links do WhatsApp".
+Todo link de WhatsApp, no site e fora dele, é `whatsapp.harmonizacaohumana.com.br/<origem>`, nunca o wa.me
+direto. O mapa completo (link, onde usar, para que serve, mensagem pronta) está em `docs/links-whatsapp.md`,
+gerado no build a partir de `site.config.json`. Trocar o número ali atualiza todos os links de uma vez.
+A função fica em `netlify/edge-functions/whatsapp/`: redireciona (302) e conta cada acesso no Umami como
+evento `whatsapp-<origem>`, sem cookie. Nova origem: acrescente em `whatsapp.origens` e o caminho em
+`config.path` da função. Para testar: GitHub → Actions → "Conferir links do WhatsApp".
 
 ## Rodar no computador
 
