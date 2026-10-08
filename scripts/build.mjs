@@ -131,13 +131,15 @@ if (cfg.whatsappSubdominio) {
 // o mapa nunca fica diferente do que está no ar.
 {
   const linhas = Object.entries(cfg.whatsapp.origens || {}).map(([origem, o]) =>
-    `| https://${cfg.whatsappSubdominio}/${origem} | ${o.onde} | ${o.para} | ${cfg.whatsapp[o.texto]} |`);
+    `| https://${cfg.whatsappSubdominio}/${origem} | ${o.onde} | ${o.para} | ${cfg.whatsapp[o.texto]} | ${o.sinal || ''} |`);
   await writeFile(path.join(raiz, 'docs/links-whatsapp.md'),
     `# Links públicos de WhatsApp\n\n` +
     `Gerado por scripts/build.mjs a partir de site.config.json. Não editar à mão: mude o arquivo de configuração.\n\n` +
     `Regra: fora do site e no próprio site, use sempre estes endereços, nunca o link wa.me direto. Trocar o número em\n` +
-    `site.config.json atualiza todos de uma vez. Cada acesso é contado no Umami como evento "whatsapp-<origem>".\n\n` +
-    `| Link | Onde usar | Para que serve | Mensagem pronta que aparece no WhatsApp |\n|---|---|---|---|\n` +
+    `site.config.json atualiza todos de uma vez. Cada acesso é contado no Umami como evento "whatsapp-<origem>".\n` +
+    `A mensagem não diz de onde a pessoa veio; o sinal é uma palavra-chave discreta que só o Filipe conhece.\n` +
+    `Página com esta tabela (privada, do Filipe): https://claude.ai/artifact/LT4bHRpJ5iJhwrQgn2p1SM\n\n` +
+    `| Link | Onde usar | Para que serve | Mensagem pronta que aparece no WhatsApp | Sinal (como o Filipe reconhece a origem) |\n|---|---|---|---|---|\n` +
     linhas.join('\n') +
     `\n\nO endereço sem nada depois (https://${cfg.whatsappSubdominio}) ou com um caminho que não está na tabela\n` +
     `abre o WhatsApp com a mensagem do site ("${cfg.whatsapp.textoGeral}").\n`);

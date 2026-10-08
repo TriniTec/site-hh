@@ -1,0 +1,130 @@
+<title>Links de WhatsApp da HH</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Manrope:wght@400;600&display=swap">
+<style>
+/* Layout: uma coluna de leitura com a tabela como peça central; no celular, cada linha vira um cartão. */
+:root { --fundo: #FFF7E7; --texto: #082B61; --suave: #4a5d80; --linha: #e6d9bd; --laranja: #C2600C; --ouro: #D6A332; --cartao: #ffffff; --chip-site: #f6e7c4; --chip-fora: #fde3cc;
+  --t: "DM Sans", system-ui, sans-serif; --c: Manrope, system-ui, sans-serif; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --fundo: #061F47; --texto: #FFF7E7; --suave: #c3cde0; --linha: #23406f; --laranja: #F39A4C; --ouro: #FECD41; --cartao: #0b2a5c; --chip-site: #234a7d; --chip-fora: #5a3a1c; color-scheme: dark } }
+:root[data-theme="dark"] { --fundo: #061F47; --texto: #FFF7E7; --suave: #c3cde0; --linha: #23406f; --laranja: #F39A4C; --ouro: #FECD41; --cartao: #0b2a5c; --chip-site: #234a7d; --chip-fora: #5a3a1c; color-scheme: dark }
+body { background: var(--fundo); color: var(--texto); font-family: var(--c); font-size: 16px; line-height: 1.55; padding-inline: 16px; padding-block: 40px 64px; }
+main { max-width: 1080px; margin: 0 auto; display: grid; gap: 28px; }
+h1, h2 { font-family: var(--t); font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.1; }
+h1 span { color: var(--laranja); }
+h2 { font-size: 1.25rem; }
+p { margin: 0; max-width: 68ch; }
+.olho { font-family: var(--t); font-weight: 700; font-size: .75rem; letter-spacing: .16em; text-transform: uppercase; color: var(--laranja); }
+.topo { display: grid; gap: 12px; }
+.regra { border-left: 0; background: var(--cartao); border-radius: 14px; padding: 18px 20px; display: grid; gap: 6px; box-shadow: 0 1px 0 var(--linha); }
+.regra b { font-family: var(--t); }
+.tabela { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; background: var(--cartao); border-radius: 14px; overflow: hidden; }
+th, td { text-align: left; vertical-align: top; padding: 14px 16px; border-bottom: 1px solid var(--linha); }
+th { font-family: var(--t); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--suave); font-weight: 700; }
+tr:last-child td { border-bottom: 0; }
+code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .85rem; word-break: break-all; }
+code b { color: var(--laranja); }
+.link { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.copiar { font: 600 .8rem var(--c); color: var(--texto); background: transparent; border: 1px solid var(--linha); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.copiar:hover, .copiar:focus-visible { border-color: var(--laranja); outline: none; }
+.chip { display: inline-block; font: 700 .7rem var(--t); letter-spacing: .08em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; margin: 0 8px 4px 0; }
+.chip--site { background: var(--chip-site); } .chip--fora { background: var(--chip-fora); }
+q { quotes: "\201C" "\201D"; font-style: italic; }
+.notas { display: grid; gap: 14px; }
+.notas ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; max-width: 72ch; }
+@media (max-width: 760px) {
+  table, tbody, tr, td { display: block; width: 100%; } thead { display: none; }
+  table { background: transparent; } tr { background: var(--cartao); border-radius: 14px; margin-bottom: 12px; padding: 6px 0; }
+  td { border: 0; padding: 8px 16px; } td::before { content: attr(data-rotulo); display: block; font: 700 .7rem var(--t); letter-spacing: .12em; text-transform: uppercase; color: var(--suave); margin-bottom: 2px; }
+}
+</style>
+<main>
+  <header class="topo">
+    <p class="olho">Harmonização Humana · mapa</p>
+    <h1>Links de WhatsApp <span>da Harmonização Humana</span></h1>
+    <p>Todo contato pelo WhatsApp passa por um endereço da Harmonização Humana. Cada link abre o WhatsApp do Filipe com uma mensagem pronta, diferente para cada origem. O número fica guardado num lugar só, no site: se ele mudar, todos os links abaixo continuam funcionando, sem trocar nada nas plataformas.</p>
+  </header>
+  <div class="regra"><b>Regra</b><p>Nunca usar o link direto do WhatsApp (wa.me) em lugar nenhum. Sempre um destes endereços.</p></div>
+  <section aria-labelledby="t-links" style="display:grid;gap:12px">
+    <h2 id="t-links">Os links</h2>
+    <div class="tabela"><table>
+      <thead><tr><th>Link</th><th>Onde usar</th><th>Para que serve</th><th>Mensagem pronta no WhatsApp</th><th>Sinal</th></tr></thead>
+      <tbody>
+      <tr>
+        <td data-rotulo="Link"><div class="link"><code>whatsapp.harmonizacaohumana.com.br/<b>site</b></code><button type="button" class="copiar" data-texto="https://whatsapp.harmonizacaohumana.com.br/site" aria-label="Copiar o link site">Copiar</button></div></td>
+        <td data-rotulo="Onde usar"><span class="chip chip--site">No site</span>botões &quot;Quero conversar&quot; (topo, Home, Sobre, chamada final, botão fixo do celular, rodapé)</td>
+        <td data-rotulo="Para que serve">Conversa geral, de quem conheceu pelo site</td>
+        <td data-rotulo="Mensagem pronta"><q>Oi Filipe! Quero saber mais sobre a Harmonização Humana :)</q></td>
+        <td data-rotulo="Sinal"><b>&quot;saber mais&quot;</b></td>
+      </tr>
+      <tr>
+        <td data-rotulo="Link"><div class="link"><code>whatsapp.harmonizacaohumana.com.br/<b>sessao</b></code><button type="button" class="copiar" data-texto="https://whatsapp.harmonizacaohumana.com.br/sessao" aria-label="Copiar o link sessao">Copiar</button></div></td>
+        <td data-rotulo="Onde usar"><span class="chip chip--site">No site</span>botão do cartão &quot;Sessão individual&quot; (página A Jornada)</td>
+        <td data-rotulo="Para que serve">Interesse na sessão individual</td>
+        <td data-rotulo="Mensagem pronta"><q>Oi Filipe! Tenho interesse na sessão individual. Pode me contar mais? :)</q></td>
+        <td data-rotulo="Sinal"><b>&quot;sessão individual&quot;</b></td>
+      </tr>
+      <tr>
+        <td data-rotulo="Link"><div class="link"><code>whatsapp.harmonizacaohumana.com.br/<b>jornada</b></code><button type="button" class="copiar" data-texto="https://whatsapp.harmonizacaohumana.com.br/jornada" aria-label="Copiar o link jornada">Copiar</button></div></td>
+        <td data-rotulo="Onde usar"><span class="chip chip--site">No site</span>botões do cartão &quot;A Jornada&quot; e &quot;Quero fazer a Jornada&quot; (página A Jornada)</td>
+        <td data-rotulo="Para que serve">Interesse na Jornada de 10 semanas</td>
+        <td data-rotulo="Mensagem pronta"><q>Oi Filipe! Tenho interesse na Jornada. Pode me contar mais? :)</q></td>
+        <td data-rotulo="Sinal"><b>&quot;Jornada&quot;</b></td>
+      </tr>
+      <tr>
+        <td data-rotulo="Link"><div class="link"><code>whatsapp.harmonizacaohumana.com.br/<b>mensagem</b></code><button type="button" class="copiar" data-texto="https://whatsapp.harmonizacaohumana.com.br/mensagem" aria-label="Copiar o link mensagem">Copiar</button></div></td>
+        <td data-rotulo="Onde usar"><span class="chip chip--site">No site</span>botão &quot;Pedir uma Mensagem&quot; (página A Jornada). Também serve para divulgar a Mensagem fora do site</td>
+        <td data-rotulo="Para que serve">Pedido da Mensagem em áudio</td>
+        <td data-rotulo="Mensagem pronta"><q>Oi Filipe! Quero pedir uma Mensagem :)</q></td>
+        <td data-rotulo="Sinal"><b>&quot;pedir uma Mensagem&quot;</b></td>
+      </tr>
+      <tr>
+        <td data-rotulo="Link"><div class="link"><code>whatsapp.harmonizacaohumana.com.br/<b>instagram</b></code><button type="button" class="copiar" data-texto="https://whatsapp.harmonizacaohumana.com.br/instagram" aria-label="Copiar o link instagram">Copiar</button></div></td>
+        <td data-rotulo="Onde usar"><span class="chip chip--fora">Fora do site</span>link da bio (e onde mais o Instagram pedir link de WhatsApp)</td>
+        <td data-rotulo="Para que serve">Conversa geral, de quem veio pelo Instagram</td>
+        <td data-rotulo="Mensagem pronta"><q>Oi Filipe! Quero conhecer melhor a Harmonização Humana :)</q></td>
+        <td data-rotulo="Sinal"><b>&quot;conhecer melhor&quot;</b></td>
+      </tr>
+      <tr>
+        <td data-rotulo="Link"><div class="link"><code>whatsapp.harmonizacaohumana.com.br/<b>youtube</b></code><button type="button" class="copiar" data-texto="https://whatsapp.harmonizacaohumana.com.br/youtube" aria-label="Copiar o link youtube">Copiar</button></div></td>
+        <td data-rotulo="Onde usar"><span class="chip chip--fora">Fora do site</span>reservado (descrição do canal ou dos vídeos, quando for usar)</td>
+        <td data-rotulo="Para que serve">Conversa geral, de quem veio pelo YouTube</td>
+        <td data-rotulo="Mensagem pronta"><q>Oi Filipe! Gostaria de saber mais sobre a Harmonização Humana :)</q></td>
+        <td data-rotulo="Sinal"><b>&quot;Gostaria&quot;</b></td>
+      </tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section class="notas" aria-labelledby="t-sinal">
+    <h2 id="t-sinal">Como saber de onde a pessoa veio</h2>
+    <p>A mensagem não diz de onde a pessoa veio. Cada origem tem uma palavra-chave discreta, que só a gente conhece:</p>
+    <ul>
+      <li><b>&quot;saber mais&quot;</b> → site (botões gerais)</li>
+      <li><b>&quot;sessão individual&quot;</b> → cartão da sessão individual</li>
+      <li><b>&quot;Jornada&quot;</b> → cartão da Jornada</li>
+      <li><b>&quot;pedir uma Mensagem&quot;</b> → botão da Mensagem</li>
+      <li><b>&quot;conhecer melhor&quot;</b> → Instagram</li>
+      <li><b>&quot;Gostaria&quot;</b> → YouTube</li>
+    </ul>
+    <p>Se a pessoa reescrever a mensagem inteira, o sinal se perde. Na maioria dos casos ela só toca em enviar.</p>
+  </section>
+  <section class="notas" aria-labelledby="t-notas">
+    <h2 id="t-notas">Como funciona</h2>
+    <ul>
+      <li><b>Endereço sem nada depois</b> (<code>whatsapp.harmonizacaohumana.com.br</code>) ou com um final que não está na tabela, como um erro de digitação: abre o WhatsApp com a mensagem do site, <q>Oi Filipe! Quero saber mais sobre a Harmonização Humana :)</q>. Ninguém cai numa página de erro.</li>
+      <li><b>Contagem:</b> cada acesso aparece no Umami, em Eventos, como <code>whatsapp-site</code>, <code>whatsapp-instagram</code> e assim por diante. Sem cookie e sem guardar nada da pessoa.</li>
+      <li><b>Trocar o número ou uma mensagem:</b> pedir na conversa do site. Muda em um arquivo só (site.config.json) e vale para todos os links na hora em que o site é publicado.</li>
+      <li><b>Link novo</b> (por exemplo, para um evento ou uma campanha): pedir na conversa do site, com o nome do final do link e a mensagem pronta.</li>
+    </ul>
+  </section>
+</main>
+<script>
+document.querySelectorAll(".copiar").forEach(function (b) {
+  b.addEventListener("click", function () {
+    var t = b.getAttribute("data-texto");
+    var ok = function () { b.textContent = "Copiado"; setTimeout(function () { b.textContent = "Copiar"; }, 1600); };
+    var falhou = function () { var r = document.createRange(); r.selectNodeContents(b.previousElementSibling); var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); b.textContent = "Selecionado, copie"; };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(ok, falhou); else falhou();
+  });
+});
+</script>

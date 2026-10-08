@@ -25,8 +25,10 @@ As três últimas lives (`data/lives.json`) se atualizam sozinhas: o GitHub roda
 ## WhatsApp por origem
 
 Todo link de WhatsApp, no site e fora dele, é `whatsapp.harmonizacaohumana.com.br/<origem>`, nunca o wa.me
-direto. O mapa completo (link, onde usar, para que serve, mensagem pronta) está em `docs/links-whatsapp.md`,
-gerado no build a partir de `site.config.json`. Trocar o número ali atualiza todos os links de uma vez.
+direto. O mapa completo (link, onde usar, para que serve, mensagem pronta e o sinal de cada origem) está em
+`docs/links-whatsapp.md`, gerado no build a partir de `site.config.json`. A mesma tabela, como página, é o artifact
+https://claude.ai/artifact/LT4bHRpJ5iJhwrQgn2p1SM (privado, fixado na barra lateral do Filipe no claude.ai): ao mudar
+links ou mensagens, rodar `node scripts/mapa-whatsapp.mjs` e republicar `docs/links-whatsapp.html` nesse link. Trocar o número ali atualiza todos os links de uma vez.
 A função fica em `netlify/edge-functions/whatsapp/`: redireciona (302) e conta cada acesso no Umami como
 evento `whatsapp-<origem>`, sem cookie. Nova origem: acrescente em `whatsapp.origens` e o caminho em
 `config.path` da função. Para testar: GitHub → Actions → "Conferir links do WhatsApp".

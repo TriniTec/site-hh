@@ -24,4 +24,9 @@ A tarefa diária das lives faz commits no `main`: antes de enviar, trazer o `mai
 Imagens: quando uma parte pedir imagem nova, deixar o lugar reservado no site (`.imagem-reservada`) e
 escrever o prompt em `docs/imagens-a-gerar.md`; o Filipe pede ao Aruan.
 
+WhatsApp: todo link (no site e fora dele) é whatsapp.harmonizacaohumana.com.br/<origem>, nunca wa.me direto.
+Mensagens e origens em site.config.json; mensagem nova ou alterada passa pela regra de ouro dos textos.
+Ao mudar, atualizar também a página do mapa (artifact https://claude.ai/artifact/LT4bHRpJ5iJhwrQgn2p1SM),
+gerada por scripts/mapa-whatsapp.mjs.
+
 Como mexer no site: ver README.md.

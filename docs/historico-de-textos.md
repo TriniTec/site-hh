@@ -114,3 +114,5 @@ A origem já é contada pelo link no Umami; a mensagem fica na voz da pessoa.
 | /sessao | 08/10 | Oi Filipe, vim pelo site e tenho interesse na sessão individual | Oi Filipe! Tenho interesse na sessão individual. Pode me contar mais? :) | Filipe (opção A) |
 | /jornada | 08/10 | Oi Filipe, vim pelo site e tenho interesse na Jornada | Oi Filipe! Tenho interesse na Jornada. Pode me contar mais? :) | Filipe (opção A) |
 | /mensagem | 08/10 | Oi Filipe, queria pedir uma Mensagem | Oi Filipe! Quero pedir uma Mensagem :) | Filipe (opção A) |
+| /instagram | 08/10 | Oi Filipe, vim pelo Instagram e queria saber mais sobre a Harmonização Humana | Oi Filipe! Quero conhecer melhor a Harmonização Humana :) | Filipe (sinal "conhecer melhor") |
+| /youtube | 08/10 | Oi Filipe, vim pelo YouTube e queria saber mais sobre a Harmonização Humana | Oi Filipe! Gostaria de saber mais sobre a Harmonização Humana :) | Filipe (sinal "Gostaria") |
