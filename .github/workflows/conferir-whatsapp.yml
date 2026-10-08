@@ -21,12 +21,14 @@ jobs:
           celular='Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1'
           computador='Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36'
           falhou=0
+          # A raiz só redireciona no subdomínio; no domínio principal ela é o site.
           for caminho in /site /instagram /youtube /mensagem /; do
             for nome in celular computador; do
               ua=${!nome}
-              linha=$(curl -s -o /dev/null -A "$ua" -w '%{http_code} %{redirect_url}' "$BASE$caminho")
+              linha=$(curl -s -o /dev/null -A "$ua" -w '%{http_code} %{redirect_url}' "$BASE$caminho" || true)
               codigo=${linha%% *}; destino=${linha#* }
-              final=$(curl -sL -o /dev/null -A "$ua" -w '%{http_code}' "$destino")
+              if [ -z "$destino" ]; then echo "$caminho ($nome): $codigo, sem redirecionamento"; [ "$caminho" = "/" ] || falhou=1; continue; fi
+              final=$(curl -sL -o /dev/null -A "$ua" -w '%{http_code}' "$destino" || echo erro)
               echo "$caminho ($nome): $codigo → $(python3 -c 'import sys,urllib.parse;print(urllib.parse.unquote(sys.argv[1]))' "$destino") (wa.me respondeu $final)"
               case "$destino" in https://wa.me/*) ;; *) falhou=1 ;; esac
               [ "$codigo" = "302" ] || falhou=1
