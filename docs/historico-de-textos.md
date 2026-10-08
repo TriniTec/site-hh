@@ -102,3 +102,15 @@ Etiquetas em todas as versões: "Recomendada" e "10 sessões · 1 por semana". F
 | /instagram | Oi Filipe, vim pelo Instagram e queria saber mais sobre a Harmonização Humana | Novo, no mesmo molde do texto do site; redação Claude |
 | /youtube | Oi Filipe, vim pelo YouTube e queria saber mais sobre a Harmonização Humana | Novo, no mesmo molde do texto do site; redação Claude |
 | /mensagem | Oi Filipe, queria pedir uma Mensagem | Mesmo texto do botão "Pedir uma Mensagem" (já existia) |
+
+
+## Mensagens prontas do WhatsApp: versão sem "vim pelo…" (08/10)
+
+A origem já é contada pelo link no Umami; a mensagem fica na voz da pessoa.
+
+| Link | Data | Antes | Depois | Pedido por |
+|---|---|---|---|---|
+| /site | 08/10 | Oi Filipe, vim pelo site e queria saber mais sobre a Harmonização Humana | Oi Filipe! Quero saber mais sobre a Harmonização Humana :) | Filipe (opção A) |
+| /sessao | 08/10 | Oi Filipe, vim pelo site e tenho interesse na sessão individual | Oi Filipe! Tenho interesse na sessão individual. Pode me contar mais? :) | Filipe (opção A) |
+| /jornada | 08/10 | Oi Filipe, vim pelo site e tenho interesse na Jornada | Oi Filipe! Tenho interesse na Jornada. Pode me contar mais? :) | Filipe (opção A) |
+| /mensagem | 08/10 | Oi Filipe, queria pedir uma Mensagem | Oi Filipe! Quero pedir uma Mensagem :) | Filipe (opção A) |
