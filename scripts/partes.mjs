@@ -4,6 +4,16 @@
 export const esc = (s = '') =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+// Endereços do WhatsApp por origem (whatsapp.harmonizacaohumana.com.br/instagram etc.): origem → link wa.me.
+// Saem do mesmo site.config.json que os botões do site; o build grava isso para a função do Netlify.
+export function whatsappOrigens(cfg) {
+  const destinos = {};
+  for (const [origem, chave] of Object.entries(cfg.whatsapp.origens || {})) {
+    destinos[origem] = `https://wa.me/${cfg.whatsapp.numero}?text=${encodeURIComponent(cfg.whatsapp[chave])}`;
+  }
+  return destinos;
+}
+
 export function links(cfg) {
   const wa = (texto) => `https://wa.me/${cfg.whatsapp.numero}?text=${encodeURIComponent(texto)}`;
   return {

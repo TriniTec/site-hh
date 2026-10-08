@@ -2,7 +2,7 @@
 import { readFile, writeFile, mkdir, cp, rm } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { pagina, links } from './partes.mjs';
+import { pagina, links, whatsappOrigens } from './partes.mjs';
 import inicio from '../paginas/inicio.mjs';
 import aJornada from '../paginas/a-jornada.mjs';
 import sobre from '../paginas/sobre.mjs';
@@ -111,3 +111,18 @@ if (!cfg.umamiWebsiteId) avisos.push('Umami: umamiWebsiteId vazio em site.config
 
 console.log(`Site montado em dist/ (${paginas.length} páginas).`);
 if (avisos.length) console.log('Pendências:\n- ' + avisos.join('\n- '));
+
+// WhatsApp por origem: whatsapp.harmonizacaohumana.com.br/site, /instagram, /youtube, /mensagem.
+// A função do Netlify (netlify/edge-functions/whatsapp/) lê estes destinos, conta o acesso no Umami e
+// redireciona (302). A raiz do subdomínio e qualquer outro caminho vão para a mensagem geral do site.
+const destinos = whatsappOrigens(cfg);
+await writeFile(path.join(raiz, 'netlify/edge-functions/whatsapp/destinos.js'),
+  `// Gerado por scripts/build.mjs a partir de site.config.json. Não editar à mão.\n` +
+  `export const destinos = ${JSON.stringify(destinos, null, 2)};\n` +
+  `export const umamiWebsiteId = ${JSON.stringify(cfg.umamiWebsiteId || '')};\n` +
+  `export const subdominio = ${JSON.stringify(cfg.whatsappSubdominio || '')};\n`);
+if (cfg.whatsappSubdominio) {
+  await writeFile(path.join(dist, '_redirects'),
+    `# Gerado por scripts/build.mjs. Raiz e caminhos desconhecidos do subdomínio do WhatsApp: mensagem geral.\n` +
+    `https://${cfg.whatsappSubdominio}/* ${destinos.site || L.whatsapp} 302!\n`);
+}

@@ -8,7 +8,15 @@
     "textoGeral": "Oi Filipe, vim pelo site e queria saber mais sobre a Harmonização Humana",
     "textoMensagem": "Oi Filipe, queria pedir uma Mensagem",
     "textoSessao": "Oi Filipe, vim pelo site e tenho interesse na sessão individual",
-    "textoJornada": "Oi Filipe, vim pelo site e tenho interesse na Jornada"
+    "textoJornada": "Oi Filipe, vim pelo site e tenho interesse na Jornada",
+    "textoInstagram": "Oi Filipe, vim pelo Instagram e queria saber mais sobre a Harmonização Humana",
+    "textoYoutube": "Oi Filipe, vim pelo YouTube e queria saber mais sobre a Harmonização Humana",
+    "origens": {
+      "site": "textoGeral",
+      "instagram": "textoInstagram",
+      "youtube": "textoYoutube",
+      "mensagem": "textoMensagem"
+    }
   },
   "youtube": "https://www.youtube.com/@FilipeMorgadoHH",
   "instagram": "https://www.instagram.com/filipemorgado.hh",
@@ -16,5 +24,6 @@
   "umamiWebsiteId": "471706c0-02ee-4b80-b339-d50430243247",
   "mensagemPrazo": "Entrega em geral em um ou dois dias úteis.",
   "playlistDepoimentos": "PLC8ZTQBtxNkk",
-  "apresentacaoPdf": ""
+  "apresentacaoPdf": "",
+  "whatsappSubdominio": "whatsapp.harmonizacaohumana.com.br"
 }

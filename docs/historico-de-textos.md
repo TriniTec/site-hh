@@ -93,3 +93,12 @@ Etiquetas em todas as versões: "Recomendada" e "10 sessões · 1 por semana". F
 |---|---|---|---|---|
 | 1 | 01/10 | Este trabalho não substitui acompanhamento médico, psicológico ou psiquiátrico, nem outros cuidados profissionais de saúde. Não são feitas promessas de cura ou garantia de resultados. | Texto do documento 02 (no llms.txt havia uma versão curta, sem "nem outros cuidados profissionais de saúde") | Documento 02 |
 | 2 | 07/10 | Este trabalho não substitui o acompanhamento de médicos, psicólogos, psiquiatras e de outros profissionais de saúde. Não são feitas promessas de cura ou garantia de resultados. | Primeira frase reescrita; a segunda não muda. O llms.txt passa a ter o aviso completo | Filipe |
+
+## Mensagens prontas do WhatsApp por origem (07/10, para revisão do Filipe)
+
+| Origem | Texto inteiro | Pedido por |
+|---|---|---|
+| /site | Oi Filipe, vim pelo site e queria saber mais sobre a Harmonização Humana | Mesmo texto do botão geral do site (já existia) |
+| /instagram | Oi Filipe, vim pelo Instagram e queria saber mais sobre a Harmonização Humana | Novo, no mesmo molde do texto do site; redação Claude |
+| /youtube | Oi Filipe, vim pelo YouTube e queria saber mais sobre a Harmonização Humana | Novo, no mesmo molde do texto do site; redação Claude |
+| /mensagem | Oi Filipe, queria pedir uma Mensagem | Mesmo texto do botão "Pedir uma Mensagem" (já existia) |
