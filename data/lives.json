@@ -1,7 +1,15 @@
 [
   {
+    "videoId": "QJxZ7OfO2Ck",
+    "titulo": "Leitura Energética Ao Vivo · Autoleitura · Ep 05",
+    "data": "2026-10-15",
+    "dataExtenso": "15 de outubro de 2026",
+    "miniatura": "/img/lives/QJxZ7OfO2Ck.jpg",
+    "inicio": "2026-10-15T22:00:00.000Z"
+  },
+  {
     "videoId": "SS-kdCXqt14",
-    "titulo": "Leitura energética ao vivo — Autoleitura · Ep 04",
+    "titulo": "Leitura Energética Ao Vivo: Do Calabouço à Decapitação · Ep 04",
     "data": "2026-10-08",
     "dataExtenso": "8 de outubro de 2026",
     "miniatura": "/img/lives/SS-kdCXqt14.jpg",
@@ -14,13 +22,5 @@
     "dataExtenso": "1 de outubro de 2026",
     "miniatura": "/img/lives/6PgcjB3dUp4.jpg",
     "guia": "https://drive.google.com/file/d/1pwrZfsQ6gd_y_4gAFkRFL6bw5r3S4_cZ/view"
-  },
-  {
-    "videoId": "OPoIDaSE4Qw",
-    "titulo": "Leitura Energética Ao Vivo: Vontade de Desistir, Novo Começo · Ep 02",
-    "data": "2026-09-24",
-    "dataExtenso": "24 de setembro de 2026",
-    "miniatura": "/img/lives/OPoIDaSE4Qw.jpg",
-    "guia": "https://drive.google.com/file/d/1BqtPzozQ85VCy0q0k2Dq_YRFzvY9uxDu/view"
   }
 ]
