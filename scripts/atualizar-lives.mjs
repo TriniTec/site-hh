@@ -4,7 +4,8 @@
 //
 // Dois caminhos: primeiro o feed público da playlist; se o YouTube não entregar o feed (aconteceu com
 // os IDs curtos destas playlists: 404), lê a página pública da playlist, a mesma que se abre no navegador.
-import { readFile, writeFile, readdir, rm, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, readdir, rm, mkdir, access } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
@@ -98,6 +99,22 @@ function linkCompleto(p, curto) {
   return [...alvos, ...diretos].find((u) => u.startsWith(inicio)) ?? null;
 }
 
+// Miniatura: baixada em toda execução, porque o YouTube troca a imagem (a da live agendada muda depois que
+// ela vai ao ar). O nome do arquivo leva um pedaço da impressão digital da imagem: imagem nova, nome novo,
+// e o navegador não fica preso à antiga guardada em cache.
+async function miniatura(videoId) {
+  for (const nome of ['hqdefault.jpg', 'mqdefault.jpg']) {
+    const r = await fetch(`https://i.ytimg.com/vi/${videoId}/${nome}`, { headers: { 'cache-control': 'no-cache' } });
+    if (!r.ok) continue;
+    const bytes = Buffer.from(await r.arrayBuffer());
+    const arquivo = `${videoId}-${createHash('sha1').update(bytes).digest('hex').slice(0, 8)}.jpg`;
+    await mkdir(pastaMini, { recursive: true });
+    try { await access(path.join(pastaMini, arquivo)); } catch { await writeFile(path.join(pastaMini, arquivo), bytes); }
+    return `/img/lives/${arquivo}`;
+  }
+  throw new Error(`Miniatura de ${videoId} não encontrada`);
+}
+
 async function dataDaLive(videoId) {
   for (let tentativa = 1; tentativa <= 3; tentativa++) {
     const r = await fetch(`https://www.youtube.com/watch?v=${videoId}&hl=pt-BR&bpctr=9999999999&has_verified=1`, { headers: cabecalhos });
@@ -140,7 +157,7 @@ for (const e of entradas.slice(0, 3)) {
     titulo: e.titulo,
     data: quando ? diaSP(quando) : antes.data,
     dataExtenso: quando ? extenso(quando) : antes.dataExtenso,
-    miniatura: `/img/lives/${e.videoId}.jpg`,
+    miniatura: await miniatura(e.videoId),
     // Horário exato da transmissão: o site mostra a etiqueta "Ao vivo…" enquanto ela não aconteceu
     ...(inicio && new Date(inicio) > new Date() ? { inicio: new Date(inicio).toISOString() } : {}),
     ...(!quando && antes.inicio ? { inicio: antes.inicio } : {}),
@@ -150,23 +167,12 @@ for (const e of entradas.slice(0, 3)) {
 console.log(`Encontradas ${entradas.length} lives; as três mais novas:\n` + novas.map((l) => `- ${l.dataExtenso}: ${l.titulo}${l.guia ? `\n  guia: ${l.guia}` : ''}`).join('\n'));
 
 if (JSON.stringify(atuais) === JSON.stringify(novas)) {
-  console.log('Nenhuma live nova.');
+  console.log('Nada mudou (lives, datas, guias e miniaturas iguais).');
   process.exit(0);
 }
 
-await mkdir(pastaMini, { recursive: true });
-for (const l of novas) {
-  let ok = false;
-  for (const nome of ['hqdefault.jpg', 'mqdefault.jpg']) {
-    const r = await fetch(`https://i.ytimg.com/vi/${l.videoId}/${nome}`);
-    if (!r.ok) continue;
-    await writeFile(path.join(pastaMini, `${l.videoId}.jpg`), Buffer.from(await r.arrayBuffer()));
-    ok = true; break;
-  }
-  if (!ok) throw new Error(`Miniatura de ${l.videoId} não encontrada`);
-}
-// Apaga miniaturas que saíram da lista
-const manter = new Set(novas.map((l) => `${l.videoId}.jpg`));
+// Apaga miniaturas que saíram da lista ou foram trocadas por uma imagem nova
+const manter = new Set(novas.map((l) => path.basename(l.miniatura)));
 for (const f of await readdir(pastaMini)) if (f.endsWith('.jpg') && !manter.has(f)) await rm(path.join(pastaMini, f));
 
 await writeFile(arqLives, JSON.stringify(novas, null, 2) + '\n');

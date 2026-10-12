@@ -20,7 +20,8 @@ Referências: documento 02 (briefing e textos, v1.10), documento 06 (identidade 
 | Cores, tamanhos, espaços | `src/css/site.css` |
 
 As três últimas lives (`data/lives.json`) se atualizam sozinhas: o GitHub roda
-`scripts/atualizar-lives.mjs` todo dia às 8h e só publica quando entrou live nova.
+`scripts/atualizar-lives.mjs` todo dia às 8h e só publica quando algo mudou: live nova, ordem, data, guia ou
+miniatura (a imagem é baixada de novo todo dia, porque o YouTube troca a da live agendada depois que ela vai ao ar).
 
 ## WhatsApp por origem
 
