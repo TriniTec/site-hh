@@ -1,5 +1,41 @@
 # Site da Harmonização Humana · orientações
 
+Este arquivo é lido sozinho no começo de toda conversa sobre este repositório. Ele é o ponto de partida:
+leia-o, e só abra outros arquivos quando a tarefa pedir. Com quem falar: o Filipe Morgado (dono do projeto),
+sempre em português, em linguagem simples, sem jargão técnico, uma coisa de cada vez.
+
+## O projeto em 1 minuto
+
+- **O que é:** site da Harmonização Humana (leitura energética e transformação), de Filipe Morgado.
+  No ar em https://harmonizacaohumana.com.br. Três páginas: Início, A Jornada (formatos: Mensagem, sessão
+  individual e Jornada de 10 semanas) e Sobre. Versão visual "Solar". Versão 1 fechada em 06/10/2026.
+- **Como funciona:** site estático, Node 22 sem dependências. `node scripts/build.mjs` monta `dist/` a partir de
+  `paginas/*.mjs` (textos em HTML), `scripts/partes.mjs` (topo, rodapé, head) e `site.config.json`
+  (valores únicos: WhatsApp, links, Umami). Estilo em `src/css/site.css`; comportamento em `src/js/site.js`.
+- **Publicação:** o Netlify publica o `main` a cada envio (projeto "harmonizacaohumana"). DNS no Registro.br.
+  leituraenergetica.com.br (com e sem www) redireciona para o domínio principal (`netlify.toml`).
+- **Automático (GitHub Actions):** "Atualizar lives" (todo dia 8h: as 3 lives da playlist PLQbbN3rDJtEM, na ordem
+  da playlist, com data da transmissão, etiqueta da live agendada, guia em PDF lido da descrição do vídeo e
+  miniatura baixada de novo todo dia). Manuais: "Conferir texto no ar", "Conferir links do WhatsApp",
+  "Teste de velocidade" (relatório em `docs/velocidade.md`).
+- **WhatsApp:** função do Netlify em `netlify/edge-functions/whatsapp/`, no subdomínio
+  whatsapp.harmonizacaohumana.com.br (ver a seção WhatsApp abaixo e o README).
+- **Estatística:** Umami, sem cookies (cliques nos botões e acessos a cada link de WhatsApp como eventos).
+- **Busca:** Google Search Console (propriedade de domínio) e Bing com o sitemap enviado (12/10/2026).
+- **Design System** (cores, fontes, componentes, regras de linguagem):
+  https://claude.ai/artifact/7YVsRVReoy3F5L5yWbi4gg. Quando o site e ele divergirem, o site vale e o DS é atualizado.
+- **Pendências:** lista "Para fazer depois" no README (PDF de apresentação esperando revisão do Filipe, fotos
+  para o Aruan, versão com mais respiro, modo noite).
+
+## Como trabalhar
+
+- Antes de mexer: `git pull origin main` (a tarefa das lives faz commits sozinha). Envie só para o `main`.
+- Teste local: `node scripts/build.mjs` e `node scripts/serve.mjs` (http://localhost:8080). Este ambiente não
+  abre o site no ar nem o YouTube: para conferir o que está publicado, rode no GitHub as tarefas "Conferir…".
+- Mudança pequena e direta: faça, confira, envie e diga em poucas linhas o que mudou. Texto novo ou mudança em
+  texto revisado: mostre antes e depois e espere o "pode" do Filipe.
+- Commits em português, descrevendo o que muda para quem usa o site.
+
 ## Regra de ouro dos textos
 
 **Texto que o Filipe já revisou não muda sem ele pedir.** Se surgir uma sugestão de mudança num texto
