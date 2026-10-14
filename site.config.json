@@ -47,8 +47,15 @@
         "onde": "YouTube: reservado (descrição do canal ou dos vídeos, quando for usar)",
         "para": "Conversa geral, de quem veio pelo YouTube",
         "sinal": "\"Gostaria\""
+      },
+      "live": {
+        "texto": "textoLive",
+        "onde": "YouTube: chat das lives (o contato que o Filipe deixa no fim da live)",
+        "para": "Conversa com quem assistiu a uma live",
+        "sinal": "\"conversar com você\""
       }
-    }
+    },
+    "textoLive": "Oi Filipe! Quero conversar com você :)"
   },
   "youtube": "https://www.youtube.com/@FilipeMorgadoHH",
   "instagram": "https://www.instagram.com/filipemorgado.hh",

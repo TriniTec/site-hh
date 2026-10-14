@@ -116,3 +116,4 @@ A origem já é contada pelo link no Umami; a mensagem fica na voz da pessoa.
 | /mensagem | 08/10 | Oi Filipe, queria pedir uma Mensagem | Oi Filipe! Quero pedir uma Mensagem :) | Filipe (opção A) |
 | /instagram | 08/10 | Oi Filipe, vim pelo Instagram e queria saber mais sobre a Harmonização Humana | Oi Filipe! Quero conhecer melhor a Harmonização Humana :) | Filipe (sinal "conhecer melhor") |
 | /youtube | 08/10 | Oi Filipe, vim pelo YouTube e queria saber mais sobre a Harmonização Humana | Oi Filipe! Gostaria de saber mais sobre a Harmonização Humana :) | Filipe (sinal "Gostaria") |
+| /live | 14/10 | (não existia) | Oi Filipe! Quero conversar com você :) | Filipe pediu o link para o chat das lives; texto proposto por Claude, aguardando aprovação |

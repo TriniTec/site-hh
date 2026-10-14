@@ -37,4 +37,4 @@ export default async (request, context) => {
 };
 
 // Ao criar uma origem nova em site.config.json, acrescente o caminho aqui também.
-export const config = { path: ['/site', '/site/', '/sessao', '/sessao/', '/jornada', '/jornada/', '/mensagem', '/mensagem/', '/instagram', '/instagram/', '/youtube', '/youtube/'] };
+export const config = { path: ['/site', '/site/', '/sessao', '/sessao/', '/jornada', '/jornada/', '/mensagem', '/mensagem/', '/instagram', '/instagram/', '/youtube', '/youtube/', '/live', '/live/'] };
