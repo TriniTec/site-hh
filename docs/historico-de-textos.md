@@ -138,3 +138,12 @@ A origem já é contada pelo link no Umami; a mensagem fica na voz da pessoa.
 |---|---|---|---|---|
 | Frase do topo | 15/10 | Toda quinta, às 19h, tem leitura ao vivo no YouTube. Aqui ficam os guias de cada uma, junto com o vídeo. | Toda quinta, às 19h, tem Leitura Ao Vivo no YouTube. Aqui ficam os guias de cada uma, junto com o vídeo. | Filipe (L, A e V maiúsculos) |
 | Temas dos guias | 15/10 | (sem temas) | Ep 04: Vidas passadas, Medo · Ep 03: Culpa, Arrependimento, Amor-próprio · Ep 02: Recomeço, Medo · Ep 01: Amor-próprio, Exposição | Filipe (cada sentimento é um tema) |
+
+## Mensagens do WhatsApp /live e /guias aprovadas com ajuste (15/10)
+
+| Link | Data | Antes | Depois | Pedido por |
+|---|---|---|---|---|
+| /live | 15/10 | Oi Filipe! Quero conversar com você :) | Oi Filipe! Quero agendar uma sessão com você :) (sinal "agendar uma sessão") | Filipe (quem vem da live já quer agendar) |
+| /guias | 15/10 | Oi Filipe! Quero saber mais sobre as leituras :) | Oi Filipe! Quero saber mais sobre as Leituras :) (sinal "as Leituras") | Filipe (L maiúsculo) |
+
+Textos propostos da página dos guias aprovados pelo Filipe em 15/10.
