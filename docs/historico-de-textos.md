@@ -131,3 +131,10 @@ A origem já é contada pelo link no Umami; a mensagem fica na voz da pessoa.
 | Resumos | Primeiro parágrafo da descrição de cada vídeo no YouTube | Textos do próprio Filipe (descrições) |
 | Fim da página | Mesma chamada final da Home ("Você não precisa saber por onde começar." …) | Texto já aprovado |
 | WhatsApp /guias | Oi Filipe! Quero saber mais sobre as leituras :) (sinal "as leituras") | Filipe pediu um link próprio; texto Claude, proposta |
+
+## Página dos guias: frase com "Leitura Ao Vivo" e temas (15/10)
+
+| Onde | Data | Antes | Depois | Pedido por |
+|---|---|---|---|---|
+| Frase do topo | 15/10 | Toda quinta, às 19h, tem leitura ao vivo no YouTube. Aqui ficam os guias de cada uma, junto com o vídeo. | Toda quinta, às 19h, tem Leitura Ao Vivo no YouTube. Aqui ficam os guias de cada uma, junto com o vídeo. | Filipe (L, A e V maiúsculos) |
+| Temas dos guias | 15/10 | (sem temas) | Ep 04: Vidas passadas, Medo · Ep 03: Culpa, Arrependimento, Amor-próprio · Ep 02: Recomeço, Medo · Ep 01: Amor-próprio, Exposição | Filipe (cada sentimento é um tema) |

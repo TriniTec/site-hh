@@ -45,7 +45,7 @@ export default function guias({ cfg, L, episodios = [] }) {
     <div class="dentro">
       <p class="olho surge">Leituras ao vivo</p>
       <h1 class="surge" style="--atraso:.08s">Guias das leituras <em class="laranja" style="font-style:normal">ao vivo.</em></h1>
-      <p class="lead surge" style="--atraso:.16s">Toda quinta, às 19h, tem leitura ao vivo no YouTube. Aqui ficam os guias de cada uma, junto com o vídeo.</p>
+      <p class="lead surge" style="--atraso:.16s">Toda quinta, às 19h, tem Leitura Ao Vivo no YouTube. Aqui ficam os guias de cada uma, junto com o vídeo.</p>
       <div class="guias-canais surge" style="--atraso:.24s">
         <p class="guias-canais__rotulo">Onde acompanhar as lives</p>
         <ul>
