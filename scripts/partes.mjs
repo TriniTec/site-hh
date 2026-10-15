@@ -24,6 +24,7 @@ export function links(cfg) {
     whatsappMensagem: wa('mensagem'),
     whatsappSessao: wa('sessao'),
     whatsappJornada: wa('jornada'),
+    whatsappGuias: wa('guias'),
     playlist: `https://www.youtube.com/playlist?list=${cfg.playlistLives}`,
     youtube: cfg.youtube,
     instagram: cfg.instagram,

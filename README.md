@@ -23,6 +23,26 @@ As três últimas lives (`data/lives.json`) se atualizam sozinhas: o GitHub roda
 `scripts/atualizar-lives.mjs` todo dia às 8h e só publica quando algo mudou: live nova, ordem, data, guia ou
 miniatura (a imagem é baixada de novo todo dia, porque o YouTube troca a da live agendada depois que ela vai ao ar).
 
+## Guias das leituras ao vivo (/ao-vivo/guias)
+
+Página reservada (fora do menu, do rodapé e do sitemap, com noindex), para o link do direct do Instagram
+(palavra HARMONIA no SendPulse) e do chat da live. Mostra todo episódio que tem guia, do mais novo para o mais
+antigo, com busca por texto e filtro por tema. Link direto para um guia: `/ao-vivo/guias#2026-10-08` (a data).
+
+Os dados ficam em `data/episodios.json`. A tarefa diária das lives preenche sozinha: título, data, link do guia
+(da descrição do vídeo), miniatura do YouTube em WebP e `resumoYoutube` (primeiro parágrafo da descrição).
+À mão, no mesmo arquivo, sem mexer no código:
+
+| Campo | O que é |
+| --- | --- |
+| `resumo` | Resumo próprio para a página. Vazio: usa o `resumoYoutube`. |
+| `carrossel` | Capa do carrossel do Instagram (3:4, WebP, ~600×800) em `src/img/guias/`, ex. `/img/guias/2026-10-08-carrossel.webp`. Vazio: só a miniatura do YouTube. |
+| `carrosselAlt` | Texto alternativo da capa do carrossel. |
+| `categorias` | Lista de temas, ex. `["Vidas passadas", "Medo"]`. Os botões de filtro aparecem sozinhos a partir deles. |
+
+Cliques contados no Umami: `guia-abrir` e `guia-video`, com a data da leitura. O link do direct pode levar
+`?utm_source=instagram&utm_medium=dm` (o Umami lê sozinho).
+
 ## WhatsApp por origem
 
 Todo link de WhatsApp, no site e fora dele, é `whatsapp.harmonizacaohumana.com.br/<origem>`, nunca o wa.me

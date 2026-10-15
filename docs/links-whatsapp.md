@@ -16,6 +16,7 @@ Página com esta tabela (privada, do Filipe): https://claude.ai/artifact/LT4bHRp
 | https://whatsapp.harmonizacaohumana.com.br/instagram | Instagram: link da bio (e onde mais o Instagram pedir link de WhatsApp) | Conversa geral, de quem veio pelo Instagram | Oi Filipe! Quero conhecer melhor a Harmonização Humana :) | "conhecer melhor" |
 | https://whatsapp.harmonizacaohumana.com.br/youtube | YouTube: reservado (descrição do canal ou dos vídeos, quando for usar) | Conversa geral, de quem veio pelo YouTube | Oi Filipe! Gostaria de saber mais sobre a Harmonização Humana :) | "Gostaria" |
 | https://whatsapp.harmonizacaohumana.com.br/live | YouTube: chat das lives (o contato que o Filipe deixa no fim da live) | Conversa com quem assistiu a uma live | Oi Filipe! Quero conversar com você :) | "conversar com você" |
+| https://whatsapp.harmonizacaohumana.com.br/guias | Site: botão no fim da página dos guias das leituras ao vivo (/ao-vivo/guias) | Conversa com quem chegou pelos guias (direct do Instagram, chat da live) | Oi Filipe! Quero saber mais sobre as leituras :) | "as leituras" |
 
 O endereço sem nada depois (https://whatsapp.harmonizacaohumana.com.br) ou com um caminho que não está na tabela
 abre o WhatsApp com a mensagem do site ("Oi Filipe! Quero saber mais sobre a Harmonização Humana :)").

@@ -73,6 +73,39 @@
     else if (agora >= inicio - 10 * 60e3) etiqueta.querySelector('span').textContent = 'Ao vivo agora';
   });
 
+  // Página dos guias: busca por texto (sem acento) e filtro por tema, juntos.
+  var guias = document.querySelector('[data-guias]');
+  if (guias) {
+    var campo = guias.querySelector('#busca-guias');
+    var cartoes = [].slice.call(guias.querySelectorAll('.guia'));
+    var botoes = [].slice.call(guias.querySelectorAll('.guias-filtros button'));
+    var contagem = guias.querySelector('[data-contagem]');
+    var vazio = guias.querySelector('[data-vazio]');
+    var tema = '';
+    var normalizar = function (t) { return t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim(); };
+    var aplicar = function () {
+      var termos = normalizar(campo.value).split(/\s+/).filter(Boolean);
+      var vistos = 0;
+      cartoes.forEach(function (c) {
+        var texto = c.getAttribute('data-busca');
+        var cats = c.getAttribute('data-cat').split('|');
+        var ok = termos.every(function (t) { return texto.indexOf(t) >= 0; }) && (!tema || cats.indexOf(tema) >= 0);
+        c.hidden = !ok;
+        if (ok) { vistos++; c.classList.add('visto'); }
+      });
+      contagem.textContent = vistos + (vistos === 1 ? ' guia' : ' guias');
+      vazio.hidden = vistos > 0;
+    };
+    campo.addEventListener('input', aplicar);
+    botoes.forEach(function (b) {
+      b.addEventListener('click', function () {
+        tema = b.getAttribute('data-cat');
+        botoes.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+        aplicar();
+      });
+    });
+  }
+
   // Depoimentos em vídeo: a imagem dá lugar ao player só depois do toque (youtube-nocookie.com).
   document.querySelectorAll('[data-video]').forEach(function (botao) {
     botao.addEventListener('click', function () {

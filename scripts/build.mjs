@@ -6,6 +6,7 @@ import { pagina, links, whatsappOrigens } from './partes.mjs';
 import inicio from '../paginas/inicio.mjs';
 import aJornada from '../paginas/a-jornada.mjs';
 import sobre from '../paginas/sobre.mjs';
+import guiasAoVivo from '../paginas/guias.mjs';
 
 const raiz = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(raiz, 'dist');
@@ -19,6 +20,7 @@ if (process.env.URL) cfg.dominio = process.env.URL.replace(/\/$/, '');
 const depoimentos = await lerJson('data/depoimentos.json');
 const lives = await lerJson('data/lives.json');
 const guias = await lerJson('data/guias.json');
+const episodios = await lerJson('data/episodios.json').catch(() => []);
 const L = links(cfg);
 
 await rm(dist, { recursive: true, force: true });
@@ -45,10 +47,16 @@ for (const d of depoimentos) {
   if (!d.imagem) console.log(`Aviso: miniatura do depoimento de ${d.nome} não baixada (sem acesso ao YouTube)`);
 }
 
-const paginas = [inicio, aJornada, sobre].map((p) => p({ cfg, L, depoimentos, lives, guias }));
-for (const p of paginas) {
-  await writeFile(path.join(dist, p.arquivo), pagina({ cfg, L, ...p }));
+const todas = [inicio, aJornada, sobre, guiasAoVivo].map((p) => p({ cfg, L, depoimentos, lives, guias, episodios }));
+for (const p of todas) {
+  await mkdir(path.dirname(path.join(dist, p.arquivo)), { recursive: true });
+  let html = pagina({ cfg, L, ...p });
+  // Página reservada (ex.: /ao-vivo/guias): noindex e fora do sitemap e do llms.txt. Não bloquear no robots.txt,
+  // para o Google conseguir ler o noindex.
+  if (p.indexar === false) html = html.replace('<head>', '<head>\n<meta name="robots" content="noindex">');
+  await writeFile(path.join(dist, p.arquivo), html);
 }
+const paginas = todas.filter((p) => p.indexar !== false);
 
 // 404 simples, com o mesmo topo e rodapé
 await writeFile(path.join(dist, '404.html'), pagina({

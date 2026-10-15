@@ -53,9 +53,16 @@
         "onde": "YouTube: chat das lives (o contato que o Filipe deixa no fim da live)",
         "para": "Conversa com quem assistiu a uma live",
         "sinal": "\"conversar com você\""
+      },
+      "guias": {
+        "texto": "textoGuias",
+        "onde": "Site: botão no fim da página dos guias das leituras ao vivo (/ao-vivo/guias)",
+        "para": "Conversa com quem chegou pelos guias (direct do Instagram, chat da live)",
+        "sinal": "\"as leituras\""
       }
     },
-    "textoLive": "Oi Filipe! Quero conversar com você :)"
+    "textoLive": "Oi Filipe! Quero conversar com você :)",
+    "textoGuias": "Oi Filipe! Quero saber mais sobre as leituras :)"
   },
   "youtube": "https://www.youtube.com/@FilipeMorgadoHH",
   "instagram": "https://www.instagram.com/filipemorgado.hh",

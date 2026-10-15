@@ -117,3 +117,17 @@ A origem já é contada pelo link no Umami; a mensagem fica na voz da pessoa.
 | /instagram | 08/10 | Oi Filipe, vim pelo Instagram e queria saber mais sobre a Harmonização Humana | Oi Filipe! Quero conhecer melhor a Harmonização Humana :) | Filipe (sinal "conhecer melhor") |
 | /youtube | 08/10 | Oi Filipe, vim pelo YouTube e queria saber mais sobre a Harmonização Humana | Oi Filipe! Gostaria de saber mais sobre a Harmonização Humana :) | Filipe (sinal "Gostaria") |
 | /live | 14/10 | (não existia) | Oi Filipe! Quero conversar com você :) | Filipe pediu o link para o chat das lives; texto proposto por Claude, aguardando aprovação |
+
+## Página dos guias das leituras ao vivo (15/10, para revisão do Filipe)
+
+| Onde | Texto inteiro | Pedido por |
+|---|---|---|
+| Título | Guias das leituras ao vivo. | Filipe (prompt da página) |
+| Frase | Toda quinta, às 19h, tem leitura ao vivo no YouTube. Aqui ficam os guias de cada uma, junto com o vídeo. | Filipe (prompt da página) |
+| Olho acima do título | Leituras ao vivo | Claude, proposta |
+| Canais | "Onde acompanhar as lives" · botões "YouTube · ao vivo às quintas, 19h" e "Instagram" | Filipe pediu os canais; texto Claude, proposta |
+| Busca | Buscar por tema ou título · "Nenhum guia com essa busca. Tente outra palavra ou veja todos." | Claude, proposta |
+| Cartão | Botões "Abrir o guia" e "Assistir à leitura" | Filipe (prompt da página) |
+| Resumos | Primeiro parágrafo da descrição de cada vídeo no YouTube | Textos do próprio Filipe (descrições) |
+| Fim da página | Mesma chamada final da Home ("Você não precisa saber por onde começar." …) | Texto já aprovado |
+| WhatsApp /guias | Oi Filipe! Quero saber mais sobre as leituras :) (sinal "as leituras") | Filipe pediu um link próprio; texto Claude, proposta |

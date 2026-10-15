@@ -446,3 +446,43 @@ h1, h2, h3 { font-family: var(--t); font-weight: 700; margin: 0; text-wrap: bala
 .formato .botao { max-width: 100%; white-space: normal; text-align: center; line-height: 1.2; padding-block: 12px; }
 @media (max-width: 400px) { .formato { padding: 36px 22px 30px; } .formato .botao { padding-inline: 20px; font-size: 1.0625rem; } }
 @media (max-width: 400px) { main .botao { max-width: 100%; white-space: normal; text-align: center; line-height: 1.2; padding-block: 12px; } }
+
+/* Página dos guias das leituras ao vivo (/ao-vivo/guias) */
+.visualmente-oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.guias-canais { margin-top: 36px; }
+.guias-canais__rotulo { font-family: var(--t); font-weight: 700; font-size: .8125rem; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 14px; }
+.guias-canais ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px; }
+.guias-canais .botao .rede { width: 22px; height: 22px; }
+.guias-canais .botao { max-width: 100%; white-space: normal; text-align: left; line-height: 1.25; padding-block: 10px; }
+.guias { padding-top: clamp(48px, 7vw, 88px); }
+.guias-ferramentas { display: grid; gap: 16px; margin-bottom: 32px; }
+.guias-busca { display: flex; align-items: center; gap: 10px; background: var(--marfim); border-radius: 999px; padding: 0 20px; box-shadow: var(--sombra); max-width: 560px; }
+.guias-busca svg { width: 22px; height: 22px; flex: none; opacity: .7; }
+.guias-busca input { flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; color: var(--texto); padding: 15px 0; outline: none; }
+.guias-busca:focus-within { box-shadow: 0 0 0 2px var(--indigo), var(--sombra); }
+.guias-filtros { display: flex; flex-wrap: wrap; gap: 8px; }
+.guias-filtros button { font-family: var(--t); font-weight: 700; font-size: .9375rem; border: 1.5px solid var(--indigo); background: transparent; color: var(--indigo); border-radius: 999px; padding: 8px 16px; cursor: pointer; }
+.guias-filtros button[aria-pressed="true"] { background: var(--indigo); color: var(--marfim); }
+.guias-contagem { margin: 0; font-size: .9375rem; opacity: .8; }
+.guias-lista { display: grid; gap: 24px; }
+@media (min-width: 760px) { .guias-lista { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .guias-lista { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.guia { background: var(--marfim); border-radius: var(--raio); overflow: hidden; box-shadow: var(--sombra); display: flex; flex-direction: column; scroll-margin-top: 96px; }
+.guia:target { box-shadow: 0 0 0 3px var(--laranja), var(--sombra); }
+.guia__imagens { display: grid; background: var(--indigo); }
+.guia__imagens--duas { grid-template-columns: 3fr 5.33fr; gap: 3px; align-items: stretch; }
+.guia__imagens img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.guia__mini { aspect-ratio: 16 / 9; }
+.guia__carrossel { aspect-ratio: 3 / 4; }
+.guia__imagens--duas .guia__mini { aspect-ratio: auto; }
+.guia__corpo { padding: 22px 24px 26px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.guia__corpo h2 { font-size: 1.3125rem; line-height: 1.25; letter-spacing: -0.01em; }
+.guia__data { margin: 0; font-family: var(--t); font-weight: 700; font-size: .8125rem; letter-spacing: .12em; text-transform: uppercase; color: var(--laranja); }
+.guia__cats { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.guia__cats li { font-size: .8125rem; font-weight: 600; background: var(--areia); border-radius: 999px; padding: 3px 10px; }
+.guia__resumo { margin: 0; font-size: 1rem; line-height: 1.55; }
+.guia__acoes { margin: auto 0 0; padding-top: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
+.botao--guia { background: var(--indigo); color: var(--marfim); font-size: 1rem; min-height: 50px; padding: 0 24px; }
+.botao--guia:hover { transform: translateY(-2px); }
+.guias-vazio { margin: 24px 0 0; font-family: var(--t); font-weight: 500; font-size: 1.125rem; }
+.guias-topo .dentro { position: relative; z-index: 1; }
