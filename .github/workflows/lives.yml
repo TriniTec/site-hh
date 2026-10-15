@@ -21,10 +21,10 @@ jobs:
       - run: node scripts/atualizar-lives.mjs
       - name: Publicar se mudou
         run: |
-          if [ -n "$(git status --porcelain data src/img/lives)" ]; then
+          if [ -n "$(git status --porcelain data src/img/lives src/img/guias)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add -A data/lives.json src/img/lives
+            git add -A data/lives.json data/episodios.json src/img/lives src/img/guias
             git commit -m "Lives: atualiza as três mais recentes"
             git push
           else

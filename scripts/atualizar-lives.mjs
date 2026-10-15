@@ -13,6 +13,8 @@ const raiz = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const cfg = JSON.parse(await readFile(path.join(raiz, 'site.config.json'), 'utf8'));
 const pastaMini = path.join(raiz, 'src/img/lives');
 const arqLives = path.join(raiz, 'data/lives.json');
+const arqEpisodios = path.join(raiz, 'data/episodios.json');
+const pastaGuias = path.join(raiz, 'src/img/guias');
 const id = cfg.playlistLives;
 const cabecalhos = { 'accept-language': 'pt-BR,pt;q=0.9', 'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36', cookie: 'CONSENT=YES+1; SOCS=CAI' };
 
@@ -115,6 +117,39 @@ async function miniatura(videoId) {
   throw new Error(`Miniatura de ${videoId} não encontrada`);
 }
 
+// Resumo para a página dos guias: o primeiro parágrafo da descrição do vídeo que não seja link, aviso ou
+// lista de capítulos. O Filipe pode escrever outro no campo "resumo" de data/episodios.json, que prevalece.
+function resumoDaDescricao(texto = '') {
+  const paragrafo = texto.split(/\n\s*\n/).map((t) => t.replace(/\s+/g, ' ').trim())
+    .find((t) => t.length > 40 && !/https?:\/\//.test(t) && !/^\d{1,2}:\d{2}/.test(t) && !/^#/.test(t));
+  if (!paragrafo) return '';
+  if (paragrafo.length <= 320) return paragrafo;
+  const corte = paragrafo.slice(0, 320);
+  const fim = Math.max(corte.lastIndexOf('. '), corte.lastIndexOf('? '), corte.lastIndexOf('! '));
+  return fim > 120 ? corte.slice(0, fim + 1) : corte.replace(/\s+\S*$/, '') + '…';
+}
+
+// Miniatura da página dos guias, em WebP (mais leve), guardada em src/img/guias com o mesmo esquema de nome.
+async function miniaturaGuia(videoId) {
+  for (const url of [`https://i.ytimg.com/vi_webp/${videoId}/hqdefault.webp`, `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`]) {
+    const r = await fetch(url, { headers: { 'cache-control': 'no-cache' } });
+    if (!r.ok) continue;
+    const bytes = Buffer.from(await r.arrayBuffer());
+    const ext = url.endsWith('.webp') ? 'webp' : 'jpg';
+    const arquivo = `${videoId}-${createHash('sha1').update(bytes).digest('hex').slice(0, 8)}.${ext}`;
+    await mkdir(pastaGuias, { recursive: true });
+    try { await access(path.join(pastaGuias, arquivo)); } catch { await writeFile(path.join(pastaGuias, arquivo), bytes); }
+    return `/img/guias/${arquivo}`;
+  }
+  return '';
+}
+
+const lidas = new Map();
+async function dataDaLiveUmaVez(videoId) {
+  if (!lidas.has(videoId)) lidas.set(videoId, await dataDaLive(videoId));
+  return lidas.get(videoId);
+}
+
 async function dataDaLive(videoId) {
   for (let tentativa = 1; tentativa <= 3; tentativa++) {
     const r = await fetch(`https://www.youtube.com/watch?v=${videoId}&hl=pt-BR&bpctr=9999999999&has_verified=1`, { headers: cabecalhos });
@@ -131,7 +166,7 @@ async function dataDaLive(videoId) {
       console.log(`Sem guia em ${videoId}. Descrição com ${desc.length} caracteres; links: ${(desc.match(/https?:\S+/g) || []).join(' ') || 'nenhum'}; menciona guia: ${/guia/i.test(desc)}`);
       if (!desc) for (const chave of ['Description', 'description"']) { const i = p.indexOf(chave); if (i >= 0) console.log(`  ${chave}: ${p.slice(Math.max(0, i - 60), i + 160).replace(/\s+/g, ' ')}`); }
     }
-    if (quando) return { quando, inicio, guia };
+    if (quando) return { quando, inicio, guia, descricao: descricao(p) };
     console.log(`Sem data na página de ${videoId} (tentativa ${tentativa}, resposta ${r.status}, ${p.length} caracteres, título: ${p.match(/<title>([^<]*)/)?.[1] ?? '?'}).`);
     for (const chave of ['startTimestamp', 'publishDate', 'uploadDate', 'dateText']) {
       const i = p.indexOf(chave);
@@ -148,7 +183,7 @@ const atuais = JSON.parse(await readFile(arqLives, 'utf8'));
 const entradas = (await peloFeed()) ?? (await pelaPagina());
 const novas = [];
 for (const e of entradas.slice(0, 3)) {
-  const { quando, inicio, guia } = (await dataDaLive(e.videoId)) ?? {};
+  const { quando, inicio, guia } = (await dataDaLiveUmaVez(e.videoId)) ?? {};
   const antes = atuais.find((l) => l.videoId === e.videoId);
   // Se o YouTube não entregar a data agora, fica a que já estava no site; live nova sem data é erro
   if (!quando && !antes) throw new Error(`Não encontrei a data da live ${e.videoId}`);
@@ -166,8 +201,36 @@ for (const e of entradas.slice(0, 3)) {
 }
 console.log(`Encontradas ${entradas.length} lives; as três mais novas:\n` + novas.map((l) => `- ${l.dataExtenso}: ${l.titulo}${l.guia ? `\n  guia: ${l.guia}` : ''}`).join('\n'));
 
+// Arquivo de todos os episódios (página /ao-vivo/guias). Os campos que vêm do YouTube são atualizados a cada
+// execução; os que o Filipe preenche à mão (resumo, carrossel, carrosselAlt, categorias) são mantidos.
+// Episódio que sai da playlist continua no arquivo.
+let episodios = [];
+try { episodios = JSON.parse(await readFile(arqEpisodios, 'utf8')); } catch { /* primeira vez */ }
+const episodiosAntes = JSON.stringify(episodios);
+for (const e of entradas) {
+  const info = await dataDaLiveUmaVez(e.videoId);
+  const antes = episodios.find((x) => x.videoId === e.videoId);
+  if (!info?.quando && !antes) continue;
+  if (info?.inicio && new Date(info.inicio) > new Date()) continue; // ainda não aconteceu
+  const ep = antes ?? { videoId: e.videoId, resumo: '', carrossel: '', carrosselAlt: '', categorias: [] };
+  ep.titulo = e.titulo;
+  if (info?.quando) { ep.data = diaSP(info.quando); ep.dataExtenso = extenso(info.quando); }
+  if (info?.guia) ep.guia = info.guia;
+  if (info?.descricao) ep.resumoYoutube = resumoDaDescricao(info.descricao);
+  if (ep.guia) ep.miniatura = (await miniaturaGuia(e.videoId)) || ep.miniatura || '';
+  if (!antes) episodios.push(ep);
+}
+episodios.sort((a, b) => (b.data || '').localeCompare(a.data || ''));
+const mudouEpisodios = JSON.stringify(episodios) !== episodiosAntes;
+if (mudouEpisodios) {
+  await writeFile(arqEpisodios, JSON.stringify(episodios, null, 2) + '\n');
+  const usadas = new Set(episodios.map((x) => x.miniatura && path.basename(x.miniatura)).filter(Boolean));
+  try { for (const f of await readdir(pastaGuias)) if (/\.(webp|jpg)$/.test(f) && !usadas.has(f)) await rm(path.join(pastaGuias, f)); } catch { /* sem pasta */ }
+  console.log(`Guias: ${episodios.filter((x) => x.guia).length} episódios com guia (data/episodios.json atualizado).`);
+}
+
 if (JSON.stringify(atuais) === JSON.stringify(novas)) {
-  console.log('Nada mudou (lives, datas, guias e miniaturas iguais).');
+  console.log(mudouEpisodios ? 'Lives iguais; só o arquivo dos guias mudou.' : 'Nada mudou (lives, datas, guias e miniaturas iguais).');
   process.exit(0);
 }
 
