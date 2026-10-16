@@ -1,5 +1,20 @@
 [
   {
+    "videoId": "QJxZ7OfO2Ck",
+    "resumo": "",
+    "carrossel": "",
+    "carrosselAlt": "",
+    "categorias": [
+      "Vidas passadas",
+      "Medo",
+      "Tristeza",
+      "Incapacidade"
+    ],
+    "titulo": "Leitura Energética Ao Vivo: Medo do Desconhecido, de Onde Vem? · Ep 05",
+    "data": "2026-10-15",
+    "dataExtenso": "15 de outubro de 2026"
+  },
+  {
     "videoId": "SS-kdCXqt14",
     "resumo": "",
     "carrossel": "",
@@ -70,18 +85,5 @@
     "guia": "https://drive.google.com/file/d/1Iz5bR4LxQFFf1nwLxZSpNYAshY0fSGQF/view",
     "resumoYoutube": "Uma autoleitura ao vivo, sem tema definido e sem roteiro.",
     "miniatura": "/img/guias/Kd28W8qSQjo-441bb5fe.webp"
-  },
-  {
-    "videoId": "QJxZ7OfO2Ck",
-    "resumo": "",
-    "carrossel": "",
-    "carrosselAlt": "",
-    "categorias": [
-      "Vidas passadas",
-      "Medo",
-      "Tristeza",
-      "Incapacidade"
-    ],
-    "titulo": "Leitura Energética Ao Vivo: Medo do Desconhecido, de Onde Vem? · Ep 05"
   }
 ]
