@@ -1,10 +1,18 @@
 [
   {
+    "videoId": "SRKAwLnQ8kU",
+    "titulo": "Leitura Energética Ao Vivo · Autoleitura · Ep 06",
+    "data": "2026-10-22",
+    "dataExtenso": "22 de outubro de 2026",
+    "miniatura": "/img/lives/SRKAwLnQ8kU-9025fce0.jpg",
+    "inicio": "2026-10-22T22:00:00.000Z"
+  },
+  {
     "videoId": "QJxZ7OfO2Ck",
-    "titulo": "Leitura Energética Ao Vivo · Autoleitura · Ep 05",
+    "titulo": "Leitura Energética Ao Vivo: Medo do Desconhecido, de Onde Vem? · Ep 05",
     "data": "2026-10-15",
     "dataExtenso": "15 de outubro de 2026",
-    "miniatura": "/img/lives/QJxZ7OfO2Ck-9025fce0.jpg",
+    "miniatura": "/img/lives/QJxZ7OfO2Ck-45e5f6ed.jpg",
     "inicio": "2026-10-15T22:00:00.000Z"
   },
   {
@@ -14,13 +22,5 @@
     "dataExtenso": "8 de outubro de 2026",
     "miniatura": "/img/lives/SS-kdCXqt14-b105b030.jpg",
     "guia": "https://drive.google.com/file/d/1BjFS9B_QtOkbcF73acwOa5hRylP1Ctxf/view"
-  },
-  {
-    "videoId": "6PgcjB3dUp4",
-    "titulo": "Leitura Energética Ao Vivo: O Arrependimento de Não Ajudar · Ep 03",
-    "data": "2026-10-01",
-    "dataExtenso": "1 de outubro de 2026",
-    "miniatura": "/img/lives/6PgcjB3dUp4-e65fa8ec.jpg",
-    "guia": "https://drive.google.com/file/d/1pwrZfsQ6gd_y_4gAFkRFL6bw5r3S4_cZ/view"
   }
 ]
