@@ -215,6 +215,9 @@ for (const e of entradas) {
   const ep = antes ?? { videoId: e.videoId, resumo: '', carrossel: '', carrosselAlt: '', categorias: [] };
   ep.titulo = e.titulo;
   if (info?.quando) { ep.data = diaSP(info.quando); ep.dataExtenso = extenso(info.quando); }
+  // Sem data do YouTube nesta execução: fica a que a lista das lives já tem (live recém-terminada, por ex.)
+  const naLista = novas.find((l) => l.videoId === e.videoId);
+  if (!ep.data && naLista) { ep.data = naLista.data; ep.dataExtenso = naLista.dataExtenso; }
   if (info?.guia) ep.guia = info.guia;
   if (info?.descricao) ep.resumoYoutube = resumoDaDescricao(info.descricao);
   if (ep.guia) ep.miniatura = (await miniaturaGuia(e.videoId)) || ep.miniatura || '';
