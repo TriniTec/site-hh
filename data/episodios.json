@@ -1,12 +1,26 @@
 [
   {
+    "videoId": "QJxZ7OfO2Ck",
+    "resumo": "",
+    "carrossel": "",
+    "carrosselAlt": "",
+    "categorias": [
+      "Vidas passadas",
+      "Medo",
+      "Tristeza",
+      "Incapacidade"
+    ]
+  },
+  {
     "videoId": "SS-kdCXqt14",
     "resumo": "",
     "carrossel": "",
     "carrosselAlt": "",
     "categorias": [
       "Vidas passadas",
-      "Medo"
+      "Incapacidade",
+      "Medo",
+      "Tristeza"
     ],
     "titulo": "Leitura Energética Ao Vivo: Do Calabouço à Decapitação · Ep 04",
     "data": "2026-10-08",
@@ -21,9 +35,10 @@
     "carrossel": "",
     "carrosselAlt": "",
     "categorias": [
-      "Culpa",
       "Arrependimento",
-      "Amor-próprio"
+      "Vergonha",
+      "Amor-próprio",
+      "Tristeza"
     ],
     "titulo": "Leitura Energética Ao Vivo: O Arrependimento de Não Ajudar · Ep 03",
     "data": "2026-10-01",
@@ -38,8 +53,10 @@
     "carrossel": "",
     "carrosselAlt": "",
     "categorias": [
+      "Desistência",
       "Recomeço",
-      "Medo"
+      "Vidas passadas",
+      "Tristeza"
     ],
     "titulo": "Leitura Energética Ao Vivo: Vontade de Desistir, Novo Começo · Ep 02",
     "data": "2026-09-24",
@@ -54,8 +71,10 @@
     "carrossel": "",
     "carrosselAlt": "",
     "categorias": [
+      "Exposição",
       "Amor-próprio",
-      "Exposição"
+      "Mágoa",
+      "Tristeza"
     ],
     "titulo": "Leitura Energética Ao Vivo: Dificuldade de se Expor, Amor-próprio · Ep 01",
     "data": "2026-09-17",

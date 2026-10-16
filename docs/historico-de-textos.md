@@ -147,3 +147,13 @@ A origem já é contada pelo link no Umami; a mensagem fica na voz da pessoa.
 | /guias | 15/10 | Oi Filipe! Quero saber mais sobre as leituras :) | Oi Filipe! Quero saber mais sobre as Leituras :) (sinal "as Leituras") | Filipe (L maiúsculo) |
 
 Textos propostos da página dos guias aprovados pelo Filipe em 15/10.
+
+## Temas dos guias tirados das transcrições (16/10)
+
+| Episódio | Antes | Depois | Pedido por |
+|---|---|---|---|
+| Ep 05 (15/10) | (ainda não estava no arquivo) | Vidas passadas, Medo, Tristeza, Incapacidade | Filipe (temas gerados no Cowork a partir das transcrições) |
+| Ep 04 (08/10) | Vidas passadas, Medo | Vidas passadas, Incapacidade, Medo, Tristeza | Filipe (idem) |
+| Ep 03 (01/10) | Culpa, Arrependimento, Amor-próprio | Arrependimento, Vergonha, Amor-próprio, Tristeza | Filipe (idem) |
+| Ep 02 (24/09) | Recomeço, Medo | Desistência, Recomeço, Vidas passadas, Tristeza | Filipe (idem) |
+| Ep 01 (17/09) | Amor-próprio, Exposição | Exposição, Amor-próprio, Mágoa, Tristeza | Filipe (idem) |
