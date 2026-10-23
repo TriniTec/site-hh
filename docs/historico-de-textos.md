@@ -157,3 +157,9 @@ Textos propostos da página dos guias aprovados pelo Filipe em 15/10.
 | Ep 03 (01/10) | Culpa, Arrependimento, Amor-próprio | Arrependimento, Vergonha, Amor-próprio, Tristeza | Filipe (idem) |
 | Ep 02 (24/09) | Recomeço, Medo | Desistência, Recomeço, Vidas passadas, Tristeza | Filipe (idem) |
 | Ep 01 (17/09) | Amor-próprio, Exposição | Exposição, Amor-próprio, Mágoa, Tristeza | Filipe (idem) |
+
+## Temas do Ep 06 (23/10)
+
+| Episódio | Antes | Depois | Pedido por |
+|---|---|---|---|
+| Ep 06 (22/10) | (ainda não estava no arquivo) | Vidas passadas, Medo, Fé, Juramento | Filipe (temas vindos do Cowork) |
