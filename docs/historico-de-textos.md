@@ -163,3 +163,9 @@ Textos propostos da página dos guias aprovados pelo Filipe em 15/10.
 | Episódio | Antes | Depois | Pedido por |
 |---|---|---|---|
 | Ep 06 (22/10) | (ainda não estava no arquivo) | Vidas passadas, Medo, Fé, Juramento | Filipe (temas vindos do Cowork) |
+
+## Resumo do Ep 06 (23/10)
+
+| Onde | Antes | Depois | Pedido por |
+|---|---|---|---|
+| /ao-vivo/guias, Ep 06 | Mensagem espiritual para hoje: um dia de bênçãos. A mensagem começa em 16:56. (resumo do YouTube) | Resumo próprio, em dois parágrafos: a mensagem espiritual e as três memórias da autoleitura (praia e mata, arqueiro e juramento, catedral e fé) | Filipe (texto enviado por ele) |

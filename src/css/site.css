@@ -481,7 +481,7 @@ h1, h2, h3 { font-family: var(--t); font-weight: 700; margin: 0; text-wrap: bala
 .guia__data { margin: 0; font-family: var(--t); font-weight: 700; font-size: .8125rem; letter-spacing: .12em; text-transform: uppercase; color: var(--laranja); }
 .guia__cats { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
 .guia__cats li { font-size: .8125rem; font-weight: 600; background: var(--areia); border-radius: 999px; padding: 3px 10px; }
-.guia__resumo { margin: 0; font-size: 1rem; line-height: 1.55; }
+.guia__resumo { margin: 0; font-size: 1rem; line-height: 1.55; white-space: pre-line; }
 .guia__acoes { margin: auto 0 0; padding-top: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
 .botao--guia { background: var(--indigo); color: var(--marfim); font-size: 1rem; min-height: 50px; padding: 0 24px; }
 .botao--guia:hover { transform: translateY(-2px); }
