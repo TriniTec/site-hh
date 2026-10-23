@@ -151,6 +151,8 @@ async function dataDaLiveUmaVez(videoId) {
 }
 
 async function dataDaLive(videoId) {
+  // Live que acabou de terminar: a página pode vir sem a data, mas com a descrição e o guia. Não perder o guia.
+  let parcial = null;
   for (let tentativa = 1; tentativa <= 3; tentativa++) {
     const r = await fetch(`https://www.youtube.com/watch?v=${videoId}&hl=pt-BR&bpctr=9999999999&has_verified=1`, { headers: cabecalhos });
     const p = await r.text();
@@ -167,6 +169,7 @@ async function dataDaLive(videoId) {
       if (!desc) for (const chave of ['Description', 'description"']) { const i = p.indexOf(chave); if (i >= 0) console.log(`  ${chave}: ${p.slice(Math.max(0, i - 60), i + 160).replace(/\s+/g, ' ')}`); }
     }
     if (quando) return { quando, inicio, guia, descricao: descricao(p) };
+    if (guia) parcial = { quando: null, inicio: null, guia, descricao: descricao(p) };
     console.log(`Sem data na página de ${videoId} (tentativa ${tentativa}, resposta ${r.status}, ${p.length} caracteres, título: ${p.match(/<title>([^<]*)/)?.[1] ?? '?'}).`);
     for (const chave of ['startTimestamp', 'publishDate', 'uploadDate', 'dateText']) {
       const i = p.indexOf(chave);
@@ -174,7 +177,7 @@ async function dataDaLive(videoId) {
     }
     await new Promise((ok) => setTimeout(ok, 3000));
   }
-  return null;
+  return parcial;
 }
 
 // Ordem: a da playlist (o Filipe a mantém com a live mais nova primeiro). A data que o YouTube informa
