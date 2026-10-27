@@ -62,7 +62,10 @@ escrever o prompt em `docs/imagens-a-gerar.md`; o Filipe pede ao Aruan.
 
 WhatsApp: todo link (no site e fora dele) é whatsapp.harmonizacaohumana.com.br/<origem>, nunca wa.me direto.
 Mensagens e origens em site.config.json; mensagem nova ou alterada passa pela regra de ouro dos textos.
-Ao mudar, atualizar também a página do mapa (artifact https://claude.ai/artifact/LT4bHRpJ5iJhwrQgn2p1SM),
-gerada por scripts/mapa-whatsapp.mjs.
+REGRA FIXA: toda vez que um link de WhatsApp for criado, editado ou removido (endereço, mensagem, sinal, onde usar),
+o artifact do mapa (https://claude.ai/artifact/LT4bHRpJ5iJhwrQgn2p1SM) é atualizado na mesma hora, sem o Filipe pedir:
+rodar `node scripts/mapa-whatsapp.mjs` e publicar `docs/links-whatsapp.html` nesse mesmo endereço com a ferramenta
+Artifact (action publish, com url). A tarefa só termina depois disso, e a resposta ao Filipe confirma que o mapa foi atualizado.
+Tudo vai direto para o `main`, sem branch.
 
 Como mexer no site: ver README.md.

@@ -11,7 +11,7 @@
     "textoJornada": "Oi Filipe! Tenho interesse na Jornada. Pode me contar mais? :)",
     "textoInstagram": "Oi Filipe! Quero conhecer melhor a Harmonização Humana :)",
     "textoYoutube": "Oi Filipe! Gostaria de saber mais sobre a Harmonização Humana :)",
-    "textoYoutubeMensagem": "Oi Filipe! Assisti a uma mensagem no YouTube e quero receber uma para mim :)",
+    "textoYoutubeMensagem": "Oi Filipe! Assisti a uma Mensagem no YouTube e quero receber uma para mim :)",
     "origens": {
       "site": {
         "texto": "textoGeral",
@@ -52,7 +52,7 @@
       "youtube-mensagem": {
         "texto": "textoYoutubeMensagem",
         "onde": "YouTube: descrição dos vídeos de mensagem espiritual e da playlist \"Mensagem Espiritual para Hoje\"",
-        "para": "Pedido de Mensagem, de quem assistiu a uma mensagem no YouTube",
+        "para": "Pedido de Mensagem, de quem assistiu a uma Mensagem no YouTube",
         "sinal": "\"Assisti\""
       },
       "live": {
