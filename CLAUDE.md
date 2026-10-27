@@ -66,6 +66,5 @@ REGRA FIXA: toda vez que um link de WhatsApp for criado, editado ou removido (en
 o artifact do mapa (https://claude.ai/artifact/LT4bHRpJ5iJhwrQgn2p1SM) é atualizado na mesma hora, sem o Filipe pedir:
 rodar `node scripts/mapa-whatsapp.mjs` e publicar `docs/links-whatsapp.html` nesse mesmo endereço com a ferramenta
 Artifact (action publish, com url). A tarefa só termina depois disso, e a resposta ao Filipe confirma que o mapa foi atualizado.
-Tudo vai direto para o `main`, sem branch.
 
 Como mexer no site: ver README.md.
