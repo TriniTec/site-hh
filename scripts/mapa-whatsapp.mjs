@@ -21,7 +21,7 @@ const linhas = origens.map(([o, v]) => {
         <td data-rotulo="Sinal"><b>${esc(v.sinal || '')}</b></td>
       </tr>`;
 }).join('');
-const sinais = origens.map(([o, v]) => `\n      <li><b>${esc(v.sinal)}</b> → ${o === 'site' ? 'site (botões gerais)' : o === 'sessao' ? 'cartão da sessão individual' : o === 'jornada' ? 'cartão da Jornada' : o === 'mensagem' ? 'botão da Mensagem' : o === 'instagram' ? 'Instagram' : o === 'live' ? 'chat das lives' : o === 'guias' ? 'página dos guias' : 'YouTube'}</li>`).join('');
+const sinais = origens.map(([o, v]) => `\n      <li><b>${esc(v.sinal)}</b> → ${o === 'site' ? 'site (botões gerais)' : o === 'sessao' ? 'cartão da sessão individual' : o === 'jornada' ? 'cartão da Jornada' : o === 'mensagem' ? 'botão da Mensagem' : o === 'instagram' ? 'Instagram' : o === 'youtube-mensagem' ? 'vídeos de mensagem do YouTube' : o === 'live' ? 'chat das lives' : o === 'guias' ? 'página dos guias' : 'YouTube'}</li>`).join('');
 
 const html = `<title>Links de WhatsApp da HH</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Manrope:wght@400;600&display=swap">

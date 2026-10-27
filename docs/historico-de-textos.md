@@ -169,3 +169,9 @@ Textos propostos da página dos guias aprovados pelo Filipe em 15/10.
 | Onde | Antes | Depois | Pedido por |
 |---|---|---|---|
 | /ao-vivo/guias, Ep 06 | Mensagem espiritual para hoje: um dia de bênçãos. A mensagem começa em 16:56. (resumo do YouTube) | Resumo próprio, em dois parágrafos: a mensagem espiritual e as três memórias da autoleitura (praia e mata, arqueiro e juramento, catedral e fé) | Filipe (texto enviado por ele) |
+
+## Mensagem pronta nova do WhatsApp (27/10)
+
+| Onde | Antes | Depois | Pedido por |
+|---|---|---|---|
+| Link whatsapp.harmonizacaohumana.com.br/youtube-mensagem (descrição dos vídeos de mensagem espiritual do YouTube) | (link não existia) | Oi Filipe! Assisti a uma mensagem no YouTube e quero receber uma para mim :) | Filipe (texto vindo do Chat, aprovado por ele) |
