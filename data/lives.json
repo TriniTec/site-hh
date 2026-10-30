@@ -1,10 +1,18 @@
 [
   {
+    "videoId": "4rYt4b4DcnI",
+    "titulo": "Leitura Energética Ao Vivo · Ep 08",
+    "data": "2026-11-05",
+    "dataExtenso": "5 de novembro de 2026",
+    "miniatura": "/img/lives/4rYt4b4DcnI-9025fce0.jpg",
+    "inicio": "2026-11-05T22:00:00.000Z"
+  },
+  {
     "videoId": "wRJMj_UX7AE",
-    "titulo": "Leitura Energética Ao Vivo · Autoleitura · Ep 07",
+    "titulo": "Mensagem Espiritual para Hoje e Leitura Energética: Andar em Círculos com Rodrigo · Ep 07",
     "data": "2026-10-29",
     "dataExtenso": "29 de outubro de 2026",
-    "miniatura": "/img/lives/wRJMj_UX7AE-9025fce0.jpg",
+    "miniatura": "/img/lives/wRJMj_UX7AE-9f116cc0.jpg",
     "inicio": "2026-10-29T22:00:00.000Z"
   },
   {
@@ -14,13 +22,5 @@
     "dataExtenso": "22 de outubro de 2026",
     "miniatura": "/img/lives/SRKAwLnQ8kU-f1ac1141.jpg",
     "guia": "https://drive.google.com/file/d/1WP8eqc5xu7V_AmLWVMU9XgM4fgiffYft/view"
-  },
-  {
-    "videoId": "QJxZ7OfO2Ck",
-    "titulo": "Leitura Energética Ao Vivo: Medo do Desconhecido, de Onde Vem? · Ep 05",
-    "data": "2026-10-15",
-    "dataExtenso": "15 de outubro de 2026",
-    "miniatura": "/img/lives/QJxZ7OfO2Ck-45e5f6ed.jpg",
-    "guia": "https://drive.google.com/file/d/1BpBvmv9pr0T3DUhyV2ju_gM1wdDOefSp/view"
   }
 ]
