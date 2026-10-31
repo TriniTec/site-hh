@@ -117,16 +117,24 @@ async function miniatura(videoId) {
   throw new Error(`Miniatura de ${videoId} não encontrada`);
 }
 
-// Resumo para a página dos guias: o primeiro parágrafo da descrição do vídeo que não seja link, aviso ou
-// lista de capítulos. O Filipe pode escrever outro no campo "resumo" de data/episodios.json, que prevalece.
+// Resumo para a página dos guias: o topo da descrição do vídeo (os parágrafos antes do primeiro link, aviso ou
+// lista de capítulos), num parágrafo só, sem as frases com minuto do vídeo ("A mensagem começa em 06:33"),
+// que fora do YouTube não fazem sentido. Longo demais: corta numa frase inteira, sem reticências.
+// O Filipe pode escrever outro no campo "resumo" de data/episodios.json, que prevalece.
 function resumoDaDescricao(texto = '') {
-  const paragrafo = texto.split(/\n\s*\n/).map((t) => t.replace(/\s+/g, ' ').trim())
-    .find((t) => t.length > 40 && !/https?:\/\//.test(t) && !/^\d{1,2}:\d{2}/.test(t) && !/^#/.test(t));
-  if (!paragrafo) return '';
-  if (paragrafo.length <= 320) return paragrafo;
-  const corte = paragrafo.slice(0, 320);
-  const fim = Math.max(corte.lastIndexOf('. '), corte.lastIndexOf('? '), corte.lastIndexOf('! '));
-  return fim > 120 ? corte.slice(0, fim + 1) : corte.replace(/\s+\S*$/, '') + '…';
+  const topo = [];
+  for (const p of texto.split(/\n\s*\n/)) {
+    if (/https?:\/\//.test(p) || /^\s*(\d{1,2}:\d{2}|#|CAP[IÍ]TULOS|─)/i.test(p)) break;
+    topo.push(p);
+  }
+  const frases = topo.join(' ').replace(/\s+/g, ' ').trim().split(/(?<=[.?!])\s+/)
+    .filter((f) => f && !/\b\d{1,2}:\d{2}\b/.test(f));
+  let resumo = '';
+  for (const f of frases) {
+    if (resumo && (resumo + ' ' + f).length > 460) break;
+    resumo = resumo ? `${resumo} ${f}` : f;
+  }
+  return resumo;
 }
 
 // Miniatura da página dos guias, em WebP (mais leve), guardada em src/img/guias com o mesmo esquema de nome.

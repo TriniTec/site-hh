@@ -30,7 +30,9 @@ Página reservada (fora do menu, do rodapé e do sitemap, com noindex), para o l
 antigo, com busca por texto e filtro por tema. Link direto para um guia: `/ao-vivo/guias#2026-10-08` (a data).
 
 Os dados ficam em `data/episodios.json`. A tarefa diária das lives preenche sozinha: título, data, link do guia
-(da descrição do vídeo), miniatura do YouTube em WebP e `resumoYoutube` (primeiro parágrafo da descrição).
+(da descrição do vídeo), miniatura do YouTube em WebP e `resumoYoutube` (o topo da descrição, num parágrafo só,
+sem as frases com minuto do vídeo, cortado numa frase inteira até uns 460 caracteres). O episódio só aparece na página
+quando tem guia, miniatura e resumo. A página não tem lista de capítulos.
 À mão, no mesmo arquivo, sem mexer no código:
 
 | Campo | O que é |

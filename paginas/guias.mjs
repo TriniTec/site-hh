@@ -34,7 +34,8 @@ function cartao(ep) {
 }
 
 export default function guias({ cfg, L, episodios = [] }) {
-  const comGuia = episodios.filter((e) => e.guia && e.data).sort((a, b) => b.data.localeCompare(a.data));
+  // Só entra episódio completo: guia, data, miniatura e resumo. Faltando algo, espera a tarefa das lives.
+  const comGuia = episodios.filter((e) => e.guia && e.data && e.miniatura && (e.resumo || e.resumoYoutube)).sort((a, b) => b.data.localeCompare(a.data));
   const categorias = [...new Set(comGuia.flatMap((e) => e.categorias || []))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
   const base = jsonldBase(cfg);
   const jsonld = { '@context': 'https://schema.org', '@graph': [base.person, breadcrumb(cfg, [['Início', '/'], ['Guias das leituras ao vivo', '/ao-vivo/guias']])] };
