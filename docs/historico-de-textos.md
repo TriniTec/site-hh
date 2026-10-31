@@ -175,3 +175,9 @@ Textos propostos da página dos guias aprovados pelo Filipe em 15/10.
 | Onde | Antes | Depois | Pedido por |
 |---|---|---|---|
 | Link whatsapp.harmonizacaohumana.com.br/youtube-mensagem (descrição dos vídeos de mensagem espiritual do YouTube) | (link não existia) | Oi Filipe! Assisti a uma Mensagem no YouTube e quero receber uma para mim :) | Filipe (texto vindo do Chat, aprovado por ele) |
+
+## Temas do Ep 07 (31/10)
+
+| Episódio | Antes | Depois | Pedido por |
+|---|---|---|---|
+| Ep 07 (29/10) | (ainda não estava no arquivo) | Estagnação, Escolha, Vidas passadas, Incapacidade | Filipe |

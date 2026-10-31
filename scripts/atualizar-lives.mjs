@@ -213,7 +213,8 @@ const episodiosAntes = JSON.stringify(episodios);
 for (const e of entradas) {
   const info = await dataDaLiveUmaVez(e.videoId);
   const antes = episodios.find((x) => x.videoId === e.videoId);
-  if (!info?.quando && !antes) continue;
+  // Live recém-terminada costuma vir sem data do YouTube: vale a da lista das lives para criar o episódio
+  if (!info?.quando && !antes && !novas.some((l) => l.videoId === e.videoId)) continue;
   if (info?.inicio && new Date(info.inicio) > new Date()) continue; // ainda não aconteceu
   const ep = antes ?? { videoId: e.videoId, resumo: '', carrossel: '', carrosselAlt: '', categorias: [] };
   ep.titulo = e.titulo;
