@@ -181,3 +181,9 @@ Textos propostos da página dos guias aprovados pelo Filipe em 15/10.
 | Episódio | Antes | Depois | Pedido por |
 |---|---|---|---|
 | Ep 07 (29/10) | (ainda não estava no arquivo) | Estagnação, Escolha, Vidas passadas, Incapacidade | Filipe |
+
+## Resumo do Ep 06 em um parágrafo (31/10)
+
+| Onde | Antes | Depois | Pedido por |
+|---|---|---|---|
+| /ao-vivo/guias, Ep 06 | Dois parágrafos, com "A mensagem começa em 16:56." | Uma mensagem espiritual para hoje, um dia de bênçãos, e uma autoleitura ao vivo, a sexta da série, num dia de registros akáshicos. Três memórias de outras vidas: a praia e a mata que, mesmo lindas, despertam ameaça; o arqueiro leal a um juramento feito sob ameaça; e a catedral onde a fé foi embora, no fundo a falta de fé em si mesmo. | Filipe (um parágrafo só, sem o minuto do vídeo, que não faz sentido fora do YouTube) |
