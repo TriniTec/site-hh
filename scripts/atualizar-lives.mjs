@@ -124,8 +124,8 @@ async function miniatura(videoId) {
 }
 
 // Resumo para a página dos guias: o topo da descrição do vídeo (os parágrafos antes do primeiro link, aviso ou
-// lista de capítulos), num parágrafo só, sem as frases com minuto do vídeo ("A mensagem começa em 06:33"),
-// que fora do YouTube não fazem sentido. Longo demais: corta numa frase inteira, sem reticências.
+// lista de capítulos), num parágrafo só, sem as frases com minuto do vídeo ("A mensagem começa em 06:33") nem o
+// aviso do vídeo só da mensagem, que fora do YouTube não fazem sentido. Longo demais: corta numa frase inteira, sem reticências.
 // O Filipe pode escrever outro no campo "resumo" de data/episodios.json, que prevalece.
 function resumoDaDescricao(texto = '') {
   const topo = [];
@@ -134,7 +134,7 @@ function resumoDaDescricao(texto = '') {
     topo.push(p);
   }
   const frases = topo.join(' ').replace(/\s+/g, ' ').trim().split(/(?<=[.?!])\s+/)
-    .filter((f) => f && !/\b\d{1,2}:\d{2}\b/.test(f));
+    .filter((f) => f && !/\b\d{1,2}:\d{2}\b/.test(f) && !/•|\.\.\.$|…$|vídeo só dela/i.test(f));
   let resumo = '';
   for (const f of frases) {
     if (resumo && (resumo + ' ' + f).length > 460) break;
