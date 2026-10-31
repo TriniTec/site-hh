@@ -48,12 +48,18 @@ async function pelaPagina() {
   const itens = [];
   (function andar(o) {
     if (!o || typeof o !== 'object') return;
-    const v = o.playlistVideoRenderer;
+    const v = o.playlistVideoRenderer || o.playlistPanelVideoRenderer;
     if (v?.videoId) itens.push({ videoId: v.videoId, titulo: v.title?.runs?.map((x) => x.text).join('') || v.title?.simpleText || '' });
+    // Formato mais novo da página do YouTube: cada vídeo vem como "lockupViewModel"
+    const l = o.lockupViewModel;
+    if (l?.contentId && /VIDEO/.test(l.contentType || '')) itens.push({ videoId: l.contentId, titulo: l.metadata?.lockupMetadataViewModel?.title?.content || '' });
     for (const k in o) andar(o[k]);
   })(JSON.parse(dados));
-  if (!itens.length) throw new Error('A playlist está vazia ou não é pública.');
-  return itens;
+  if (!itens.length) {
+    console.log(`Página da playlist: ${html.length} caracteres, título: ${html.match(/<title>([^<]*)/)?.[1] ?? '?'}; formatos achados: ${[...new Set(dados.match(/"[a-zA-Z]+(?:Renderer|ViewModel)"/g) || [])].slice(0, 40).join(' ')}`);
+    throw new Error('A playlist está vazia ou não é pública.');
+  }
+  return itens.filter((x, n) => itens.findIndex((y) => y.videoId === x.videoId) === n);
 }
 
 // Data da live: o início da transmissão (ou o horário agendado, se ainda não aconteceu). A data de
