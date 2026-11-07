@@ -180,6 +180,7 @@ async function dataDaLive(videoId) {
     if (!guia) {
       const desc = descricao(p);
       console.log(`Sem guia em ${videoId}. Descrição com ${desc.length} caracteres; links: ${(desc.match(/https?:\S+/g) || []).join(' ') || 'nenhum'}; menciona guia: ${/guia/i.test(desc)}`);
+      if (desc) console.log(`  Descrição inteira de ${videoId}: ${JSON.stringify(desc)}`);
       if (!desc) for (const chave of ['Description', 'description"']) { const i = p.indexOf(chave); if (i >= 0) console.log(`  ${chave}: ${p.slice(Math.max(0, i - 60), i + 160).replace(/\s+/g, ' ')}`); }
     }
     if (quando) return { quando, inicio, guia, descricao: descricao(p) };
