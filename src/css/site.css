@@ -474,7 +474,7 @@ h1, h2, h3 { font-family: var(--t); font-weight: 700; margin: 0; text-wrap: bala
 .guia__imagens--duas { grid-template-columns: 3fr 5.33fr; gap: 3px; align-items: stretch; }
 .guia__imagens img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .guia__mini { aspect-ratio: 16 / 9; }
-.guia__carrossel { aspect-ratio: 3 / 4; }
+.guia__carrossel { aspect-ratio: 4 / 5; }
 .guia__imagens--duas .guia__mini { aspect-ratio: auto; }
 .guia__corpo { padding: 22px 24px 26px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .guia__corpo h2 { font-size: 1.3125rem; line-height: 1.25; letter-spacing: -0.01em; }

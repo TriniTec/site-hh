@@ -1,7 +1,7 @@
 // Página "Guias das leituras ao vivo" (/ao-vivo/guias). Reservada: só se chega pelo link (direct do Instagram,
 // chat da live). Fora do menu, do rodapé e do sitemap, com noindex.
 // Os dados vêm de data/episodios.json, que a tarefa das lives preenche sozinha (título, data, guia, miniatura,
-// resumo do YouTube). À mão, no mesmo arquivo: resumo, carrossel (imagem 3:4), carrosselAlt e categorias.
+// resumo do YouTube). À mão, no mesmo arquivo: resumo, carrossel (imagem 4:5), carrosselAlt e categorias.
 import { botaoConversar, breadcrumb, jsonldBase, esc, sol, youtubeIcone, instagramIcone } from '../scripts/partes.mjs';
 
 // Texto para a busca: minúsculas e sem acento ("decapitação" acha "decapitacao").
@@ -15,7 +15,7 @@ function cartao(ep) {
     ? `<img class="guia__mini" src="${esc(ep.miniatura)}" width="480" height="360" loading="lazy" alt="Miniatura do vídeo no YouTube: ${esc(ep.titulo)}">`
     : '';
   const carrossel = ep.carrossel
-    ? `<img class="guia__carrossel" src="${esc(ep.carrossel)}" width="600" height="800" loading="lazy" alt="${esc(ep.carrosselAlt || `Capa do carrossel no Instagram: ${ep.titulo}`)}">`
+    ? `<img class="guia__carrossel" src="${esc(ep.carrossel)}" width="600" height="750" loading="lazy" alt="${esc(ep.carrosselAlt || `Capa do carrossel no Instagram: ${ep.titulo}`)}">`
     : '';
   return `
         <article class="guia surge" id="${esc(ep.data)}" data-busca="${esc(normalizar([ep.titulo, resumo, ep.dataExtenso, ...categorias].join(' ')))}" data-cat="${esc(categorias.map(normalizar).join('|'))}">

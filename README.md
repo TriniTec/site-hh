@@ -38,7 +38,7 @@ quando tem guia, miniatura e resumo. A página não tem lista de capítulos.
 | Campo | O que é |
 | --- | --- |
 | `resumo` | Resumo próprio para a página. Vazio: usa o `resumoYoutube`. |
-| `carrossel` | Capa do carrossel do Instagram (3:4, WebP, ~600×800) em `src/img/guias/`, ex. `/img/guias/2026-10-08-carrossel.webp`. Vazio: só a miniatura do YouTube. |
+| `carrossel` | Capa do carrossel do Instagram (4:5, o formato dos posts, 1080×1350 no Instagram; no site em WebP, ex. 600×750) em `src/img/guias/`, ex. `/img/guias/2026-10-08-carrossel.webp`. Vazio: só a miniatura do YouTube. |
 | `carrosselAlt` | Texto alternativo da capa do carrossel. |
 | `categorias` | Lista de temas, ex. `["Vidas passadas", "Medo"]`. Os botões de filtro aparecem sozinhos a partir deles. |
 
