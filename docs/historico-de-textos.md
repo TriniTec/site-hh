@@ -182,6 +182,12 @@ Textos propostos da página dos guias aprovados pelo Filipe em 15/10.
 |---|---|---|---|
 | Ep 07 (29/10) | (ainda não estava no arquivo) | Estagnação, Escolha, Vidas passadas, Incapacidade | Filipe |
 
+## Temas do Ep 09 (13/11)
+
+| Episódio | Antes | Depois | Pedido por |
+|---|---|---|---|
+| Ep 09 (12/11) | (ainda não estava no arquivo) | Estagnação, Raiva, Tristeza (Raiva é tema novo) | Filipe (linha de `temas-das-leituras-ao-vivo.md`, pela sessão criar do Ep 09) |
+
 ## Resumo do Ep 06 em um parágrafo (31/10)
 
 | Onde | Antes | Depois | Pedido por |
