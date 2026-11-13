@@ -8,7 +8,8 @@ export const destinos = {
   "youtube": "https://wa.me/5511999915617?text=Oi%20Filipe!%20Gostaria%20de%20saber%20mais%20sobre%20a%20Harmoniza%C3%A7%C3%A3o%20Humana%20%3A)",
   "youtube-mensagem": "https://wa.me/5511999915617?text=Oi%20Filipe!%20Assisti%20a%20uma%20Mensagem%20no%20YouTube%20e%20quero%20receber%20uma%20para%20mim%20%3A)",
   "live": "https://wa.me/5511999915617?text=Oi%20Filipe!%20Quero%20agendar%20uma%20sess%C3%A3o%20com%20voc%C3%AA%20%3A)",
-  "guias": "https://wa.me/5511999915617?text=Oi%20Filipe!%20Quero%20saber%20mais%20sobre%20as%20Leituras%20%3A)"
+  "guias": "https://wa.me/5511999915617?text=Oi%20Filipe!%20Quero%20saber%20mais%20sobre%20as%20Leituras%20%3A)",
+  "maps": "https://wa.me/5511999915617?text=Oi%20Filipe!%20Encontrei%20a%20Harmoniza%C3%A7%C3%A3o%20Humana%20e%20quero%20entender%20como%20funciona%20%3A)"
 };
 export const umamiWebsiteId = "471706c0-02ee-4b80-b339-d50430243247";
 export const subdominio = "whatsapp.harmonizacaohumana.com.br";

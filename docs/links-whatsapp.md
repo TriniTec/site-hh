@@ -18,6 +18,7 @@ Página com esta tabela (privada, do Filipe): https://claude.ai/artifact/LT4bHRp
 | https://whatsapp.harmonizacaohumana.com.br/youtube-mensagem | YouTube: descrição dos vídeos de mensagem espiritual e da playlist "Mensagem Espiritual para Hoje" | Pedido de Mensagem, de quem assistiu a uma Mensagem no YouTube | Oi Filipe! Assisti a uma Mensagem no YouTube e quero receber uma para mim :) | "Assisti" |
 | https://whatsapp.harmonizacaohumana.com.br/live | YouTube: chat das lives (o contato que o Filipe deixa no fim da live) | Agendar sessão com quem acabou de assistir a uma live | Oi Filipe! Quero agendar uma sessão com você :) | "agendar uma sessão" |
 | https://whatsapp.harmonizacaohumana.com.br/guias | Site: botão no fim da página dos guias das leituras ao vivo (/ao-vivo/guias) | Conversa com quem chegou pelos guias (direct do Instagram, chat da live) | Oi Filipe! Quero saber mais sobre as Leituras :) | "as Leituras" |
+| https://whatsapp.harmonizacaohumana.com.br/maps | Google Maps: botão de WhatsApp do perfil da empresa (Perfil da Empresa no Google) | Conversa com quem encontrou a Harmonização Humana no Google Maps ou na busca do Google | Oi Filipe! Encontrei a Harmonização Humana e quero entender como funciona :) | "Encontrei" |
 
 O endereço sem nada depois (https://whatsapp.harmonizacaohumana.com.br) ou com um caminho que não está na tabela
 abre o WhatsApp com a mensagem do site ("Oi Filipe! Quero saber mais sobre a Harmonização Humana :)").

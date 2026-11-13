@@ -66,10 +66,17 @@
         "onde": "Site: botão no fim da página dos guias das leituras ao vivo (/ao-vivo/guias)",
         "para": "Conversa com quem chegou pelos guias (direct do Instagram, chat da live)",
         "sinal": "\"as Leituras\""
+      },
+      "maps": {
+        "texto": "textoMaps",
+        "onde": "Google Maps: botão de WhatsApp do perfil da empresa (Perfil da Empresa no Google)",
+        "para": "Conversa com quem encontrou a Harmonização Humana no Google Maps ou na busca do Google",
+        "sinal": "\"Encontrei\""
       }
     },
     "textoLive": "Oi Filipe! Quero agendar uma sessão com você :)",
-    "textoGuias": "Oi Filipe! Quero saber mais sobre as Leituras :)"
+    "textoGuias": "Oi Filipe! Quero saber mais sobre as Leituras :)",
+    "textoMaps": "Oi Filipe! Encontrei a Harmonização Humana e quero entender como funciona :)"
   },
   "youtube": "https://www.youtube.com/@FilipeMorgadoHH",
   "instagram": "https://www.instagram.com/filipemorgado.hh",
