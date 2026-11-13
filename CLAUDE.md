@@ -60,7 +60,7 @@ A tarefa diária das lives faz commits no `main`: antes de enviar, trazer o `mai
 Imagens: quando uma parte pedir imagem nova, deixar o lugar reservado no site (`.imagem-reservada`) e
 escrever o prompt em `docs/imagens-a-gerar.md`; o Filipe pede ao Aruan.
 
-WhatsApp: todo link (no site e fora dele) é whatsapp.harmonizacaohumana.com.br/<origem>, nunca wa.me direto.
+WhatsApp: todo link (no site e fora dele) é whatsapp.harmonizacaohumana.com.br/<origem>, nunca wa.me direto. Única exceção: o perfil da empresa no Google Maps, que recusa o nosso endereço; lá vai o wa.me com o número e a mensagem da origem "maps".
 Mensagens e origens em site.config.json; mensagem nova ou alterada passa pela regra de ouro dos textos.
 REGRA FIXA: toda vez que um link de WhatsApp for criado, editado ou removido (endereço, mensagem, sinal, onde usar),
 o artifact do mapa (https://claude.ai/artifact/LT4bHRpJ5iJhwrQgn2p1SM) é atualizado na mesma hora, sem o Filipe pedir:

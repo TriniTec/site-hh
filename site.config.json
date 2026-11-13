@@ -69,7 +69,7 @@
       },
       "maps": {
         "texto": "textoMaps",
-        "onde": "Google Maps: botão de WhatsApp do perfil da empresa (Perfil da Empresa no Google)",
+        "onde": "Google Maps: o Google recusa este endereço no campo de WhatsApp do perfil da empresa. Lá vai o link direto (wa.me com o número e esta mensagem), a única exceção à regra; este fica de reserva",
         "para": "Conversa com quem encontrou a Harmonização Humana no Google Maps ou na busca do Google",
         "sinal": "\"Encontrei\""
       }
