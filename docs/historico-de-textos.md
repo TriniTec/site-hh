@@ -199,3 +199,10 @@ Textos propostos da página dos guias aprovados pelo Filipe em 15/10.
 | Link | Data | Antes | Depois | Pedido por |
 |---|---|---|---|---|
 | /maps | 13/11 | (não existia) | Oi Filipe! Encontrei a Harmonização Humana e quero entender como funciona :) (sinal "Encontrei") | Filipe pediu um link para o perfil da empresa no Google Maps; texto proposto por Claude, aguardando aprovação |
+
+## Ep 10 nos guias: temas e resumo (20/11)
+
+| Onde | Antes | Depois | Pedido por |
+|---|---|---|---|
+| /ao-vivo/guias, Ep 10, temas | (episódio novo) | Estagnação, Escolha, Mágoa, Fé | Filipe (temas aprovados) |
+| /ao-vivo/guias, Ep 10, resumo | Pelo código: só os primeiros parágrafos da descrição, cortados na pergunta "onde você está...". | Mensagem espiritual para hoje: onde você está, e para onde você quer ir. A mensagem é para todos e termina numa imagem: o que aperta é como um novelo, feito de nós que a própria pessoa amarrou, e o pedido é soltar um por vez. Na leitura ao vivo, a Kelly tinha no sacro um novelo cheio de voltas, e o trabalho foi nó por nó, com cuidado e paciência. A sabedoria dela estava guardada numa caixa, a luz ficou no coração, e o pedido final foi buscar novas e boas escolhas. (campo `resumo`, que prevalece) | Filipe (ler a descrição inteira e adaptar ao formato do site) |
