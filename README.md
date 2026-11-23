@@ -91,6 +91,7 @@ vídeo em vez da capa escolhida; por isso a capa própria é o caminho certo). O
   mesmo com o aparelho no modo escuro (`color-scheme: light`).
 - Imagens: foto real para a trajetória no Sobre e foto de corpo inteiro em alta resolução (ver `docs/imagens-a-gerar.md`).
 - Versão de teste com mais respiro, em branch separado (a faixa de palavras já saiu).
+- Critérios de site (`docs/criterios-site-de-posicionamento-v2.md`): ver com a Mel os pontos que não ficaram claros para ela no site, para virarem critérios; confirmar as autorizações de uso dos três depoimentos.
 
 ## Apresentação em PDF
 
