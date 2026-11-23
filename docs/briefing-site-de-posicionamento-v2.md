@@ -1,4 +1,6 @@
-# Briefing para site de posicionamento
+# Briefing para site de posicionamento · versão 2
+
+**Versão 2** (23/11/2026). Perguntas mais claras e gerais, com as essenciais marcadas. A versão 1 está em `briefing-site-de-posicionamento-v1.md`.
 
 Perguntas para fazer a um cliente novo, ou a um projeto novo do Filipe, antes de criar o site.
 Tiradas da "engenharia reversa" do site da Harmonização Humana (versão Solar, outubro de 2026).
