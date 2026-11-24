@@ -73,9 +73,12 @@ async function liveAgendada() {
   const dados = html.match(/var ytInitialData = (\{[\s\S]*?\});<\/script>/)?.[1];
   if (!dados) throw new Error('Não encontrei os dados da aba "Ao vivo" do canal.');
   const programadas = [];
+  let videos = 0;
   (function andar(o) {
     if (!o || typeof o !== 'object') return;
     const l = o.lockupViewModel;
+    if (l?.contentId) videos++;
+    if (o.videoRenderer?.videoId) videos++;
     if (l?.contentId && /Programad|Scheduled|Premieres|Estreia/i.test(JSON.stringify(l.metadata || {}))) {
       programadas.push({ videoId: l.contentId, titulo: l.metadata?.lockupMetadataViewModel?.title?.content || '' });
     }
@@ -89,6 +92,10 @@ async function liveAgendada() {
     const t = pv.match(/"scheduledStartTime":"(\d+)"/)?.[1];
     if (t) achadas.push({ ...p, inicio: new Date(t * 1000).toISOString() });
   }
+  // Só se diz "nenhuma live agendada" quando a aba veio com vídeos e nenhum estava programado. Aba sem vídeo
+  // nenhum (formato novo do YouTube) ou live programada sem hora na página dela é falha de leitura: fica a anterior.
+  if (!videos) throw new Error('A aba "Ao vivo" veio sem nenhum vídeo (o formato da página pode ter mudado).');
+  if (programadas.length && !achadas.length) throw new Error(`Live programada sem hora na página do vídeo (${programadas.map((p) => p.videoId).join(' ')}).`);
   // A mais próxima que ainda não terminou (a faixa some 90 minutos depois do início)
   return achadas.filter((x) => new Date(x.inicio) > new Date(Date.now() - 90 * 60e3)).sort((a, b) => a.inicio.localeCompare(b.inicio))[0] ?? null;
 }
@@ -266,8 +273,9 @@ for (const e of entradas) {
   const { quando, inicio, guia } = (await dataDaLiveUmaVez(e.videoId)) ?? {};
   if (inicio && new Date(inicio) > new Date()) { console.log(`Ainda não aconteceu, sem card: ${e.titulo}`); continue; }
   const antes = atuais.find((l) => l.videoId === e.videoId);
-  // Se o YouTube não entregar a data agora, fica a que já estava no site; live nova sem data é erro
-  if (!quando && !antes) throw new Error(`Não encontrei a data da live ${e.videoId}`);
+  // Se o YouTube não entregar a data agora, fica a que já estava no site. Live nova sem data fica sem card nesta
+  // execução (pode ser a live agendada, que não tem card nem antes); a ação não para por isso.
+  if (!quando && !antes) { console.log(`Sem data da live ${e.videoId} (${e.titulo}): fica sem card por agora.`); continue; }
   novas.push({
     videoId: e.videoId,
     titulo: e.titulo,
