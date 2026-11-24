@@ -62,6 +62,37 @@ async function pelaPagina() {
   return itens.filter((x, n) => itens.findIndex((y) => y.videoId === x.videoId) === n);
 }
 
+// A live da semana, para a faixa "Ao vivo agora" do site. Desde o Ep 10 ela só entra na playlist das lives na semana
+// dela (quando ganha a miniatura), mas fica agendada no canal desde a quinta anterior: vem da aba "Ao vivo" do canal
+// (a que mostra "Programado para…"). A hora exata vem da página do vídeo (scheduledStartTime, um carimbo de tempo,
+// sem confusão de fuso). Nada de hora fixa no código: se o Filipe mudar o horário, o site acompanha na execução seguinte.
+async function liveAgendada() {
+  const r = await fetch(`${cfg.youtube}/streams?hl=pt-BR`, { headers: cabecalhos });
+  if (!r.ok) throw new Error(`Aba "Ao vivo" do canal respondeu ${r.status}`);
+  const html = await r.text();
+  const dados = html.match(/var ytInitialData = (\{[\s\S]*?\});<\/script>/)?.[1];
+  if (!dados) throw new Error('Não encontrei os dados da aba "Ao vivo" do canal.');
+  const programadas = [];
+  (function andar(o) {
+    if (!o || typeof o !== 'object') return;
+    const l = o.lockupViewModel;
+    if (l?.contentId && /Programad|Scheduled|Premieres|Estreia/i.test(JSON.stringify(l.metadata || {}))) {
+      programadas.push({ videoId: l.contentId, titulo: l.metadata?.lockupMetadataViewModel?.title?.content || '' });
+    }
+    const v = o.videoRenderer; // formato antigo da página
+    if (v?.videoId && v.upcomingEventData) programadas.push({ videoId: v.videoId, titulo: v.title?.runs?.map((x) => x.text).join('') || '' });
+    for (const k in o) andar(o[k]);
+  })(JSON.parse(dados));
+  const achadas = [];
+  for (const p of programadas.filter((x, n) => programadas.findIndex((y) => y.videoId === x.videoId) === n)) {
+    const pv = await (await fetch(`https://www.youtube.com/watch?v=${p.videoId}&hl=pt-BR`, { headers: cabecalhos })).text();
+    const t = pv.match(/"scheduledStartTime":"(\d+)"/)?.[1];
+    if (t) achadas.push({ ...p, inicio: new Date(t * 1000).toISOString() });
+  }
+  // A mais próxima que ainda não terminou (a faixa some 90 minutos depois do início)
+  return achadas.filter((x) => new Date(x.inicio) > new Date(Date.now() - 90 * 60e3)).sort((a, b) => a.inicio.localeCompare(b.inicio))[0] ?? null;
+}
+
 // Data da live: o início da transmissão (ou o horário agendado, se ainda não aconteceu). A data de
 // publicação não serve: numa live agendada é o dia em que ela foi agendada, e numa live que já passou
 // pode cair no dia seguinte (quando o vídeo termina de processar).
@@ -226,9 +257,14 @@ async function dataDaLive(videoId) {
 // pode ser a de publicação do vídeo editado, e não a da live, então não serve para ordenar.
 const atuais = JSON.parse(await readFile(arqLives, 'utf8'));
 const entradas = (await peloFeed()) ?? (await pelaPagina());
+// Os cards mostram só lives que já aconteceram: a que ainda vai acontecer não ganha card, mesmo depois de entrar
+// na playlist (decisão do Filipe, unificação do Ep 10: "melhor deixar conteúdo real que a pessoa pode ver agora").
+// Na hora dela, quem avisa é a faixa "Ao vivo agora" (data/live-agendada.json, abaixo).
 const novas = [];
-for (const e of entradas.slice(0, 3)) {
+for (const e of entradas) {
+  if (novas.length === 3) break;
   const { quando, inicio, guia } = (await dataDaLiveUmaVez(e.videoId)) ?? {};
+  if (inicio && new Date(inicio) > new Date()) { console.log(`Ainda não aconteceu, sem card: ${e.titulo}`); continue; }
   const antes = atuais.find((l) => l.videoId === e.videoId);
   // Se o YouTube não entregar a data agora, fica a que já estava no site; live nova sem data é erro
   if (!quando && !antes) throw new Error(`Não encontrei a data da live ${e.videoId}`);
@@ -238,9 +274,6 @@ for (const e of entradas.slice(0, 3)) {
     data: quando ? diaSP(quando) : antes.data,
     dataExtenso: quando ? extenso(quando) : antes.dataExtenso,
     miniatura: await miniatura(e.videoId),
-    // Horário exato da transmissão: o site mostra a etiqueta "Ao vivo…" enquanto ela não aconteceu
-    ...(inicio && new Date(inicio) > new Date() ? { inicio: new Date(inicio).toISOString() } : {}),
-    ...(!quando && antes.inicio ? { inicio: antes.inicio } : {}),
     ...(guia ? { guia } : !quando && antes?.guia ? { guia: antes.guia } : {}),
   });
 }
@@ -276,6 +309,19 @@ if (mudouEpisodios) {
   const usadas = new Set(episodios.map((x) => x.miniatura && path.basename(x.miniatura)).filter(Boolean));
   try { for (const f of await readdir(pastaGuias)) if (/\.(webp|jpg)$/.test(f) && !usadas.has(f)) await rm(path.join(pastaGuias, f)); } catch { /* sem pasta */ }
   console.log(`Guias: ${episodios.filter((x) => x.guia).length} episódios com guia (data/episodios.json atualizado).`);
+}
+
+// A live da semana para a faixa "Ao vivo agora". Se o YouTube falhar, fica o que já estava (a faixa não some à toa).
+const arqAgendada = path.join(raiz, 'data/live-agendada.json');
+try {
+  const ag = await liveAgendada();
+  const texto = JSON.stringify(ag ?? {}, null, 2) + '\n';
+  let antesAg = '';
+  try { antesAg = await readFile(arqAgendada, 'utf8'); } catch { /* primeira vez */ }
+  if (texto !== antesAg) await writeFile(arqAgendada, texto);
+  console.log(ag ? `Live agendada: ${ag.titulo}, início ${ag.inicio}` : 'Nenhuma live agendada no canal.');
+} catch (erro) {
+  console.log(`Não consegui ler a live agendada (fica a que já estava): ${erro.message}`);
 }
 
 if (JSON.stringify(atuais) === JSON.stringify(novas)) {

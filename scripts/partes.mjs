@@ -167,9 +167,17 @@ export function sol({ raios = 28, id = 's', onda = 3.2 } = {}) {
   </svg>`;
 }
 
-export function pagina({ cfg, L, atual, titulo, descricao, caminho, jsonld, preload, conteudo }) {
+// Faixa "Ao vivo agora", no alto de todas as páginas, com o link da live da semana (data/live-agendada.json, que a
+// ação "Atualizar lives" lê da aba "Ao vivo" do canal). Vem escondida: o site.js mostra só no horário da live.
+function faixaAoVivo(aoVivo) {
+  if (!aoVivo?.inicio || !aoVivo.videoId) return '';
+  return `<a class="faixa-vivo" href="https://www.youtube.com/watch?v=${esc(aoVivo.videoId)}" target="_blank" rel="noopener" data-ao-vivo="${esc(aoVivo.inicio)}" data-umami-event="ao-vivo-agora" hidden><i></i><b>Ao vivo agora</b><span>no YouTube · Assistir</span></a>`;
+}
+
+export function pagina({ cfg, L, aoVivo, atual, titulo, descricao, caminho, jsonld, preload, conteudo }) {
   return `${head({ cfg, titulo, descricao, caminho, jsonld, preload })}
 <body>
+${faixaAoVivo(aoVivo)}
 ${topo({ L, atual })}
 <main id="conteudo">
 ${conteudo}

@@ -66,12 +66,18 @@
     });
   });
 
-  // Live agendada: "Ao vivo agora" durante a transmissão; depois dela a etiqueta sai.
-  document.querySelectorAll('[data-inicio]').forEach(function (etiqueta) {
-    var inicio = Date.parse(etiqueta.getAttribute('data-inicio')), agora = Date.now();
-    if (agora > inicio + 3 * 3600e3) etiqueta.remove();
-    else if (agora >= inicio - 10 * 60e3) etiqueta.querySelector('span').textContent = 'Ao vivo agora';
-  });
+  // Faixa "Ao vivo agora": aparece de 10 minutos antes do início da live até 90 minutos depois, pelo relógio de quem
+  // visita, e se confere a cada minuto (quem está com a página aberta vê a faixa chegar e sair).
+  var faixa = document.querySelector('[data-ao-vivo]');
+  if (faixa) {
+    var inicioLive = Date.parse(faixa.getAttribute('data-ao-vivo'));
+    var conferirLive = function () {
+      var agora = Date.now();
+      faixa.hidden = !(agora >= inicioLive - 10 * 60e3 && agora <= inicioLive + 90 * 60e3);
+    };
+    conferirLive();
+    setInterval(conferirLive, 60e3);
+  }
 
   // Página dos guias: busca por texto (sem acento) e filtro por tema, juntos.
   var guias = document.querySelector('[data-guias]');

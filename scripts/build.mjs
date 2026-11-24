@@ -21,6 +21,7 @@ const depoimentos = await lerJson('data/depoimentos.json');
 const lives = await lerJson('data/lives.json');
 const guias = await lerJson('data/guias.json');
 const episodios = await lerJson('data/episodios.json').catch(() => []);
+const aoVivo = await lerJson('data/live-agendada.json').catch(() => ({})); // faixa "Ao vivo agora"
 const L = links(cfg);
 
 await rm(dist, { recursive: true, force: true });
@@ -50,7 +51,7 @@ for (const d of depoimentos) {
 const todas = [inicio, aJornada, sobre, guiasAoVivo].map((p) => p({ cfg, L, depoimentos, lives, guias, episodios }));
 for (const p of todas) {
   await mkdir(path.dirname(path.join(dist, p.arquivo)), { recursive: true });
-  let html = pagina({ cfg, L, ...p });
+  let html = pagina({ cfg, L, aoVivo, ...p });
   // Página reservada (ex.: /ao-vivo/guias): noindex e fora do sitemap e do llms.txt. Não bloquear no robots.txt,
   // para o Google conseguir ler o noindex.
   if (p.indexar === false) html = html.replace('<head>', '<head>\n<meta name="robots" content="noindex">');
@@ -60,7 +61,7 @@ const paginas = todas.filter((p) => p.indexar !== false);
 
 // 404 simples, com o mesmo topo e rodapé
 await writeFile(path.join(dist, '404.html'), pagina({
-  cfg, L, atual: '', caminho: '/404', titulo: 'Página não encontrada | Harmonização Humana',
+  cfg, L, aoVivo, atual: '', caminho: '/404', titulo: 'Página não encontrada | Harmonização Humana',
   descricao: 'Esta página não existe.', jsonld: { '@context': 'https://schema.org', '@type': 'WebPage', name: 'Página não encontrada' },
   conteudo: `<section class="bloco"><div class="dentro estreito">
     <h1 class="grande">Esta página não existe.</h1>

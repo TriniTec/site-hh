@@ -14,14 +14,17 @@ sempre em português, em linguagem simples, sem jargão técnico, uma coisa de c
   (valores únicos: WhatsApp, links, Umami). Estilo em `src/css/site.css`; comportamento em `src/js/site.js`.
 - **Publicação:** o Netlify publica o `main` a cada envio (projeto "harmonizacaohumana"). DNS no Registro.br.
   leituraenergetica.com.br (com e sem www) redireciona para o domínio principal (`netlify.toml`).
-- **Automático (GitHub Actions):** "Atualizar lives" (todo dia 8h: as 3 lives da playlist PLQbbN3rDJtEM, na ordem
-  da playlist, com data da transmissão, guia em PDF lido da descrição do vídeo e miniatura baixada de novo todo
-  dia; e os episódios da página dos guias, `data/episodios.json`, com um resumo automático tirado da descrição
-  inteira, que é só proteção até a sessão do site escrever o dela: ver "Resumo de cada live", abaixo). Desde o
-  Ep 10 a live da quinta seguinte só entra na playlist na semana dela, quando ganha a miniatura; enquanto isso o
-  site não a mostra. Quando ela já está na playlist, o card dela leva a etiqueta "Ao vivo na quinta, às 19h", que
-  vira "Ao vivo agora" na hora da transmissão. Manuais: "Conferir texto no ar", "Conferir links do WhatsApp",
-  "Teste de velocidade" (relatório em `docs/velocidade.md`).
+- **Automático (GitHub Actions):** "Atualizar lives" (todo dia 8h, e na quinta também às 17h): as 3 últimas lives
+  que já aconteceram, da playlist PLQbbN3rDJtEM, na ordem da playlist, com data da transmissão, guia em PDF lido
+  da descrição do vídeo e miniatura baixada de novo todo dia; os episódios da página dos guias,
+  `data/episodios.json`, com um resumo automático tirado da descrição inteira, que é só proteção até a sessão do
+  site escrever o dela (ver "Resumo de cada live", abaixo); e a live agendada da semana, lida da aba "Ao vivo" do
+  canal, em `data/live-agendada.json`. A live que ainda vai acontecer não ganha card, mesmo depois de entrar na
+  playlist (decisão do Filipe na unificação do Ep 10: o site mostra o que a pessoa pode ver agora). No horário
+  dela, de 10 minutos antes do início até 90 minutos depois, todas as páginas mostram no alto a faixa "Ao vivo
+  agora", com o link da live; quem decide se ela aparece é o `site.js`, pelo relógio de quem visita. A hora vem
+  do YouTube, nunca fixa no código: mudou o horário da live, o site acompanha na execução seguinte. Manuais:
+  "Conferir texto no ar", "Conferir links do WhatsApp", "Teste de velocidade" (relatório em `docs/velocidade.md`).
 - **WhatsApp:** função do Netlify em `netlify/edge-functions/whatsapp/`, no subdomínio
   whatsapp.harmonizacaohumana.com.br (ver a seção WhatsApp abaixo e o README).
 - **Estatística:** Umami, sem cookies (cliques nos botões e acessos a cada link de WhatsApp como eventos).
