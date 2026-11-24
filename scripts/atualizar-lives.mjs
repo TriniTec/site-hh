@@ -123,24 +123,51 @@ async function miniatura(videoId) {
   throw new Error(`Miniatura de ${videoId} não encontrada`);
 }
 
-// Resumo para a página dos guias: o topo da descrição do vídeo (os parágrafos antes do primeiro link, aviso ou
-// lista de capítulos), num parágrafo só, sem as frases com minuto do vídeo ("A mensagem começa em 06:33") nem o
-// aviso do vídeo só da mensagem, que fora do YouTube não fazem sentido. Longo demais: corta numa frase inteira, sem reticências.
-// O Filipe pode escrever outro no campo "resumo" de data/episodios.json, que prevalece.
+// Resumo automático para a página dos guias. É só uma proteção: o resumo de verdade a sessão do site escreve
+// no campo "resumo" de data/episodios.json, que prevalece, lendo a descrição inteira (CLAUDE.md, "Resumo de cada live").
+// Lê o texto inteiro do episódio na descrição (tudo antes dos capítulos e do bloco fixo), não só o topo: numa live
+// com mensagem espiritual a descrição começa pela mensagem, e a leitura vem depois. Ficam de fora as linhas com
+// link e o rótulo de um link ("Guia:"), as frases com minuto do vídeo ("A mensagem começa em 06:33"), o aviso do
+// vídeo só da mensagem e o parágrafo do depoimento ("como foi", "fez sentido"), que fora do YouTube não fazem sentido.
+// Para caber (até 460 caracteres, frases inteiras, sem reticências) pega a primeira frase de cada parágrafo, depois a
+// segunda de cada um, e assim por diante, e devolve na ordem do texto: assim a mensagem e a leitura aparecem as duas.
+function frasesDe(paragrafo) {
+  const frases = [];
+  let atual = '', aspas = 0;
+  for (const pedaco of paragrafo.split(/(\s+)/)) {
+    atual += pedaco;
+    if (!pedaco.trim()) continue;
+    aspas += (pedaco.match(/["“”]/g) || []).length;
+    // Não corta dentro de uma fala entre aspas ("E aí, como foi? Fez sentido?")
+    if (/[.?!]["”]?$/.test(pedaco) && aspas % 2 === 0) { frases.push(atual.trim()); atual = ''; }
+  }
+  if (atual.trim()) frases.push(atual.trim());
+  return frases;
+}
+
 function resumoDaDescricao(texto = '') {
-  const topo = [];
-  for (const p of texto.split(/\n\s*\n/)) {
-    if (/https?:\/\//.test(p) || /^\s*(\d{1,2}:\d{2}|#|CAP[IÍ]TULOS|─)/i.test(p)) break;
-    topo.push(p);
+  const paragrafos = [];
+  for (const linha of texto.split('\n')) {
+    if (/^\s*(\d{1,2}:\d{2}|#|CAP[IÍ]TULOS|─)/i.test(linha)) break;
+    if (/https?:\/\//.test(linha) || (/:\s*$/.test(linha) && linha.trim().length < 60)) continue;
+    if (linha.trim()) paragrafos.push(linha.trim());
   }
-  const frases = topo.join(' ').replace(/\s+/g, ' ').trim().split(/(?<=[.?!])\s+/)
-    .filter((f) => f && !/\b\d{1,2}:\d{2}\b/.test(f) && !/•|\.\.\.$|…$|vídeo só dela/i.test(f));
-  let resumo = '';
-  for (const f of frases) {
-    if (resumo && (resumo + ' ' + f).length > 460) break;
-    resumo = resumo ? `${resumo} ${f}` : f;
+  const blocos = paragrafos
+    .filter((p) => !/como (é que )?foi|fez (algum )?sentido|o que disso/i.test(p))
+    .map((p) => frasesDe(p).filter((f) => !/\b\d{1,2}:\d{2}\b/.test(f) && !/•|\.\.\.$|…$|vídeo só dela/i.test(f)))
+    .filter((b) => b.length);
+  const escolhidas = new Set();
+  let total = 0;
+  for (let r = 0, cabe = true; cabe && blocos.some((b) => b.length > r); r++) {
+    for (let b = 0; b < blocos.length && cabe; b++) {
+      const f = blocos[b][r];
+      if (!f) continue;
+      if (total && total + 1 + f.length > 460) { cabe = false; break; }
+      escolhidas.add(`${b}.${r}`);
+      total += (total ? 1 : 0) + f.length;
+    }
   }
-  return resumo;
+  return blocos.flatMap((b, i) => b.filter((_, r) => escolhidas.has(`${i}.${r}`))).join(' ');
 }
 
 // Miniatura da página dos guias, em WebP (mais leve), guardada em src/img/guias com o mesmo esquema de nome.

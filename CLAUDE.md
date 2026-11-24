@@ -15,8 +15,12 @@ sempre em português, em linguagem simples, sem jargão técnico, uma coisa de c
 - **Publicação:** o Netlify publica o `main` a cada envio (projeto "harmonizacaohumana"). DNS no Registro.br.
   leituraenergetica.com.br (com e sem www) redireciona para o domínio principal (`netlify.toml`).
 - **Automático (GitHub Actions):** "Atualizar lives" (todo dia 8h: as 3 lives da playlist PLQbbN3rDJtEM, na ordem
-  da playlist, com data da transmissão, etiqueta da live agendada, guia em PDF lido da descrição do vídeo e
-  miniatura baixada de novo todo dia). Manuais: "Conferir texto no ar", "Conferir links do WhatsApp",
+  da playlist, com data da transmissão, guia em PDF lido da descrição do vídeo e miniatura baixada de novo todo
+  dia; e os episódios da página dos guias, `data/episodios.json`, com um resumo automático tirado da descrição
+  inteira, que é só proteção até a sessão do site escrever o dela: ver "Resumo de cada live", abaixo). Desde o
+  Ep 10 a live da quinta seguinte só entra na playlist na semana dela, quando ganha a miniatura; enquanto isso o
+  site não a mostra. Quando ela já está na playlist, o card dela leva a etiqueta "Ao vivo na quinta, às 19h", que
+  vira "Ao vivo agora" na hora da transmissão. Manuais: "Conferir texto no ar", "Conferir links do WhatsApp",
   "Teste de velocidade" (relatório em `docs/velocidade.md`).
 - **WhatsApp:** função do Netlify em `netlify/edge-functions/whatsapp/`, no subdomínio
   whatsapp.harmonizacaohumana.com.br (ver a seção WhatsApp abaixo e o README).
@@ -41,6 +45,24 @@ sempre em português, em linguagem simples, sem jargão técnico, uma coisa de c
 **Texto que o Filipe já revisou não muda sem ele pedir.** Se surgir uma sugestão de mudança num texto
 já revisado, mostrar o antes e o depois e esperar a aprovação; só então implementar. Toda mudança de texto
 fica registrada em `docs/historico-de-textos.md` (data, onde, antes, depois, quem pediu).
+
+## Resumo de cada live (página dos guias)
+
+O resumo de cada episódio em `/ao-vivo/guias` é escrito pela sessão do site, no campo `resumo` de
+`data/episodios.json`, que prevalece sobre o automático (`resumoYoutube`, que a ação "Atualizar lives" refaz
+todo dia e só aparece enquanto o `resumo` está vazio). Ele nasce na sessão do episódio, a que a gerente do
+pós-live abre com "Ep NN no site: guia e temas.", depois que a ação trouxe o episódio com o guia:
+
+- **Ler a descrição do vídeo inteira**, não só as primeiras linhas, e escrever a versão do site em um parágrafo.
+  Numa live com mensagem espiritual, a descrição começa por uma linha da mensagem com o minuto em que ela começa
+  e por um parágrafo dela; a leitura vem depois. O resumo fala das duas. Porquê: o Filipe pediu (unificação do
+  Ep 10) que o resumo não se prenda ao topo, que numa live com mensagem é só a mensagem.
+- **Sem o minuto do vídeo** ("A mensagem começa em 10:02") e sem o que só faz sentido no YouTube (capítulos, o
+  aviso do vídeo só da mensagem). Do tamanho dos outros resumos da página (até umas 460 letras), com as regras de
+  linguagem abaixo e só o que a descrição diz, sem acrescentar.
+- É texto novo: vai ao Filipe (pelo relatório à gerente) com o texto proposto, e entra no `main` depois do
+  "pode" dele, registrado em `docs/historico-de-textos.md`. Até lá a página mostra o automático, e o guia e os
+  temas não esperam pelo resumo.
 
 ## Regras de linguagem do Filipe, para todo texto do site
 
