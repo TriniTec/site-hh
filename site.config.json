@@ -45,7 +45,7 @@
       },
       "youtube": {
         "texto": "textoYoutube",
-        "onde": "YouTube: reservado (descrição do canal ou dos vídeos, quando for usar)",
+        "onde": "YouTube: bloco fixo da descrição de todo vídeo longo do canal, a live e o vídeo da mensagem (o vídeo da mensagem leva também o /youtube-mensagem, no convite)",
         "para": "Conversa geral, de quem veio pelo YouTube",
         "sinal": "\"Gostaria\""
       },
