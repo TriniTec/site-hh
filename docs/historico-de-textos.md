@@ -207,9 +207,9 @@ Textos propostos da página dos guias aprovados pelo Filipe em 15/10.
 | /ao-vivo/guias, Ep 10, temas | (episódio novo) | Estagnação, Escolha, Mágoa, Fé | Filipe (temas aprovados) |
 | /ao-vivo/guias, Ep 10, resumo | Pelo código: só os primeiros parágrafos da descrição, cortados na pergunta "onde você está...". | Mensagem espiritual para hoje: onde você está, e para onde você quer ir. A mensagem é para todos e termina numa imagem: o que aperta é como um novelo, feito de nós que a própria pessoa amarrou, e o pedido é soltar um por vez. Na leitura ao vivo, a Kelly tinha no sacro um novelo cheio de voltas, e o trabalho foi nó por nó, com cuidado e paciência. A sabedoria dela estava guardada numa caixa, a luz ficou no coração, e o pedido final foi buscar novas e boas escolhas. (campo `resumo`, que prevalece) | Filipe (ler a descrição inteira e adaptar ao formato do site) |
 
-## Faixa "Ao vivo agora" no horário da live (24/11, proposta)
+## Faixa "Ao vivo agora" no horário da live (24/11, aprovada com dois ajustes)
 
 | Onde | Antes | Depois | Pedido por |
 |---|---|---|---|
-| Alto de todas as páginas, só no horário da live (de 10 minutos antes a 90 minutos depois do início) | (não existia) | AO VIVO AGORA · no YouTube · Assistir (com o link da live) | Filipe (unificação do Ep 10: "essa divulgação que tá tendo uma live agora para quem entrar no site"); texto proposto pela sessão do site, aguardando o "pode" |
+| Alto de todas as páginas, só no horário da live (de 10 minutos antes a 90 minutos depois do início) | (não existia) | Nos 10 minutos antes: AO VIVO EM 8 MIN (contando) · no YouTube · Assistir. Da hora do início até 90 minutos depois: AO VIVO AGORA · no YouTube · Assistir (com o link da live) | Filipe (unificação do Ep 10: "essa divulgação que tá tendo uma live agora para quem entrar no site"; em 24/11, o pode com a contagem antes do início: "se você falar que está sendo ao vivo agora, a pessoa entra e aí não começou, aí não está certo") |
 | Início, cards das lives | O card da live agendada, com a etiqueta "Ao vivo na quinta, às 19h" | Sem card da live que ainda vai acontecer | Filipe ("Acho que é melhor deixar sem mesmo") |

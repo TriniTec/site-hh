@@ -18,12 +18,15 @@ sempre em português, em linguagem simples, sem jargão técnico, uma coisa de c
   que já aconteceram, da playlist PLQbbN3rDJtEM, na ordem da playlist, com data da transmissão, guia em PDF lido
   da descrição do vídeo e miniatura baixada de novo todo dia; os episódios da página dos guias,
   `data/episodios.json`, com um resumo automático tirado da descrição inteira, que é só proteção até a sessão do
-  site escrever o dela (ver "Resumo de cada live", abaixo); e a live agendada da semana, lida da aba "Ao vivo" do
-  canal, em `data/live-agendada.json`. A live que ainda vai acontecer não ganha card, mesmo depois de entrar na
-  playlist (decisão do Filipe na unificação do Ep 10: o site mostra o que a pessoa pode ver agora). No horário
-  dela, de 10 minutos antes do início até 90 minutos depois, todas as páginas mostram no alto a faixa "Ao vivo
-  agora", com o link da live; quem decide se ela aparece é o `site.js`, pelo relógio de quem visita. A hora vem
-  do YouTube, nunca fixa no código: mudou o horário da live, o site acompanha na execução seguinte. Manuais:
+  site escrever o dela (ver "Resumo de cada live", abaixo); e, só na segunda e na quinta (às 8h e às 17h), a live
+  agendada da semana, lida da aba "Ao vivo" do canal, em `data/live-agendada.json` (rodada à mão, lê sempre).
+  A live que ainda vai acontecer não ganha card, mesmo depois de entrar na playlist (decisão do Filipe na
+  unificação do Ep 10: o site mostra o que a pessoa pode ver agora). No horário dela, todas as páginas mostram no
+  alto a faixa da live, com o link: nos 10 minutos antes do início, a contagem ("Ao vivo em 8 min"); da hora do
+  início até 90 minutos depois, "Ao vivo agora". Antes do início ela nunca diz "agora": quem entra e encontra a
+  live sem ter começado acha que está errado. Quem decide o que a faixa mostra é o `site.js`, pelo relógio de
+  quem visita. A hora vem do YouTube, nunca fixa no código: mudou o horário da live, o site acompanha na leitura
+  seguinte (a de quinta às 17h pega uma mudança no próprio dia). Manuais:
   "Conferir texto no ar", "Conferir links do WhatsApp", "Teste de velocidade" (relatório em `docs/velocidade.md`).
 - **WhatsApp:** função do Netlify em `netlify/edge-functions/whatsapp/`, no subdomínio
   whatsapp.harmonizacaohumana.com.br (ver a seção WhatsApp abaixo e o README).

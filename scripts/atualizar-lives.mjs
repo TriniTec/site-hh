@@ -320,8 +320,16 @@ if (mudouEpisodios) {
 }
 
 // A live da semana para a faixa "Ao vivo agora". Se o YouTube falhar, fica o que já estava (a faixa não some à toa).
+// Lida só na segunda (para ver se mudou algo na semana) e na quinta, o dia da live (às 8h e às 17h, a tempo de
+// pegar uma mudança antes da live): "no dia da live e mais um outro dia da semana já tá bom, tipo segunda e quinta"
+// (Filipe, 24/11). Nos outros dias a ação roda só pelas lives e pelos guias. Rodada à mão, ou sem o arquivo, lê sempre.
 const arqAgendada = path.join(raiz, 'data/live-agendada.json');
-try {
+const diaDaSemana = new Date().toLocaleDateString('en-US', { timeZone: 'America/Sao_Paulo', weekday: 'short' });
+let temAgendada = true;
+try { await access(arqAgendada); } catch { temAgendada = false; }
+if (!['Mon', 'Thu'].includes(diaDaSemana) && process.env.GITHUB_EVENT_NAME !== 'workflow_dispatch' && temAgendada) {
+  console.log(`Hora da live não lida hoje (${diaDaSemana}): só na segunda e na quinta.`);
+} else try {
   const ag = await liveAgendada();
   const texto = JSON.stringify(ag ?? {}, null, 2) + '\n';
   let antesAg = '';
