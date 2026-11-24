@@ -63,7 +63,7 @@ async function pelaPagina() {
 }
 
 // A live da semana, para a faixa "Ao vivo agora" do site. Desde o Ep 10 ela só entra na playlist das lives na semana
-// dela (quando ganha a miniatura), mas fica agendada no canal desde a quinta anterior: vem da aba "Ao vivo" do canal
+// dela (quando ganha a miniatura), mas fica agendada no canal desde a live anterior: vem da aba "Ao vivo" do canal
 // (a que mostra "Programado para…"). A hora exata vem da página do vídeo (scheduledStartTime, um carimbo de tempo,
 // sem confusão de fuso). Nada de hora fixa no código: se o Filipe mudar o horário, o site acompanha na execução seguinte.
 async function liveAgendada() {
@@ -320,15 +320,19 @@ if (mudouEpisodios) {
 }
 
 // A live da semana para a faixa "Ao vivo agora". Se o YouTube falhar, fica o que já estava (a faixa não some à toa).
-// Lida só na segunda (para ver se mudou algo na semana) e na quinta, o dia da live (às 8h e às 17h, a tempo de
-// pegar uma mudança antes da live): "no dia da live e mais um outro dia da semana já tá bom, tipo segunda e quinta"
-// (Filipe, 24/11). Nos outros dias a ação roda só pelas lives e pelos guias. Rodada à mão, ou sem o arquivo, lê sempre.
+// Lida na segunda (para ver se mudou algo na semana) e no dia da live que está no arquivo, seja qual for o dia da
+// semana (às 8h e às 17h, a tempo de pegar uma mudança antes da live): "no dia da live e mais um outro dia da semana
+// já tá bom" (Filipe, 24/11). O dia vem do arquivo, nunca fixo: as lives de 22/12 e 29/12/2026 são na terça.
+// Nos outros dias a ação roda só pelas lives e pelos guias. Lê sempre quando rodada à mão, quando não há arquivo e
+// quando a última leitura não achou live agendada (aí não há dia da live para esperar).
 const arqAgendada = path.join(raiz, 'data/live-agendada.json');
 const diaDaSemana = new Date().toLocaleDateString('en-US', { timeZone: 'America/Sao_Paulo', weekday: 'short' });
-let temAgendada = true;
-try { await access(arqAgendada); } catch { temAgendada = false; }
-if (!['Mon', 'Thu'].includes(diaDaSemana) && process.env.GITHUB_EVENT_NAME !== 'workflow_dispatch' && temAgendada) {
-  console.log(`Hora da live não lida hoje (${diaDaSemana}): só na segunda e na quinta.`);
+let agendadaAntes = null;
+try { agendadaAntes = JSON.parse(await readFile(arqAgendada, 'utf8')); } catch { /* sem arquivo ou ilegível: lê */ }
+const diaDaLive = agendadaAntes?.inicio ? diaSP(agendadaAntes.inicio) : null;
+const lerAgendada = process.env.GITHUB_EVENT_NAME === 'workflow_dispatch' || !diaDaLive || diaDaSemana === 'Mon' || diaSP(Date.now()) === diaDaLive;
+if (!lerAgendada) {
+  console.log(`Hora da live não lida hoje (${diaSP(Date.now())}): só na segunda e no dia da live (${diaDaLive}).`);
 } else try {
   const ag = await liveAgendada();
   const texto = JSON.stringify(ag ?? {}, null, 2) + '\n';

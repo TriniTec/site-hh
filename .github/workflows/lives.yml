@@ -1,13 +1,14 @@
 name: Atualizar lives
 
-# Uma vez por dia, às 8h de Brasília (11h UTC): lê a playlist das lives e, só se algo mudou (live nova, data, guia,
-# miniatura trocada no YouTube), atualiza data/ e as miniaturas. A hora da live da semana (faixa "Ao vivo agora") ele
-# lê só na segunda e na quinta; na quinta roda também às 17h, para pegar uma mudança de hora no dia da live.
+# Duas vezes por dia, às 8h e às 17h de Brasília (11h e 20h UTC): lê a playlist das lives e, só se algo mudou (live
+# nova, data, guia, miniatura trocada no YouTube), atualiza data/ e as miniaturas. A hora da live da semana (faixa
+# "Ao vivo agora") ele lê só na segunda e no dia da live, seja qual for o dia da semana (o script decide, pelo
+# data/live-agendada.json); a rodada das 17h pega uma mudança de hora no próprio dia da live.
 # O commit faz o Netlify publicar o site de novo.
 on:
   schedule:
     - cron: "7 11 * * *"
-    - cron: "7 20 * * 4"
+    - cron: "7 20 * * *"
   workflow_dispatch:
 
 permissions:

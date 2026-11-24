@@ -14,19 +14,21 @@ sempre em português, em linguagem simples, sem jargão técnico, uma coisa de c
   (valores únicos: WhatsApp, links, Umami). Estilo em `src/css/site.css`; comportamento em `src/js/site.js`.
 - **Publicação:** o Netlify publica o `main` a cada envio (projeto "harmonizacaohumana"). DNS no Registro.br.
   leituraenergetica.com.br (com e sem www) redireciona para o domínio principal (`netlify.toml`).
-- **Automático (GitHub Actions):** "Atualizar lives" (todo dia 8h, e na quinta também às 17h): as 3 últimas lives
+- **Automático (GitHub Actions):** "Atualizar lives" (todo dia, às 8h e às 17h): as 3 últimas lives
   que já aconteceram, da playlist PLQbbN3rDJtEM, na ordem da playlist, com data da transmissão, guia em PDF lido
   da descrição do vídeo e miniatura baixada de novo todo dia; os episódios da página dos guias,
   `data/episodios.json`, com um resumo automático tirado da descrição inteira, que é só proteção até a sessão do
-  site escrever o dela (ver "Resumo de cada live", abaixo); e, só na segunda e na quinta (às 8h e às 17h), a live
-  agendada da semana, lida da aba "Ao vivo" do canal, em `data/live-agendada.json` (rodada à mão, lê sempre).
+  site escrever o dela (ver "Resumo de cada live", abaixo); e a live agendada da semana, lida da aba "Ao vivo" do
+  canal, em `data/live-agendada.json`, só na segunda e no dia da live que está nesse arquivo, seja qual for o dia da
+  semana (às 8h e às 17h). O dia nunca é fixo no código: as lives de 22/12 e 29/12/2026 são na terça. Lê sempre
+  quando rodada à mão, sem o arquivo, ou quando a última leitura não achou live agendada.
   A live que ainda vai acontecer não ganha card, mesmo depois de entrar na playlist (decisão do Filipe na
   unificação do Ep 10: o site mostra o que a pessoa pode ver agora). No horário dela, todas as páginas mostram no
   alto a faixa da live, com o link: nos 10 minutos antes do início, a contagem ("Ao vivo em 8 min"); da hora do
   início até 90 minutos depois, "Ao vivo agora". Antes do início ela nunca diz "agora": quem entra e encontra a
   live sem ter começado acha que está errado. Quem decide o que a faixa mostra é o `site.js`, pelo relógio de
   quem visita. A hora vem do YouTube, nunca fixa no código: mudou o horário da live, o site acompanha na leitura
-  seguinte (a de quinta às 17h pega uma mudança no próprio dia). Manuais:
+  seguinte (a das 17h do dia da live pega uma mudança no próprio dia). Manuais:
   "Conferir texto no ar", "Conferir links do WhatsApp", "Teste de velocidade" (relatório em `docs/velocidade.md`).
 - **WhatsApp:** função do Netlify em `netlify/edge-functions/whatsapp/`, no subdomínio
   whatsapp.harmonizacaohumana.com.br (ver a seção WhatsApp abaixo e o README).
