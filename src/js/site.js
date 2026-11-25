@@ -89,16 +89,20 @@
   var aviso = document.querySelector('[data-aviso-live]');
   if (aviso) {
     var inicioAviso = Date.parse(aviso.getAttribute('data-aviso-live'));
-    var conferirAviso = function () { aviso.hidden = inicioAviso - Date.now() <= 10 * 60e3; };
+    var janela = document.getElementById('aviso-live');
+    var conferirAviso = function () {
+      aviso.hidden = inicioAviso - Date.now() <= 10 * 60e3;
+      if (aviso.hidden && janela && janela.open) janela.close();
+    };
     conferirAviso();
     setInterval(conferirAviso, 15e3);
-    var janela = document.getElementById('aviso-live');
     if (!aviso.hidden && janela && typeof janela.showModal === 'function') {
       var chave = 'hh-aviso-live-' + janela.getAttribute('data-video');
       var visto = false;
       try { visto = localStorage.getItem(chave) === '1'; } catch (e) { /* sem armazenamento: mostra */ }
       if (!visto) {
         setTimeout(function () {
+          if (aviso.hidden) return;
           janela.showModal();
           try { localStorage.setItem(chave, '1'); } catch (e) { /* segue */ }
         }, 600);

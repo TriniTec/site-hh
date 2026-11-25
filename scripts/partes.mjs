@@ -177,8 +177,9 @@ function faixaAoVivo(aoVivo) {
 // Aviso de live fora do dia de sempre (site.config.json, liveDeSempre: quinta, 19h). Aparece sozinho quando a live
 // agendada (data/live-agendada.json) cai em outro dia ou em outra hora, e some sozinho: o site.js esconde a faixa a
 // partir de 10 minutos antes do início, quando a faixa "Ao vivo" assume o alto da página, e a ação troca a live do
-// arquivo pela seguinte no dia depois. Faixa dourada no alto e janela central na primeira visita, uma vez por live
-// em cada aparelho. Pedido do Filipe (24/11): "um aviso bem gritante no site que a live vai ser num dia diferente
+// arquivo pela seguinte na primeira leitura depois que a live termina. Faixa dourada no alto e janela central na
+// primeira visita, uma vez por live em cada aparelho. A faixa vem escondida, como a "Ao vivo": quem mostra é o
+// site.js, para não ficar uma faixa velha na tela de quem está sem JavaScript. Pedido do Filipe (24/11): "um aviso bem gritante no site que a live vai ser num dia diferente
 // do usual". Brasília não tem horário de verão desde 2019: a hora local é UTC menos 3.
 const diasDaSemana = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
 const naDia = (d) => (d === 0 || d === 6 ? 'no ' : 'na ') + diasDaSemana[d];
@@ -198,7 +199,7 @@ export function avisoDiaDaLive(aoVivo, cfg) {
   const naoE = mesmoDia ? `às ${horaEscrita(hs, ms)}` : naDia(sempre.diaDaSemana);
   const link = `https://www.youtube.com/watch?v=${esc(aoVivo.videoId)}`;
   return {
-    faixa: `<a class="faixa-aviso" href="${link}" target="_blank" rel="noopener" data-aviso-live="${esc(aoVivo.inicio)}" data-umami-event="aviso-live-faixa">${iconeCalendario}<b>${olho}</b><span>A próxima é ${quando} · <u>Ativar lembrete</u></span></a>`,
+    faixa: `<a class="faixa-aviso" href="${link}" target="_blank" rel="noopener" data-aviso-live="${esc(aoVivo.inicio)}" data-umami-event="aviso-live-faixa" hidden>${iconeCalendario}<b>${olho}</b><span>A próxima é ${quando} · <u>Ativar lembrete</u></span></a>`,
     janela: `<dialog class="aviso-live" id="aviso-live" data-video="${esc(aoVivo.videoId)}" aria-labelledby="aviso-live-titulo">
   <div class="aviso-live__caixa">
     <button class="aviso-live__fechar" type="button" data-fechar aria-label="Fechar">×</button>

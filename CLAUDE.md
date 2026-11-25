@@ -21,8 +21,8 @@ sempre em português, em linguagem simples, sem jargão técnico, uma coisa de c
   site escrever o dela (ver "Resumo de cada live", abaixo); e a live agendada da semana, lida da aba "Ao vivo" do
   canal, em `data/live-agendada.json`, só na segunda e no dia da live que está nesse arquivo, seja qual for o dia da
   semana (às 8h e às 17h). O dia nunca é fixo no código: as lives de 22/12 e 29/12/2026 são na terça. Lê sempre
-  quando rodada à mão, sem o arquivo, quando a última leitura não achou live agendada, e no dia depois da live do
-  arquivo (ela já passou), para a seguinte entrar logo.
+  quando rodada à mão, sem o arquivo, quando a última leitura não achou live agendada, e quando a live do arquivo já
+  terminou (90 minutos depois do início), para a seguinte entrar logo (numa live às 19h, no dia seguinte às 8h).
   A live que ainda vai acontecer não ganha card, mesmo depois de entrar na playlist (decisão do Filipe na
   unificação do Ep 10: o site mostra o que a pessoa pode ver agora). No horário dela, todas as páginas mostram no
   alto a faixa da live, com o link: nos 10 minutos antes do início, a contagem ("Ao vivo em 8 min"); da hora do
@@ -35,7 +35,8 @@ sempre em português, em linguagem simples, sem jargão técnico, uma coisa de c
   outra hora, todas as páginas ganham uma faixa dourada no alto ("Mudou o dia da live · A próxima é na terça,
   22/12, às 19h · Ativar lembrete") e uma janela central na primeira visita, uma vez por live em cada aparelho.
   Liga e desliga sozinho: a faixa sai 10 minutos antes do início, quando entra a faixa "Ao vivo" (as duas nunca
-  aparecem juntas), e no dia seguinte a ação troca a live do arquivo pela próxima. Os textos fixos "quintas, 19h"
+  aparecem juntas; uma janela aberta fecha junto), e na primeira leitura depois que a live termina a ação troca
+  a live do arquivo pela próxima. Os textos fixos "quintas, 19h"
   do site não mudam. Manuais:
   "Conferir texto no ar", "Conferir links do WhatsApp", "Teste de velocidade" (relatório em `docs/velocidade.md`).
 - **WhatsApp:** função do Netlify em `netlify/edge-functions/whatsapp/`, no subdomínio
