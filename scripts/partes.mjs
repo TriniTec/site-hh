@@ -174,15 +174,56 @@ function faixaAoVivo(aoVivo) {
   return `<a class="faixa-vivo" href="https://www.youtube.com/watch?v=${esc(aoVivo.videoId)}" target="_blank" rel="noopener" data-ao-vivo="${esc(aoVivo.inicio)}" data-umami-event="ao-vivo-agora" hidden><i></i><b>Ao vivo agora</b><span>no YouTube · Assistir</span></a>`;
 }
 
+// Aviso de live fora do dia de sempre (site.config.json, liveDeSempre: quinta, 19h). Aparece sozinho quando a live
+// agendada (data/live-agendada.json) cai em outro dia ou em outra hora, e some sozinho: o site.js esconde a faixa a
+// partir de 10 minutos antes do início, quando a faixa "Ao vivo" assume o alto da página, e a ação troca a live do
+// arquivo pela seguinte no dia depois. Faixa dourada no alto e janela central na primeira visita, uma vez por live
+// em cada aparelho. Pedido do Filipe (24/11): "um aviso bem gritante no site que a live vai ser num dia diferente
+// do usual". Brasília não tem horário de verão desde 2019: a hora local é UTC menos 3.
+const diasDaSemana = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+const naDia = (d) => (d === 0 || d === 6 ? 'no ' : 'na ') + diasDaSemana[d];
+const horaEscrita = (h, m) => `${h}h${m ? String(m).padStart(2, '0') : ''}`;
+const iconeCalendario = `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>`;
+export function avisoDiaDaLive(aoVivo, cfg) {
+  const sempre = cfg.liveDeSempre;
+  const vazio = { faixa: '', janela: '' };
+  if (!aoVivo?.inicio || !aoVivo.videoId || !sempre) return vazio;
+  const sp = new Date(Date.parse(aoVivo.inicio) - 3 * 3600e3);
+  const dia = sp.getUTCDay(), h = sp.getUTCHours(), m = sp.getUTCMinutes();
+  const [hs, ms] = sempre.hora.split(':').map(Number);
+  const mesmoDia = dia === sempre.diaDaSemana, mesmaHora = h === hs && m === ms;
+  if (mesmoDia && mesmaHora) return vazio;
+  const quando = `${naDia(dia)}, ${String(sp.getUTCDate()).padStart(2, '0')}/${String(sp.getUTCMonth() + 1).padStart(2, '0')}, às ${horaEscrita(h, m)}`;
+  const olho = mesmoDia ? 'Mudou o horário da live' : 'Mudou o dia da live';
+  const naoE = mesmoDia ? `às ${horaEscrita(hs, ms)}` : naDia(sempre.diaDaSemana);
+  const link = `https://www.youtube.com/watch?v=${esc(aoVivo.videoId)}`;
+  return {
+    faixa: `<a class="faixa-aviso" href="${link}" target="_blank" rel="noopener" data-aviso-live="${esc(aoVivo.inicio)}" data-umami-event="aviso-live-faixa">${iconeCalendario}<b>${olho}</b><span>A próxima é ${quando} · <u>Ativar lembrete</u></span></a>`,
+    janela: `<dialog class="aviso-live" id="aviso-live" data-video="${esc(aoVivo.videoId)}" aria-labelledby="aviso-live-titulo">
+  <div class="aviso-live__caixa">
+    <button class="aviso-live__fechar" type="button" data-fechar aria-label="Fechar">×</button>
+    <p class="aviso-live__olho">${iconeCalendario}${olho}</p>
+    <h2 id="aviso-live-titulo">A próxima live é ${quando}</h2>
+    <p>Desta vez não é ${naoE}. A Leitura Ao Vivo continua no YouTube, aberta e de graça. Quer receber uma leitura? É só escrever no chat.</p>
+    <div class="aviso-live__botoes">
+      <a class="botao botao--principal" href="${link}" target="_blank" rel="noopener" data-fechar data-umami-event="aviso-live-lembrete">${youtubeIcone}Ativar lembrete no YouTube</a>
+      <button class="botao botao--claro" type="button" data-fechar>Entendi</button>
+    </div>
+  </div>
+</dialog>`,
+  };
+}
+
 export function pagina({ cfg, L, aoVivo, atual, titulo, descricao, caminho, jsonld, preload, conteudo }) {
+  const aviso = avisoDiaDaLive(aoVivo, cfg);
   return `${head({ cfg, titulo, descricao, caminho, jsonld, preload })}
 <body>
-${faixaAoVivo(aoVivo)}
+${aviso.faixa}${faixaAoVivo(aoVivo)}
 ${topo({ L, atual })}
 <main id="conteudo">
 ${conteudo}
 </main>
-${rodape({ cfg, L })}
+${rodape({ cfg, L })}${aviso.janela ? '\n' + aviso.janela : ''}
 </body>
 </html>
 `;

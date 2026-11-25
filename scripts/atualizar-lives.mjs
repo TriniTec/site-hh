@@ -324,13 +324,16 @@ if (mudouEpisodios) {
 // semana (às 8h e às 17h, a tempo de pegar uma mudança antes da live): "no dia da live e mais um outro dia da semana
 // já tá bom" (Filipe, 24/11). O dia vem do arquivo, nunca fixo: as lives de 22/12 e 29/12/2026 são na terça.
 // Nos outros dias a ação roda só pelas lives e pelos guias. Lê sempre quando rodada à mão, quando não há arquivo e
-// quando a última leitura não achou live agendada (aí não há dia da live para esperar).
+// quando a última leitura não achou live agendada (aí não há dia da live para esperar), e no dia depois da live do
+// arquivo (ela já terminou): assim a seguinte entra logo, e o aviso de live fora do dia de sempre aparece com a
+// semana inteira de antecedência, não só na segunda.
 const arqAgendada = path.join(raiz, 'data/live-agendada.json');
 const diaDaSemana = new Date().toLocaleDateString('en-US', { timeZone: 'America/Sao_Paulo', weekday: 'short' });
 let agendadaAntes = null;
 try { agendadaAntes = JSON.parse(await readFile(arqAgendada, 'utf8')); } catch { /* sem arquivo ou ilegível: lê */ }
 const diaDaLive = agendadaAntes?.inicio ? diaSP(agendadaAntes.inicio) : null;
-const lerAgendada = process.env.GITHUB_EVENT_NAME === 'workflow_dispatch' || !diaDaLive || diaDaSemana === 'Mon' || diaSP(Date.now()) === diaDaLive;
+const jaPassou = diaDaLive && Date.parse(agendadaAntes.inicio) + 90 * 60e3 < Date.now();
+const lerAgendada = process.env.GITHUB_EVENT_NAME === 'workflow_dispatch' || !diaDaLive || jaPassou || diaDaSemana === 'Mon' || diaSP(Date.now()) === diaDaLive;
 if (!lerAgendada) {
   console.log(`Hora da live não lida hoje (${diaSP(Date.now())}): só na segunda e no dia da live (${diaDaLive}).`);
 } else try {

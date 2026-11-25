@@ -21,14 +21,22 @@ sempre em português, em linguagem simples, sem jargão técnico, uma coisa de c
   site escrever o dela (ver "Resumo de cada live", abaixo); e a live agendada da semana, lida da aba "Ao vivo" do
   canal, em `data/live-agendada.json`, só na segunda e no dia da live que está nesse arquivo, seja qual for o dia da
   semana (às 8h e às 17h). O dia nunca é fixo no código: as lives de 22/12 e 29/12/2026 são na terça. Lê sempre
-  quando rodada à mão, sem o arquivo, ou quando a última leitura não achou live agendada.
+  quando rodada à mão, sem o arquivo, quando a última leitura não achou live agendada, e no dia depois da live do
+  arquivo (ela já passou), para a seguinte entrar logo.
   A live que ainda vai acontecer não ganha card, mesmo depois de entrar na playlist (decisão do Filipe na
   unificação do Ep 10: o site mostra o que a pessoa pode ver agora). No horário dela, todas as páginas mostram no
   alto a faixa da live, com o link: nos 10 minutos antes do início, a contagem ("Ao vivo em 8 min"); da hora do
   início até 90 minutos depois, "Ao vivo agora". Antes do início ela nunca diz "agora": quem entra e encontra a
   live sem ter começado acha que está errado. Quem decide o que a faixa mostra é o `site.js`, pelo relógio de
   quem visita. A hora vem do YouTube, nunca fixa no código: mudou o horário da live, o site acompanha na leitura
-  seguinte (a das 17h do dia da live pega uma mudança no próprio dia). Manuais:
+  seguinte (a das 17h do dia da live pega uma mudança no próprio dia).
+  **Aviso de live fora do dia de sempre** (pedido do Filipe, 24/11: "um aviso bem gritante"): o dia e a hora de
+  sempre estão em `site.config.json` (`liveDeSempre`: quinta, 19h). Quando a live agendada cai em outro dia ou em
+  outra hora, todas as páginas ganham uma faixa dourada no alto ("Mudou o dia da live · A próxima é na terça,
+  22/12, às 19h · Ativar lembrete") e uma janela central na primeira visita, uma vez por live em cada aparelho.
+  Liga e desliga sozinho: a faixa sai 10 minutos antes do início, quando entra a faixa "Ao vivo" (as duas nunca
+  aparecem juntas), e no dia seguinte a ação troca a live do arquivo pela próxima. Os textos fixos "quintas, 19h"
+  do site não mudam. Manuais:
   "Conferir texto no ar", "Conferir links do WhatsApp", "Teste de velocidade" (relatório em `docs/velocidade.md`).
 - **WhatsApp:** função do Netlify em `netlify/edge-functions/whatsapp/`, no subdomínio
   whatsapp.harmonizacaohumana.com.br (ver a seção WhatsApp abaixo e o README).

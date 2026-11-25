@@ -83,6 +83,32 @@
     setInterval(conferirLive, 15e3);
   }
 
+  // Aviso de live fora do dia de sempre: a faixa dourada fica no alto até 10 minutos antes do início, quando entra a
+  // faixa "Ao vivo" (as duas nunca aparecem juntas). A janela central abre na primeira visita, uma vez por live em
+  // cada aparelho, só nesse mesmo período; fecha no X, no "Entendi", no lembrete, no Esc ou tocando fora.
+  var aviso = document.querySelector('[data-aviso-live]');
+  if (aviso) {
+    var inicioAviso = Date.parse(aviso.getAttribute('data-aviso-live'));
+    var conferirAviso = function () { aviso.hidden = inicioAviso - Date.now() <= 10 * 60e3; };
+    conferirAviso();
+    setInterval(conferirAviso, 15e3);
+    var janela = document.getElementById('aviso-live');
+    if (!aviso.hidden && janela && typeof janela.showModal === 'function') {
+      var chave = 'hh-aviso-live-' + janela.getAttribute('data-video');
+      var visto = false;
+      try { visto = localStorage.getItem(chave) === '1'; } catch (e) { /* sem armazenamento: mostra */ }
+      if (!visto) {
+        setTimeout(function () {
+          janela.showModal();
+          try { localStorage.setItem(chave, '1'); } catch (e) { /* segue */ }
+        }, 600);
+      }
+      janela.addEventListener('click', function (e) {
+        if (e.target === janela || e.target.closest('[data-fechar]')) janela.close();
+      });
+    }
+  }
+
   // Página dos guias: busca por texto (sem acento) e filtro por tema, juntos.
   var guias = document.querySelector('[data-guias]');
   if (guias) {

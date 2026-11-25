@@ -107,6 +107,23 @@ h1, h2, h3 { font-family: var(--t); font-weight: 700; margin: 0; text-wrap: bala
 .faixa-vivo b { font-weight: 700; font-size: .875rem; letter-spacing: .12em; text-transform: uppercase; }
 .faixa-vivo span { text-decoration: underline; text-underline-offset: 3px; }
 .faixa-vivo:hover span { color: var(--brilho); }
+/* Aviso de live fora do dia de sempre: faixa dourada no alto e janela central (pedido do Filipe, 24/11) */
+.faixa-aviso { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 12px; padding: 12px 20px; background: var(--brilho); color: var(--indigo); font-family: var(--t); font-size: .9375rem; line-height: 1.35; text-decoration: none; text-align: center; }
+.faixa-aviso[hidden] { display: none; }
+.faixa-aviso svg { width: 20px; height: 20px; flex: none; }
+.faixa-aviso b { font-weight: 700; font-size: .875rem; letter-spacing: .12em; text-transform: uppercase; }
+.faixa-aviso u { text-underline-offset: 3px; font-weight: 700; }
+.aviso-live { border: 0; padding: 0; background: transparent; width: min(540px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); overflow: visible; }
+.aviso-live::backdrop { background: rgba(6, 31, 71, .78); backdrop-filter: blur(4px); }
+.aviso-live__caixa { position: relative; background: var(--marfim); color: var(--indigo); border-top: 10px solid var(--brilho); border-radius: var(--raio); box-shadow: 0 30px 80px -20px rgba(0, 0, 0, .5); padding: 44px 32px 32px; text-align: center; max-height: calc(100dvh - 32px); overflow: auto; }
+.aviso-live__olho { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 16px; padding: 6px 14px; border-radius: 999px; background: var(--brilho); font-family: var(--t); font-weight: 700; font-size: .8125rem; letter-spacing: .12em; text-transform: uppercase; }
+.aviso-live__olho svg { width: 18px; height: 18px; }
+.aviso-live h2 { font-size: clamp(1.625rem, 5vw, 2.125rem); line-height: 1.15; margin: 0 0 16px; text-wrap: balance; }
+.aviso-live p { font-size: 1.0625rem; line-height: 1.6; margin: 0 0 24px; }
+.aviso-live__botoes { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.aviso-live__botoes .botao { white-space: normal; text-align: center; line-height: 1.2; padding-block: 12px; }
+.aviso-live__fechar { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--indigo); color: var(--marfim); font-size: 1.5rem; line-height: 1; cursor: pointer; }
+@media (max-width: 520px) { .aviso-live__caixa { padding: 48px 20px 24px; } .aviso-live__botoes .botao { width: 100%; } }
 .topo { position: sticky; top: 0; z-index: 100; background: rgba(255, 247, 231, .94); backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); transition: box-shadow .3s; }
 .topo.rolou { box-shadow: 0 1px 0 rgba(8, 43, 97, .08), 0 8px 24px -16px rgba(8, 43, 97, .3); }
 .topo__dentro { display: flex; align-items: center; gap: 24px; min-height: 72px; }
