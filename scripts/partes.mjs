@@ -205,7 +205,7 @@ export function avisoDiaDaLive(aoVivo, cfg) {
     <button class="aviso-live__fechar" type="button" data-fechar aria-label="Fechar">×</button>
     <p class="aviso-live__olho">${iconeCalendario}${olho}</p>
     <h2 id="aviso-live-titulo">A próxima live é ${quando}</h2>
-    <p>Desta vez não é ${naoE}. A Leitura Ao Vivo continua no YouTube, aberta e de graça. Quer receber uma leitura? É só escrever no chat.</p>
+    <p>Desta vez não é ${naoE}. A Leitura Ao Vivo continua no YouTube. Quer receber uma leitura? É só escrever no chat.</p>
     <div class="aviso-live__botoes">
       <a class="botao botao--principal" href="${link}" target="_blank" rel="noopener" data-fechar data-umami-event="aviso-live-lembrete">${youtubeIcone}Ativar lembrete no YouTube</a>
       <button class="botao botao--claro" type="button" data-fechar>Entendi</button>

@@ -213,3 +213,12 @@ Textos propostos da página dos guias aprovados pelo Filipe em 15/10.
 |---|---|---|---|
 | Alto de todas as páginas, só no horário da live (de 10 minutos antes a 90 minutos depois do início) | (não existia) | Nos 10 minutos antes: AO VIVO EM 8 MIN (contando) · no YouTube · Assistir. Da hora do início até 90 minutos depois: AO VIVO AGORA · no YouTube · Assistir (com o link da live) | Filipe (unificação do Ep 10: "essa divulgação que tá tendo uma live agora para quem entrar no site"; em 24/11, o pode com a contagem antes do início: "se você falar que está sendo ao vivo agora, a pessoa entra e aí não começou, aí não está certo") |
 | Início, cards das lives | O card da live agendada, com a etiqueta "Ao vivo na quinta, às 19h" | Sem card da live que ainda vai acontecer | Filipe ("Acho que é melhor deixar sem mesmo") |
+
+## Aviso de live fora do dia de sempre (24/11, aprovado com um corte)
+
+Aparece sozinho quando a live agendada não cai na quinta às 19h (`liveDeSempre` em `site.config.json`); o dia, a data e a hora saem da live. Exemplo da terça 22/12. Se só a hora mudar: "MUDOU O HORÁRIO DA LIVE" e "Desta vez não é às 19h.".
+
+| Onde | Antes | Depois | Pedido por |
+|---|---|---|---|
+| Alto de todas as páginas, até 10 minutos antes do início | (não existia) | MUDOU O DIA DA LIVE · A próxima é na terça, 22/12, às 19h · Ativar lembrete (com o link da live) | Filipe (24/11: "um aviso bem gritante no site que a live vai ser num dia diferente do usual. Talvez um pop-up central logo a hora que entra, e uma faixa no topo da página") |
+| Janela central na primeira visita, uma vez por live em cada aparelho | (não existia) | MUDOU O DIA DA LIVE / A próxima live é na terça, 22/12, às 19h / Desta vez não é na quinta. A Leitura Ao Vivo continua no YouTube. Quer receber uma leitura? É só escrever no chat. / [Ativar lembrete no YouTube] [Entendi] | Filipe (24/11, o pode com um corte: "pode tirar o aberto de graça, deixa só a leitura ao vivo, continua no YouTube, ponto") |
