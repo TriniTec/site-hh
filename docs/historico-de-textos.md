@@ -228,4 +228,4 @@ Aparece sozinho quando a live agendada não cai na quinta às 19h (`liveDeSempre
 | Onde | Antes | Depois | Pedido por |
 |---|---|---|---|
 | /ao-vivo/guias, Ep 11, temas | (episódio novo) | Força, Exposição, Medo, Insegurança | Filipe (temas aprovados, via gerente do pós-live; "Força" é tema novo) |
-| /ao-vivo/guias, Ep 11, resumo | Pelo código (automático). O resumo escrito espera o pode do Filipe. | (pendente) | Filipe |
+| /ao-vivo/guias, Ep 11, resumo | Pelo código (automático). O resumo escrito espera o pode do Filipe. | Mensagem espiritual para hoje: um dia de expandir, sem medo da força, que não é boa nem má, é só força, e anda um passo de cada vez, mas com passos firmes. Na leitura ao vivo, o Rodrigo se escondia atrás de uma mureta para não ser visto; o trabalho soltou a boca, devolveu a lança à mão dele e realinhou o eixo, para o guerreiro nascer. No fim, uma meditação guiada. (campo `resumo`, que prevalece) | Filipe ("Pode ir assim", 27/11) |
