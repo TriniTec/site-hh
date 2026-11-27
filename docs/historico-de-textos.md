@@ -222,3 +222,10 @@ Aparece sozinho quando a live agendada não cai na quinta às 19h (`liveDeSempre
 |---|---|---|---|
 | Alto de todas as páginas, até 10 minutos antes do início | (não existia) | MUDOU O DIA DA LIVE · A próxima é na terça, 22/12, às 19h · Ativar lembrete (com o link da live) | Filipe (24/11: "um aviso bem gritante no site que a live vai ser num dia diferente do usual. Talvez um pop-up central logo a hora que entra, e uma faixa no topo da página") |
 | Janela central na primeira visita, uma vez por live em cada aparelho | (não existia) | MUDOU O DIA DA LIVE / A próxima live é na terça, 22/12, às 19h / Desta vez não é na quinta. A Leitura Ao Vivo continua no YouTube. Quer receber uma leitura? É só escrever no chat. / [Ativar lembrete no YouTube] [Entendi] | Filipe (24/11, o pode com um corte: "pode tirar o aberto de graça, deixa só a leitura ao vivo, continua no YouTube, ponto") |
+
+## Ep 11 na página dos guias (27/11)
+
+| Onde | Antes | Depois | Pedido por |
+|---|---|---|---|
+| /ao-vivo/guias, Ep 11, temas | (episódio novo) | Força, Exposição, Medo, Insegurança | Filipe (temas aprovados, via gerente do pós-live; "Força" é tema novo) |
+| /ao-vivo/guias, Ep 11, resumo | Pelo código (automático). O resumo escrito espera o pode do Filipe. | (pendente) | Filipe |

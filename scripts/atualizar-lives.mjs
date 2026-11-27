@@ -107,7 +107,13 @@ async function liveAgendada() {
 function aoVivoEm(p) {
   const m = p.match(/Transmitido ao vivo em (\d{1,2}) de ([a-zç]{3})\.? de (\d{4})/i);
   const mes = m && meses.findIndex((n) => n.slice(0, 3) === m[2].toLowerCase()) + 1;
-  return mes ? `${m[3]}-${String(mes).padStart(2, '0')}-${m[1].padStart(2, '0')}T12:00:00-03:00` : null;
+  if (mes) return `${m[3]}-${String(mes).padStart(2, '0')}-${m[1].padStart(2, '0')}T12:00:00-03:00`;
+  // Nos primeiros dias depois da live o YouTube troca a data por um texto relativo: "Transmissão ao vivo realizada
+  // há 22 horas" (visto no Ep 11, 27/11). Conta para trás a partir de agora: a precisão de horas basta para achar o dia.
+  const r = p.match(/Transmiss[ãa]o ao vivo realizada h[áa] (\d+) (minutos?|horas?|dias?)/i);
+  if (!r) return null;
+  const unidade = { m: 60e3, h: 3600e3, d: 86400e3 }[r[2][0].toLowerCase()];
+  return new Date(Date.now() - Number(r[1]) * unidade).toISOString();
 }
 
 // Link do guia em PDF: o pós-live coloca na descrição do vídeo. Vale o link na linha que fala do guia
